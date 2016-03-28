@@ -44,7 +44,7 @@ $ composer install
 ### Todos
 
 
-### License: MIT
+### Linceță: MIT
 
    [Composer]: <https://getcomposer.org/>
    [node.js]: <http://nodejs.org>
