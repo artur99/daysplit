@@ -25,9 +25,11 @@ $ composer install
 
 ### Dezvoltare
 
-Cerințe: `git`, `composer`, `npm`, `bower`, `grunt-cli`
+Cerințe: `git`, `composer`, `node.js`
 
 ```sh
+$ npm install -g bower
+$ npm install -g grunt-cli
 $ git init
 $ git pull https://github.com/artur99/daysplit.git
 $ npm update

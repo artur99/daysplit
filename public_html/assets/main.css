@@ -27,6 +27,9 @@ html,body{
     text-align: center;
     color: #2196F3;
 }
+.loginbox .row{
+    margin-bottom: 0;
+}
 .wt{
     color: rgba(255,255,255,.9);
 }
