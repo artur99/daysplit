@@ -1,0 +1,22 @@
+{
+  "name": "calendar",
+  "version": "0.0.0",
+  "directory": "public_html/assets",
+  "dependencies": {
+    "angular-material": "^1.0.6"
+  },
+  "devDependencies": {},
+  "appPath": "app",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

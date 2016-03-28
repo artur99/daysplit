@@ -1,0 +1,33 @@
+<div ng-controller="AppCtrl" ng-cloak>
+  <md-content class="md-padding" layout-xs="column" layout-align="center" layout="row">
+    <div flex-xs flex-gt-md="30" layout="column">
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Account login</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <form class="loginform" class="container-fluid" ng-submit="submit()">
+                    <md-input-container class="col-lg-12">
+    					<label>Email</label>
+    					<input ng-model="user.email">
+    				</md-input-container>
+    				<md-input-container>
+    					<label>Password</label>
+    					<input ng-model="user.password" type="password">
+    				</md-input-container>
+    				<md-input-container layout-align="center center">
+    					<div layout="row" layout-sm="column" layout-margin>
+    						<md-button class="md-raised" flex="50" flex-sm="100">Login</md-button>
+    						<md-button class="md-raised md-primary" flex="50" flex-sm="100">Register</md-button>
+    					</div>
+    				</md-input-container>
+                  <md-button type="button" ng-click="reset()">RESET</md-button>
+                  <md-button class="md-primary" ng-disabled="myForm.$invalid">SUBMIT</md-button>
+                </form>
+            </md-card-content>
+          </md-card>
+    </div>
+  </md-content>
+</div>

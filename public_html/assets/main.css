@@ -1,0 +1,14 @@
+html,body,.row{
+    background: #3084FF;
+    height: 100%;
+}
+.leftlog{
+    background: white;
+    min-height: 100%;
+}
+.rightlog{
+    color: white;
+}
+.white{
+    color: black;
+}

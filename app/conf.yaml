@@ -1,0 +1,9 @@
+debug: true
+
+conf.api.pass: asdf
+conf.title: Calendar
+
+conf.db.host: localhost
+conf.db.user: root
+conf.db.pass:
+conf.db.name: silexdemo
