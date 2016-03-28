@@ -41,7 +41,11 @@ $ composer install
 ### Pluginuri
 
 * Facebook API
-* .....
+
+### Facilități
+
+* Încărcare rapidă - CSS/JS minificat
+
 
 ### Todos
 
