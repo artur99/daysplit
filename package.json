@@ -1,36 +1,25 @@
 {
-<<<<<<< HEAD
   "name": "daysplit",
-  "version": "1.0.1",
-=======
-  "name": "calendar",
   "version": "1.0.0",
->>>>>>> a7f8db36f0381a360131e801ef600b45ffff7663
   "description": "",
   "main": "Gruntfile.js",
   "dependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "grunt-bower": "^0.21.0",
+    "load-grunt-tasks": "^3.4.1"
   },
-  "devDependencies": {
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.1",
-    "grunt-remove": "^0.1.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-<<<<<<< HEAD
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artur99/daysplit.git"
   },
+  "author": "artur99",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/artur99/daysplit/issues"
   },
   "homepage": "https://github.com/artur99/daysplit#readme"
-=======
-  "license": "ISC"
->>>>>>> a7f8db36f0381a360131e801ef600b45ffff7663
 }
