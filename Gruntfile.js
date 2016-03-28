@@ -38,12 +38,22 @@ module.exports = function(grunt) {
 			    'public_html/assets/components/data.js': ['public_html/assets/components/data.js']
 			  }
 			}
+		},
+		cssmin: {
+		  options: {
+		    shorthandCompacting: false,
+		    roundingPrecision: -1
+		  },
+		  target: {
+		    files: {
+		      'public_html/assets/components/data.css': ['public_html/assets/components/data.css']
+		    }
+		  }
 		}
 	});
 	grunt.loadNpmTasks('grunt-bower-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	/*grunt.loadNpmTasks('grunt-bower');
-	grunt.loadNpmTasks('grunt-contrib-clean');*/
-	grunt.registerTask('default', ['bower_concat', 'uglify'/*, 'bower', 'clean'*/]);
+	grunt.registerTask('default', ['bower_concat', 'uglify', 'cssmin'/*, 'bower', 'clean'*/]);
 };
