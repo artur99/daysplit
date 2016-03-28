@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../_silex/vendor/autoload.php';
+require_once __DIR__.'/../phpvendor/autoload.php';
 
 $app = new Silex\Application();
 
