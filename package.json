@@ -1,0 +1,27 @@
+{
+  "name": "daysplit",
+  "version": "1.0.1",
+  "description": "",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-remove": "^0.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artur99/daysplit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artur99/daysplit/issues"
+  },
+  "homepage": "https://github.com/artur99/daysplit#readme"
+}

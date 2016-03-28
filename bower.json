@@ -1,0 +1,25 @@
+{
+  "name": "daysplit",
+  "version": "0.0.0",
+  "directory": "public_html/assets",
+  "dependencies": {
+    "Materialize": "materialize#^0.97.5"
+  },
+  "devDependencies": {},
+  "appPath": "app",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://github.com/artur99/daysplit",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "authors": [
+    "artur99 <david1989mail@yahoo.com>"
+  ]
+}
