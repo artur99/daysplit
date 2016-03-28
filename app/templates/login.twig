@@ -10,18 +10,38 @@
     {% endfor %}{% endif %}
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,900" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href="{{asset('components/data.css')}}" rel="stylesheet">
+    <link href="{{asset('fixer.css')}}" rel="stylesheet">
     <link href="{{asset('main.css')}}" rel="stylesheet">
-    <script src="{{asset('components/data.js')}}"></script>
-    <script src="{{asset('app.js')}}"></script>
 </head>
 <body id="login">
+    <div class="colorbar z-depth-1"></div>
     <div class="row">
-        <div class="col s5 leftlog">a</div>
-        <div class="col s7 rightlog">
-            <a class="waves-effect waves-dark btn white"><i class="material-icons left">facebook</i>Stuff</a>
+        <div class="col l4 m8 s11 z-depth-1 white loginbox hat">
+            <form class="col s12 hat">
+              <div class="row">
+                <div class="col header m10 s12 offset-m1">
+                    <i class="large material-icons">person_pin</i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m10 s12 offset-m1">
+                    <input id="email" type="email" autocomplete="off" autofocus>
+                    <label for="email" data-error="Wrong email address">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col m10 s12 offset-m1">
+                  <input id="password" type="password">
+                  <label for="password">Parola</label>
+                </div>
+              </div>
+            </form>
         </div>
     </div>
+    <script src="{{asset('components/data.js')}}"></script>
+    <script src="{{asset('app.js')}}"></script>
 </body>
 </html>

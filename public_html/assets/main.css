@@ -1,14 +1,36 @@
-html,body,.row{
-    background: #3084FF;
+html,body{
     height: 100%;
+    background: #F6F6F6;
 }
-.leftlog{
-    background: white;
-    min-height: 100%;
+#login .colorbar{
+    background: #3084FF;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
 }
-.rightlog{
-    color: white;
+.row .loginbox{
+    display: block;
+    position: relative;
+    z-index: 1;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    overflow: hidden;
 }
-.white{
-    color: black;
+.loginbox>.col{
+    padding: 30px;
+}
+.loginbox .header{
+    text-align: center;
+    color: #2196F3;
+}
+.wt{
+    color: rgba(255,255,255,.9);
+}
+.hat{
+    height: auto;
+    transition: .5s height;
 }
