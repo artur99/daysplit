@@ -1,9 +1,17 @@
 {
+<<<<<<< HEAD
   "name": "daysplit",
   "version": "0.0.0",
   "directory": "public_html/assets",
   "dependencies": {
     "Materialize": "materialize#^0.97.5"
+=======
+  "name": "calendar",
+  "version": "0.0.0",
+  "directory": "public_html/assets",
+  "dependencies": {
+    "angular-material": "^1.0.6"
+>>>>>>> a7f8db36f0381a360131e801ef600b45ffff7663
   },
   "devDependencies": {},
   "appPath": "app",
@@ -11,15 +19,22 @@
   "main": "",
   "moduleType": [],
   "license": "MIT",
+<<<<<<< HEAD
   "homepage": "https://github.com/artur99/daysplit",
+=======
+  "homepage": "",
+>>>>>>> a7f8db36f0381a360131e801ef600b45ffff7663
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
+<<<<<<< HEAD
   ],
   "authors": [
     "artur99 <david1989mail@yahoo.com>"
+=======
+>>>>>>> a7f8db36f0381a360131e801ef600b45ffff7663
   ]
 }
