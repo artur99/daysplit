@@ -17,33 +17,49 @@
     <link href="{{asset('main.css')}}" rel="stylesheet">
 </head>
 <body id="login">
-    <div class="colorbar z-depth-1"></div>
-    <div class="row">
-        <div class="col l4 m8 s11 z-depth-1 white loginbox hat">
-            <form class="col s12 hat">
+    <div class="body row blue">
+        <div class="col m6 s12 loginbox nr1">
+            <form class="col s12 l8 inpad" method="POST">
               <div class="row">
-                <div class="col header m10 s12 offset-m1">
+                <div class="col header s12">
                     <i class="large material-icons">person_pin</i>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col m10 s12 offset-m1">
-                    <input id="email" type="email" autocomplete="off" autofocus>
+                <div class="input-field col s12">
+                    <input id="email" type="email" autocomplete="off" tabindex="1" autofocus>
                     <label for="email" data-error="Wrong email address">Email</label>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col m10 s12 offset-m1">
-                  <input id="password" type="password">
+                <div class="input-field col s12">
+                  <input id="password" type="password" tabindex="2">
                   <label for="password">Parola</label>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col m10 s12 offset-m1 center-align">
-                  <input type="submit" class="btn blue waves-effect waves-light" value="Logare">
+                  <div class="col s12">
+                      <input type="checkbox" id="cbox" tabindex="3">
+                      <label for="cbox">Ține-mă logat</label>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12 center-align">
+                  <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="4">
+                      Logare
+                      <i class="material-icons left">send</i>
+                  </button>
                 </div>
               </div>
             </form>
+        </div>
+        <div class="col m6 s12 loginbox nr2 center-align">
+            <p class="flow-text col s10 offset-s1">
+                Bun venit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus ab, quia porro totam a? Illum nihil tempore hic, dolor. Quas possimus id architecto sunt vero illo est, odit nesciunt similique!
+            </p><br>
+            <a href="#" class="btn waves-effect col l5 ma waves-dark btn-large white">Logare cu Facebook</a> <br>
+            <a href="#" class="btn waves-effect col l5 ma waves-dark btn-large white">Cont nou</a><br>
+            <a href="#" class="btn waves-effect col l5 ma waves-dark red lighten-1">Restare parolă</a><br>
         </div>
     </div>
     <script src="{{asset('components/data.js')}}"></script>

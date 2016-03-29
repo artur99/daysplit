@@ -16,15 +16,13 @@ module.exports = function(grunt) {
 					cwd: 'bower_components/Materialize/font/',
 					src: '**',
 					dest: 'public_html/assets/font/',
+				},
+				{
+					expand: true,
+					cwd: 'bower_components/font-awesome/fonts/',
+					src: '**',
+					dest: 'public_html/assets/fonts/',
 				}
-		      // includes files within path and its sub-directories
-		    //   {expand: true, src: ['path/**'], dest: 'dest/'},
-			  //
-		    //   // makes all src relative to cwd
-		    //   {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
-			  //
-		    //   // flattens results to a single level
-		    //   {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'},
 		    ],
 		  },
 		},
