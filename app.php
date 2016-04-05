@@ -13,14 +13,17 @@ $app->register(new Provider\UrlGeneratorServiceProvider());
 $app->register(new Provider\TwigServiceProvider());
 include 'app/conf.php';
 include 'app/user.php';
+include 'app/langconf.php';
 include 'app/twigconf.php';
 
 include 'app/model.php';
 include 'app/router.php';
 
 $app->get('/', $router);
-$app->match('/login', $router_login);
-$app->match('/ajax', $router_ajax);
+$app->match('/account', $router_account);
+$app->match('/login/facebook', $router_login_fb);
+$app->match('/ajax/account/login', $router_ajax_login);
+$app->match('/ajax/account/signup', $router_ajax_signup);
 
 
 

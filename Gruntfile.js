@@ -13,9 +13,9 @@ module.exports = function(grunt) {
 		    files: [
 				{
 					expand: true,
-					cwd: 'bower_components/Materialize/font/',
+					cwd: 'bower_components/Materialize/fonts/',
 					src: '**',
-					dest: 'public_html/assets/font/',
+					dest: 'public_html/assets/fonts/',
 				},
 				{
 					expand: true,

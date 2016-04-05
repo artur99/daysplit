@@ -30,9 +30,29 @@ $router = function()use($app,$user){
     return $app['twig']->render('index.twig');
 };
 
-$router_login = function()use($app,$user){
+$router_account = function()use($app,$user){
     return $app['twig']->render('login.twig');
 };
-$router_ajax = function()use($app,$user){
-    return new JsonResponse([1,2]);
+$router_login_fb = function()use($app,$user){
+    return $app['twig']->render('login.twig');
+};
+$router_ajax_login = function(Request $r)use($app,$user){
+    // $data = $user->login_mode1($r->request->all());
+    // var_dump($data);
+    return new JsonResponse([
+        'type' => 'error',
+        'text' => [
+            'password' => 'Date de logare incorecte...'
+        ]
+    ]);
+};
+$router_ajax_signup = function()use($app,$user){
+    return new JsonResponse([
+        'type' => 'error',
+        'text' => [
+            'email' => 'Această adresă email este deja folosită...',
+            'password' => 'Parola este prea scurtă...',
+            'cpassword' => 'Parolele nu corespund...',
+        ]
+    ]);
 };

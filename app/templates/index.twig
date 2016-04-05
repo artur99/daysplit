@@ -8,22 +8,23 @@
     {% if meta is defined %}{% for key,itm in meta %}
     <meta name="{{key}}" content="{{itm}}">
     {% endfor %}{% endif %}
-    <!-- Vendor CSS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,900" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href="{{asset('components.css')}}" rel="stylesheet">
-    <!-- CSS -->
+    <link href="{{asset('components/data.css')}}" rel="stylesheet">
+    <link href="{{asset('fixer.css')}}" rel="stylesheet">
     <link href="{{asset('main.css')}}" rel="stylesheet">
 </head>
 <body>
     <h2>Landing Page Here!</h2>
 
+    
 
 
 
 
-    <script src="{{asset('components.js')}}"></script>
-    <script src="{{asset('app.js')}}"></script>
+      <script src="{{asset('components/data.js')}}"></script>
+      <script src="{{asset('app.js')}}"></script>
 </body>
 </html>

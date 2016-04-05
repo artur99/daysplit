@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
     {% if meta is defined %}{% for key,itm in meta %}
     <meta name="{{key}}" content="{{itm}}">
@@ -17,52 +17,113 @@
     <link href="{{asset('main.css')}}" rel="stylesheet">
 </head>
 <body id="login">
+    <!-- <div class="progress" id="loadingbar"><div class="indeterminate"></div></div> -->
     <div class="body row blue">
-        <div class="col m6 s12 loginbox nr1">
-            <form class="col s12 l8 inpad" method="POST">
-              <div class="row">
+        <div class="loginbox nr1">
+            <form class="col s12 l8 inpad" id="form-login" method="POST">
+                <div class="row">
                 <div class="col header s12">
-                    <i class="large material-icons">person_pin</i>
+                    <i class="large material-icons">&#xE55A;</i>
                 </div>
-              </div>
-              <div class="row">
+                </div>
+                <div class="row">
                 <div class="input-field col s12">
-                    <input id="email" type="email" autocomplete="off" tabindex="1" autofocus>
-                    <label for="email" data-error="Wrong email address">Email</label>
+                    <input id="l_em" type="email" name="email" autocomplete="off" tabindex="1" required autofocus>
+                    <label for="l_em">Email</label>
                 </div>
-              </div>
-              <div class="row">
+                </div>
+                <div class="row">
                 <div class="input-field col s12">
-                  <input id="password" type="password" tabindex="2">
-                  <label for="password">Parola</label>
+                    <input id="l_pw" type="password" name="password" required tabindex="2">
+                    <label for="l_pw">Parolă</label>
                 </div>
-              </div>
-              <div class="row">
-                  <div class="col s12">
-                      <input type="checkbox" id="cbox" tabindex="3">
-                      <label for="cbox">Ține-mă logat</label>
-                  </div>
-              </div>
-              <div class="row">
+                </div>
+                <div class="row">
+                <div class="col s12">
+                    <input type="checkbox" id="cbox" name="keepin" tabindex="3">
+                    <label for="cbox">Ține-mă logat</label>
+                </div>
+                </div>
+                <div class="row">
                 <div class="input-field col s12 center-align">
-                  <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="4">
+                    <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="4">
                       Logare
-                      <i class="material-icons left">send</i>
-                  </button>
+                      <i class="material-icons left">&#xE163;</i>
+                    </button>
                 </div>
-              </div>
+                </div>
+            </form>
+            <form class="col s12 l8 inpad" id="form-signup" method="POST">
+                <div class="row">
+                <div class="col header s12">
+                    <i class="large material-icons">&#xE7FE;</i>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="s_em" type="email" name="email" required autocomplete="off" tabindex="1">
+                    <label for="s_em">Email</label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="s_pw" type="password" name="password" required tabindex="2">
+                    <label for="s_pw">Parolă</label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="s_cpw" type="password" name="cpassword" required tabindex="3">
+                    <label for="s_cpw">Confirmare Parolă</label>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="input-field col s12 center-align">
+                    <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="4">
+                      Înregistrare
+                      <i class="material-icons left">&#xE163;</i>
+                    </button>
+                    <br><br><a href="#" class="btn-login">Înapoi la formularul de logare</a>
+                </div>
+                </div>
+            </form>
+            <form class="col s12 l8 inpad" id="form-reset" method="POST">
+                <div class="row">
+                <div class="col header s12">
+                    <i class="large material-icons">&#xE0DA;</i>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="r_em" type="email" required autocomplete="off" tabindex="1">
+                    <label for="r_em">Email</label>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="input-field col s12 center-align">
+                    <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="4">
+                      Resetare parolă
+                      <i class="material-icons left">&#xE163;</i>
+                    </button>
+                    <br><br><a href="#" class="btn-login">Înapoi la formularul de logare</a>
+                </div>
+                </div>
             </form>
         </div>
-        <div class="col m6 s12 loginbox nr2 center-align">
+        <div class="loginbox nr2 center-align">
             <p class="flow-text col s10 offset-s1">
                 Bun venit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus ab, quia porro totam a? Illum nihil tempore hic, dolor. Quas possimus id architecto sunt vero illo est, odit nesciunt similique!
-            </p><br>
+            </p>
+            <div class="clearfix"></div>
             <a href="#" class="btn waves-effect col l5 ma waves-dark btn-large white">Logare cu Facebook</a> <br>
-            <a href="#" class="btn waves-effect col l5 ma waves-dark btn-large white">Cont nou</a><br>
-            <a href="#" class="btn waves-effect col l5 ma waves-dark red lighten-1">Restare parolă</a><br>
+            <a href="#" id="btn-signup" class="btn waves-effect col l5 ma waves-dark btn-large white">Cont nou</a><br>
+            <a href="#" id="btn-reset" class="btn waves-effect col l5 ma waves-dark red lighten-1">Restare parolă</a><br>
         </div>
     </div>
     <script src="{{asset('components/data.js')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="{{asset('app.js')}}"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+putenv('FACEBOOK_APP_ID=257868991214937');
+putenv('FACEBOOK_APP_SECRET=8ee3cefff7168c8f2ef631b0d9828d7a');
 
 $app['conf.path'] = dirname(dirname($_SERVER['SCRIPT_FILENAME']));
 $app['twig.path'] = $app['conf.path'].'/app/templates';
