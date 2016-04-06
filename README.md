@@ -13,7 +13,16 @@ Tehnologii utilizate
 * [Grunt]
 * [Silex Micro Framework]
 * [jQuery]
+* [Underscore.js]
 * [MaterializeCSS]
+
+### Limbaje utilizate
+* HTML (+twig)
+* CSS
+* JavaScript
+* PHP (MVC)
+* SQL (DBAL)
+* ApacheConf
 
 ### Instalare
 Cerințe: `git`, `composer`
@@ -62,4 +71,5 @@ $ composer install
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
    [keymaster.js]: <https://github.com/madrobby/keymaster>
    [jQuery]: <http://jquery.com>
+   [Underscore.js]: <http://underscorejs.org/>
    [Gulp]: <http://gulpjs.com>
