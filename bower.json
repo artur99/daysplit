@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "directory": "public_html/assets",
   "dependencies": {
-    "Materialize": "materialize#^0.97.5"
+    "Materialize": "materialize#^0.97.5",
+    "material-preloader": "artur99/material-preloader",
+    "jquery-ui": "^1.11.4",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
   "appPath": "app",
