@@ -20,7 +20,7 @@ Tehnologii utilizate
 * HTML (+twig)
 * CSS
 * JavaScript
-* PHP (mcv)
+* PHP (mvc)
 * SQL (dbal)
 * ApacheConf
 
