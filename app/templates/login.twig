@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="daysplit">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                 <div class="col s12">
-                    <input type="checkbox" id="cbox" name="keepin" tabindex="3">
+                    <input type="checkbox" id="cbox" name="keepin" value="1" tabindex="3">
                     <label for="cbox">Ține-mă logat</label>
                 </div>
                 </div>
@@ -122,8 +122,11 @@
             <a href="#" id="btn-reset" class="btn waves-effect col l5 ma waves-dark red lighten-1">Restare parolă</a><br>
         </div>
     </div>
+    <script type="text/javascript">
+        var token = '{{csrftoken('main')}}';
+    </script>
     <script src="{{asset('components/data.js')}}"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
     <script src="{{asset('app.js')}}"></script>
 </body>
 </html>

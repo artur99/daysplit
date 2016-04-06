@@ -12,21 +12,57 @@ class user{
         return $this->session->has('user')&&$this->session->get('user')['role']==2?true:false;
     }
     public function check_auth($em, $pw){
-        global $model;
-        $pw = $model->encode($pw);
-        $q = $this->db->executeQuery("SELECT * FROM users WHERE type = 1 AND email = ? AND password = ? LIMIT 1", [$em, $pw]);
-        $user = $q->fetch();
-
+        global $misc;
+        if(!$misc->validate(['email'=>$em],'email')) return 0;
+        $pw = $misc->encode($pw);
+        $q = $this->db->executeQuery("SELECT id FROM users WHERE type = 1 AND email = ? AND password = ? LIMIT 1", [$em, $pw]);
+        return $q->fetchAll();
     }
-    public function login_mode1($data){
-        //Function called by ajax login
-        //Simple plain login with email and password
-        global $model;
+    public function login_validate($data){
+        global $misc;
         if(!isset($data['email'], $data['password'])) return 0;
-        $data = $model->validate($data);
-        $keepin = isset($data['keepin'])&&$data['keepin']?1:0;
-        $valid = $this->check_auth($data['email'], $data['password']);
-
+        $data = $misc->filter($data);
+        $kau = $this->check_auth($data['email'], $data['password']);
+        if(isset($kau[0], $kau[0]['id'])) $res = ['id'=>$kau[0]['id']];
+        else $res['err']=['password' => 'Date de logare invalide'];
+        return $res;
+    }
+    public function login_mode1($uid, $keepin = 0){
+        $this->db->executeQuery("UPDATE users SET ldate = UNIX_TIMESTAMP(NOW()) WHERE id = ? LIMIT 1", [(int)$uid]);
+        $uq = $this->db->executeQuery("SELECT type,name,email,image,description,fbid FROM users WHERE id = ? LIMIT 1", [(int)$uid]);
+        $udata = $uq->fetch();
+        $udata['id'] = $uid;
+        $this->session->set('user', $udata);
+        if($keepin){
+            $token = str_shuffle(str_shuffle("artur99artur99artur99net").implode(range('f','y')).time().microtime(true)).time();
+            $this->db->executeQuery("UPDATE users SET token = ? WHERE id = ? LIMIT 1", [$token, (int)$uid]);
+        }
+        return 1;
+    }
+    public function signup_mode1($data){
+        global $misc,$mailcls;
+        $data = $misc->filter($data);
+        $em = $data['email'];
+        $pw = $misc->encode($data['password']);
+        $this->db->executeQuery("INSERT INTO USERS (id, type, email, password, sdate, ldate) VALUES (NULL, 1, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $pw]);
+        $mailcls->send_signup($data['email']);
+        return 1;
+    }
+    public function signup_validate($data){
+        global $misc;
+        if(!$misc->validate($data,'email'))$err['email'] = 'Adresa de email este invalidă';
+        elseif($this->mail_exists($data['email'])) $err['email'] = 'Adresa de email este folosită';
+        if(!$misc->validate($data,'password'))$err['password'] = 'Parola este prea scurtă';
+        elseif($data['password']!=$data['cpassword'])$err['cpassword'] = 'Parolele nu corespund';
+        return isset($err)?$err:[];
+    }
+    public function mail_exists($em){
+        global $misc;
+        $em = $misc->filter(['email'=>$em]);
+        if(!$em)return 0;
+        $em = $em['email'];
+        $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
+        return $q->fetch()['COUNT(1)'];
     }
     public function fbauth(){
         global $app;

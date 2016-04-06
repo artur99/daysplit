@@ -73,3 +73,6 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     height: 30px;
     margin-top: 11px;
 }
+#materialPreloader{
+    box-shadow: 0 0 1px rgba(0,0,0,.3);
+}

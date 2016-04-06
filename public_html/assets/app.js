@@ -1,3 +1,19 @@
+//Init functions
+$(document).ready(function(){
+    preloader = new $.materialPreloader({
+        position: 'top',
+        col_1: '#f44336!important',
+        col_2: '#03a9f4!important',
+        col_3: '#ffeb3b!important',
+        col_4: '#4caf50!important',
+        fadeIn: 30
+    });
+});
+
+
+//Other
+
+
 var checkbox_focuser=[];
 $('input[type=checkbox]').bind('focus', function(){
     var $lb = $(this).parent().find('label');
@@ -40,13 +56,18 @@ function form_switch(toshow){
         });
     });
 }
+function getformdata(form){
+    var data = _.object(_.map($(form).serializeArray(), _.values))
+    data.csrftoken = token;
+    return data;
+}
 $(document).ready(function(){
     form_active = "#form-login";
     form_hide_initial("#form-signup");
     form_hide_initial("#form-reset");
     setTimeout(function(){
         form_width = $("#form-login").css("width");
-    },200);
+    }, 200);
 });
 $(document).on('click', '#btn-signup', function(){form_switch("#form-signup")});
 $(document).on('click', '#btn-reset', function(){form_switch("#form-reset")});
@@ -64,16 +85,21 @@ $(document).on('submit', "#form-login", function(e){
     else if(login_status == 1) return;
 
     markloading(fid);
-    ajax('account/login', _.object(_.map($(fid).serializeArray(), _.values)), function(data){
+    ajax('account/login', getformdata(fid), function(data){
+        $(fid+" input+label").attr('data-error', '');
         if(data.type=='success'){
-            window.location.href = '/dashboard';
+            $(fid+" input").removeClass('invalid').addClass('valid');
+            preloader.on();
+            setTimeout(function(){
+                window.location.href = '/dashboard';
+            },500);
         }else{
             if(data.type=='error'){
-                $(fid+" input+label").attr('data-error', '');
                 $(fid+" input").addClass('invalid');
-                $.each(data.text, function(i,val){
-                    if(val.length){
-                        $(fid+" input[name="+i+"]").addClass('invalid');
+                if(typeof data.text == 'string') $(fid+" input[name=password]+label").attr('data-error', data.text);
+                else $.each(data.text, function(i,val){
+                    if(val){
+                        $(fid+" input[name="+i+"]+label").attr('data-error', val);
                     }
                 });
             }
@@ -92,14 +118,19 @@ $(document).on('submit', "#form-signup", function(e){
     else if(login_status == 1) return;
 
     markloading(fid);
-    ajax('account/signup', _.object(_.map($(fid).serializeArray(), _.values)), function(data){
+    ajax('account/signup', getformdata(fid), function(data){
+        $(fid+" input+label").attr('data-error', '');
         if(data.type=='success'){
-            window.location.href = '/dashboard';
+            $(fid+" input").removeClass('invalid').addClass('valid');
+            preloader.on();
+            setTimeout(function(){
+                window.location.href = '/dashboard';
+            },500);
         }else{
             if(data.type=='error'){
-                $(fid+" input+label").attr('data-error', '');
                 $(fid+" input").addClass('invalid');
-                $.each(data.text, function(i,val){
+                if(typeof data.text == 'string') $(fid+" input[name=cpassword]+label").attr('data-error', data.text);
+                else $.each(data.text, function(i,val){
                     if(val){
                         $(fid+" input[name="+i+"]+label").attr('data-error', val);
                     }

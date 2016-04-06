@@ -53,6 +53,7 @@ $ composer install
 
 ### Facilități
 
+* Protecție împotriva SQLinjection, XSS, CSRF
 * Încărcare rapidă - CSS/JS minificat
 
 
