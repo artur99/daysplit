@@ -20,8 +20,8 @@ Tehnologii utilizate
 * HTML (+twig)
 * CSS
 * JavaScript
-* PHP (MVC)
-* SQL (DBAL)
+* PHP (mcv)
+* SQL (dbal)
 * ApacheConf
 
 ### Instalare
@@ -30,6 +30,7 @@ Cerințe: `git`, `composer`
 ```sh
 $ git clone https://github.com/artur99/daysplit.git
 $ composer install
+$ mysql -u root -p < db_structure.sql
 ```
 
 ### Dezvoltare
@@ -45,6 +46,7 @@ $ npm update
 $ bower update
 $ grunt
 $ composer install
+$ mysql -u root -p < db_structure.sql
 ```
 
 ### Pluginuri
