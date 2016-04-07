@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+</head>
+<body id="login">
+    <div class="body row blue">
+        <div class="loginbox nr2 center-align">
+            <p class="flow-text col s10 offset-s1">
+                Bun venit, {% if user.name %}{{user.name}}{% else %}{{user.email}}{% endif %}!
+            </p>
+            <div class="clearfix"></div>
+            <a href="#" id="btn-relogin" class="btn waves-effect col l5 ma waves-dark btn-large white">Accesare cont</a> <br>
+            <a href="#" id="btn-logout" class="btn waves-effect col l5 ma waves-dark btn-large red lighten-1">Deconectare</a><br>
+        </div>
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

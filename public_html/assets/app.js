@@ -3,8 +3,8 @@ $(document).ready(function(){
     preloader = new $.materialPreloader({
         position: 'top',
         col_1: '#f44336!important',
-        col_2: '#03a9f4!important',
-        col_3: '#ffeb3b!important',
+        col_2: '#ffeb3b!important',
+        col_3: '#03a9f4!important',
         col_4: '#4caf50!important',
         fadeIn: 30
     });
@@ -57,8 +57,7 @@ function form_switch(toshow){
     });
 }
 function getformdata(form){
-    var data = _.object(_.map($(form).serializeArray(), _.values))
-    data.csrftoken = token;
+    var data = _.object(_.map($(form).serializeArray(), _.values));
     return data;
 }
 $(document).ready(function(){
@@ -72,7 +71,24 @@ $(document).ready(function(){
 $(document).on('click', '#btn-signup', function(){form_switch("#form-signup")});
 $(document).on('click', '#btn-reset', function(){form_switch("#form-reset")});
 $(document).on('click', '.btn-login', function(){form_switch("#form-login")});
-
+$(document).on('click', '#btn-logout', function(){
+    markloading_btn('#btn-logout');
+    preloader.on();
+    ajax('account/logout', {}, function(){
+        setTimeout(function(){
+            window.location.href = '/account';
+        }, 400);
+    })
+});
+$(document).on('click', '#btn-relogin', function(){
+    markloading_btn('#btn-relogin');
+    preloader.on();
+    ajax('account/relogin', {}, function(){
+        setTimeout(function(){
+            window.location.href = '/dashboard';
+        }, 400);
+    })
+});
 //Forms module
 $(document).on('blur', 'input', function(){
     if(!$(this).val().length)$(this).find('+label').attr('data-error', '');
@@ -148,6 +164,7 @@ $(document).on('submit', "#form-signup", function(e){
 //Ajax module
 
 function ajax(node, data, cb){
+    data.csrftoken = csrftoken;
     $.post('/ajax/'+node, data).done(cb).error(cb);
 }
 
@@ -157,10 +174,14 @@ function ajax(node, data, cb){
 function markloading(btn){
     var btn = $(btn).find('.btn[type=submit]');
     $(btn).addClass('disabled');
-    // $(btn).find("i").html('<div class="preloader-wrapper small active"> <div class="spinner-layer spinner-blue-only"> <div class="circle-clipper left"><div class="circle"></div></div> <div class="gap-patch"><div class="circle"></div></div> <div class="circle-clipper right"><div class="circle"></div></div> </div> </div>');
 }
 function unmarkloading(btn){
     var btn = $(btn).find('.btn[type=submit]');
     $(btn).removeClass('disabled');
-    // $(btn).find("i").html('<div class="preloader-wrapper small active"> <div class="spinner-layer spinner-blue-only"> <div class="circle-clipper left"><div class="circle"></div></div> <div class="gap-patch"><div class="circle"></div></div> <div class="circle-clipper right"><div class="circle"></div></div> </div> </div>');
+}
+function markloading_btn(btn){
+    $(btn).addClass('disabled');
+}
+function unmarkloading_btn(btn){
+    $(btn).removeClass('disabled');
 }

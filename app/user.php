@@ -1,15 +1,31 @@
 <?php
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Cookie;
 class user{
     function __construct($app){
         $this->session = $app['session'];
         $this->db = $app['db'];
     }
     public function loggedin(){
-        return $this->session->has('user')?true:false;
+        return $this->session->has('user')?$this->session->get('user')['id']:false;
     }
-    public function isadmin(){
-        return $this->session->has('user')&&$this->session->get('user')['role']==2?true:false;
+    public function loggedin_cookie(){
+        global $app;
+        $ck = $app['request']->cookies;
+        if(!$ck->has('token')) return false;
+        $q = $this->db->executeQuery("SELECT id FROM users WHERE token = ? LIMIT 1", [(string)$ck->get('token')]);
+        $dt = $q->fetch();
+        if(!sizeof($dt))return false;
+        if(isset($dt['id'])) return $dt['id'];
+        return false;
+    }
+    public function cookie_login(JsonResponse &$resp = null){
+        global $app;
+        $ck = $app['request']->cookies;
+        if(!$ck->has('token')) return false;
+        $q = $this->db->executeQuery("SELECT id FROM users WHERE token = ? LIMIT 1", [(string)$ck->get('token')])->fetch();
+        if(!isset($q['id'])) return false;
+        return $this->login_mode1($q['id'], 1, $resp);
     }
     public function check_auth($em, $pw){
         global $misc;
@@ -27,7 +43,7 @@ class user{
         else $res['err']=['password' => 'Date de logare invalide'];
         return $res;
     }
-    public function login_mode1($uid, $keepin = 0){
+    public function login_mode1($uid, $keepin = 0, JsonResponse &$resp = null){
         $this->db->executeQuery("UPDATE users SET ldate = UNIX_TIMESTAMP(NOW()) WHERE id = ? LIMIT 1", [(int)$uid]);
         $uq = $this->db->executeQuery("SELECT type,name,email,image,description,fbid FROM users WHERE id = ? LIMIT 1", [(int)$uid]);
         $udata = $uq->fetch();
@@ -36,6 +52,7 @@ class user{
         if($keepin){
             $token = str_shuffle(str_shuffle("artur99artur99artur99net").implode(range('f','y')).time().microtime(true)).time();
             $this->db->executeQuery("UPDATE users SET token = ? WHERE id = ? LIMIT 1", [$token, (int)$uid]);
+            if($resp)$resp->headers->setCookie(new Cookie('token', $token, time()+604800));
         }
         return 1;
     }
@@ -93,6 +110,12 @@ class user{
             return 1;
         }
         return $helper->getLoginUrl('http://thevoiceofyoungeurope.com/login');
+    }
+    public function get($uid, $data){
+        $q = $this->db->executeQuery("SELECT ".$data." FROM users WHERE id = ?", [(int)$uid]);
+        $dt = $q->fetch();
+        if(!sizeof($dt)) return false;
+        return $dt;
     }
 }
 

@@ -1,23 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    {% include 'part/head.twig' %}
     <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
     {% if meta is defined %}{% for key,itm in meta %}
     <meta name="{{key}}" content="{{itm}}">
     {% endfor %}{% endif %}
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,900" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Dosis:400,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href="{{asset('components/data.css')}}" rel="stylesheet">
-    <link href="{{asset('fixer.css')}}" rel="stylesheet">
-    <link href="{{asset('main.css')}}" rel="stylesheet">
 </head>
 <body id="login">
-    <!-- <div class="progress" id="loadingbar"><div class="indeterminate"></div></div> -->
     <div class="body row blue">
         <div class="loginbox nr1">
             <form class="col s12 l8 inpad" id="form-login" method="POST">
@@ -122,11 +112,6 @@
             <a href="#" id="btn-reset" class="btn waves-effect col l5 ma waves-dark red lighten-1">Restare parolă</a><br>
         </div>
     </div>
-    <script type="text/javascript">
-        var token = '{{csrftoken('main')}}';
-    </script>
-    <script src="{{asset('components/data.js')}}"></script>
-    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
-    <script src="{{asset('app.js')}}"></script>
+    {% include 'part/scripts.twig' %}
 </body>
 </html>

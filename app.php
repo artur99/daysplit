@@ -28,7 +28,9 @@ $app->get('/', $router);
 $app->match('/account', $router_account);
 $app->match('/login/facebook', $router_login_fb);
 $app->match('/ajax/account/login', $router_ajax_login);
+$app->match('/ajax/account/relogin', $router_ajax_relogin);
 $app->match('/ajax/account/signup', $router_ajax_signup);
+$app->match('/ajax/account/logout', $router_ajax_logout);
 
 
 

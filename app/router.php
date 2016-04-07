@@ -30,12 +30,15 @@ $router = function()use($app,$user){
 };
 
 $router_account = function()use($app,$user){
+    if($uid = $user->loggedin()) return $app['twig']->render('loggedin.twig', ['user'=>$user->get($uid, 'name,email')]);
+    if($uid = $user->loggedin_cookie()) return $app['twig']->render('relogin.twig', ['user'=>$user->get($uid, 'name,email')]);
     return $app['twig']->render('login.twig');
 };
 $router_login_fb = function()use($app,$user){
-    return $app['twig']->render('login.twig');
+    // return $app['twig']->render('login.twig');
 };
 $router_ajax_login = function(Request $r)use($app,$user){
+    $resp = new JsonResponse();
     $pfdata = $r->request->all();
     $data = $user->login_validate($pfdata);
     if(isset($data['error']) || !isset($data['id'])){
@@ -43,10 +46,17 @@ $router_ajax_login = function(Request $r)use($app,$user){
         $res['text'] = isset($data['err'])?$data['err']:[];
     }elseif(isset($data['id'])){
         $keepin = isset($pfdata['keepin'])&&$pfdata['keepin']?1:0;
-        $user->login_mode1($data['id'], $keepin);
+        $user->login_mode1($data['id'], $keepin, $resp);
         $res['type'] = 'success';
     }
-    return new JsonResponse($res);
+    $resp->setData($res);
+    return $resp;
+};
+$router_ajax_relogin = function(Request $r)use($app,$user){
+    $resp = new JsonResponse();
+    if(!$user->cookie_login($resp)) $resp->setData(['type'=>'error']);
+    else $resp->setData(['type'=>'success']);
+    return $resp;
 };
 $router_ajax_signup = function(Request $r)use($app,$user){
     $err = $user->signup_validate($r->request->all());
@@ -58,4 +68,11 @@ $router_ajax_signup = function(Request $r)use($app,$user){
         $res['text'] = $err;
     }
     return new JsonResponse($res);
+};
+$router_ajax_logout = function(Request $r)use($app,$user){
+    $app['session']->clear();
+    $resp = new JsonResponse();
+    $resp->setData(['type'=>'success']);
+    $resp->headers->clearCookie('token');
+    return $resp;
 };
