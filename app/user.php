@@ -61,7 +61,7 @@ class user{
         $data = $misc->filter($data);
         $em = $data['email'];
         $pw = $misc->encode($data['password']);
-        $this->db->executeQuery("INSERT INTO USERS (id, type, email, password, sdate, ldate) VALUES (NULL, 1, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $pw]);
+        $this->db->executeQuery("INSERT INTO users (id, type, email, password, sdate, ldate) VALUES (NULL, 1, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $pw]);
         $lid = $this->db->lastInsertId();
         $this->login_mode1($lid, 0);
         $mailcls->send_signup($data['email']);

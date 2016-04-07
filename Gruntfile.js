@@ -29,8 +29,8 @@ module.exports = function(grunt) {
 		concat: {
 		    dist: {
 		      files: [
-		        {src: ['public_html/assets/components/bowercomp.js', 'src/js/*.js'], dest: 'public_html/assets/components/data.js'},
-				{src: ['public_html/assets/components/bowercomp.css', 'src/css/*.css'], dest: 'public_html/assets/components/data.css'}
+		        {src: ['public_html/assets/components/bowercomp.js', 'src/js/*.js', 'src/js/init.js'], dest: 'public_html/assets/components/data.js'},
+				{src: ['public_html/assets/components/bowercomp.css', 'src/css/*.css', 'src/css/main.css'], dest: 'public_html/assets/components/data.css'}
 		      ],
 		    },
 		},
@@ -75,5 +75,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.registerTask('default', ['bower_concat', 'concat', 'copy', 'uglify', 'cssmin', 'clean']);
-	grunt.registerTask('dev-watcher', ['concat']);
+	grunt.registerTask('dev-watcher', ['bower_concat', 'concat']);
 };
