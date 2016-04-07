@@ -28,10 +28,9 @@ Tehnologii utilizate
 Cerințe: `git`, `composer`, `node.js`
 
 ```sh
-$ npm install -g bower
-$ npm install -g grunt-cli
 $ git init
 $ git pull https://github.com/artur99/daysplit.git
+$ npm install -g bower grunt-cli
 $ npm update
 $ bower update
 $ grunt
