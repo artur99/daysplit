@@ -41,8 +41,6 @@ $ mysql -u root -p < db_structure.sql
 
 ### Dezvoltare
 
-Cerințe: `git`, `composer`, `node.js`
-
 ```sh
 $ grunt watch
 ```
