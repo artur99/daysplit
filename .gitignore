@@ -47,3 +47,8 @@ bower_components
 ### Composer ###
 phpvendor
 composer.lock
+
+
+### Generated data ###
+public_html/assets/*
+!public_html/assets/readme.txt

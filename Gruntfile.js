@@ -3,8 +3,8 @@ module.exports = function(grunt) {
 		bower_concat: {
 			basic: {
 				dest: {
-					js: 'public_html/assets/components/data.js',
-					css: 'public_html/assets/components/data.css'
+					js: 'public_html/assets/components/bowercomp.js',
+					css: 'public_html/assets/components/bowercomp.css'
 				}
 			}
 		},
@@ -26,6 +26,15 @@ module.exports = function(grunt) {
 		    ],
 		  },
 		},
+		concat: {
+		    dist: {
+		      files: [
+		        {src: ['public_html/assets/components/bowercomp.js', 'src/js/*.js'], dest: 'public_html/assets/components/data.js'},
+				{src: ['public_html/assets/components/bowercomp.css', 'src/css/*.css'], dest: 'public_html/assets/components/data.css'}
+		      ],
+		    },
+		},
+		clean: ['public_html/assets/components/bowercomp.js', 'public_html/assets/components/bowercomp.css'],
 		uglify: {
 			options: {
 			  mangle: false,
@@ -47,11 +56,24 @@ module.exports = function(grunt) {
 		      'public_html/assets/components/data.css': ['public_html/assets/components/data.css']
 		    }
 		  }
+	  	},
+		watch: {
+		    scripts: {
+		        files: ['src/js/*.js', 'src/css/*.css'],
+		        tasks: ['dev-watcher'],
+		        options: {
+		            interrupt: true
+		        }
+		    }
 		}
 	});
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-bower-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.registerTask('default', ['bower_concat', 'uglify', 'cssmin'/*, 'bower', 'clean'*/]);
+	grunt.registerTask('default', ['bower_concat', 'concat', 'copy', 'uglify', 'cssmin', 'clean']);
+	grunt.registerTask('dev-watcher', ['concat']);
 };

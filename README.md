@@ -25,16 +25,6 @@ Tehnologii utilizate
 * ApacheConf
 
 ### Instalare
-Cerințe: `git`, `composer`
-
-```sh
-$ git clone https://github.com/artur99/daysplit.git
-$ composer install
-$ mysql -u root -p < db_structure.sql
-```
-
-### Dezvoltare
-
 Cerințe: `git`, `composer`, `node.js`
 
 ```sh
@@ -47,6 +37,14 @@ $ bower update
 $ grunt
 $ composer install
 $ mysql -u root -p < db_structure.sql
+```
+
+### Dezvoltare
+
+Cerințe: `git`, `composer`, `node.js`
+
+```sh
+$ grunt watch
 ```
 
 ### Pluginuri
