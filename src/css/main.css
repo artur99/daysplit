@@ -2,14 +2,6 @@ html,body{
     height: 100%;
     background: #F6F6F6;
 }
-.colorbar{
-    background: #3084FF;
-    height: 200px;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 0;
-}
 .row.body{
     min-height: 100%;
     /*height: 100%;*/
@@ -25,37 +17,11 @@ html,body{
     flex-wrap: wrap;
     margin-bottom: 0;
 }
-.row .loginbox{
-    flex: 50%;
-    min-height: 100%;
-    /*text-align: center;*/
-    padding: 20px;
-    padding-top: 12vh;
-}
-@media(max-width: 700px){
-    .row .loginbox{
-        flex: 100%;
-    }
-}
-.loginbox.nr1{
-    background: #fff;
-}
-.loginbox.nr1 .header{
-    color: #2196F3;
-    text-align: center;
-}
-.loginbox.nr2{
+.colorbar{
     background: #3084FF;
-    color: #fff;
-}
-.loginbox .inpad{
-    display: block;
-    margin: auto;
-    float: none;
-}
-#loadingbar{
+    height: 200px;
+    width: 100%;
     position: absolute;
     top: 0;
-    left: 0;
-    margin: 0;
+    z-index: 0;
 }

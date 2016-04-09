@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+</head>
+<body id="dash">
+    <div class="colorbar"></div>
+    <div class="topmenu z-depth-1 red">
+        <div class="tmspl">
+            a
+        </div>
+        <div class="tmspl">
+            b
+        </div>
+        <div class="tmspl">
+            c
+        </div>
+    </div>
+    <div class="body z-depth-1">
+
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>
