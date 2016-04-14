@@ -36,6 +36,7 @@ $app->match('/ajax/account/signup', $router_ajax_signup);
 $app->match('/ajax/account/logout', $router_ajax_logout);
 
 $app->match('/ajax/dash/time', $router_ajax_time);
+$app->match('/ajax/dash/add', $router_ajax_add);
 
 
 

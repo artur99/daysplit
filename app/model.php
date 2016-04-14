@@ -17,6 +17,12 @@ class model{
         ];
         return $data;
     }
+    function add($d){
+        if(!isset($d['type'])) return ['type'=>'error', 'text'=>'Tip invalid de date'];
+        if($d['type']=='event'){
+
+        }
+    }
 
 }
 

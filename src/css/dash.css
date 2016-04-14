@@ -10,19 +10,132 @@
 .topmenu{
     width: 100%;
     height: 50px;
-    /*background: red;*/
+    background: rgba(0,0,0,.25);
     position: relative;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    -moz-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    -o-flex-wrap: wrap;
-    flex-wrap: wrap;
+    color: white;
+    /*border-bottom: 2px solid white;*/
+}
+.topmenu>.flex{
+    width: 100%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .topmenu .tmspl{
     flex: 33.3%;
+}
+.topmenu .tmspl:nth-child(1){
+    border-left: none;
+}
+.tmspl .logo{
+    font-size: 30px;
+    line-height: 45px;
+    padding-left: 20%;
+}
+.switchdd{
+    width: 48px;
+    float: left;
+    height: 48px;
+    text-align: center;
+}
+.switchdd>i{
+    color: #fff;
+    font-size: 36px;
+    line-height: 48px;
+}
+#toptime{
+    padding-right: 10px;
+    text-align: right;
+    float: right;
+    font-size: 16px;
+    line-height: 19px;
+    padding-top: 3px;
+    font-family: 'Open Sans', sans-serif;
+}
+.modtabc{
+    display: block;
+    padding: 15px 0;
+}
+.color_selector{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: inline-block;
+}
+.colors_selector_field{
+    white-space: nowrap;
+    padding-top: 5px!important;
+    padding-bottom: 15px!important;
+    height: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+@media(min-width:900px){
+    .colors_selector_field{
+        padding-left: 0;
+        padding-right: 0;
+        height: auto;
+        overflow-x: auto;
+        white-space: normal;
+    }
+}
+@media(max-width: 1025px){
+    .color_selector{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media(max-width:900px){
+    .color_selector{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+input.inpsmalldt{
+    width: 70px;
+    padding: 0;
+    height: 25px;
+    text-align: center;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+input.inpsmalldt2{
+    width: 100px;
+}
+.simpmgtop{
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    margin-top: 0!important;
+    float: right;
+    overflow: hidden;
+    height: 64px;
+}
+.smimpmg{
+    text-align: center;
+    padding-top: 35px!important;
+    padding-bottom: 15px!important;
+    transition: .25s all;
+}
+.doubledate{
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    margin-top: 0!important;
+}
+.doubledate .dategroup{
+    margin-bottom: 8px;
+}
+.smallfbtn{
+    box-shadow: none!important;
+    width: 25px;
+    height: 25px;
+
+}
+.smallfbtn>i{
+    font-size: 21px;
+    line-height: 25px;
+}
+.dg2ed{
+    display: none;
 }

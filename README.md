@@ -53,7 +53,7 @@ $ grunt watch
 
 ### Facilități
 
-* Protecție împotriva SQLinjection, XSS, CSRF
+* Protecție împotriva SQL injection, Cross-site Scripting, Cross-site request forgery
 * Încărcare rapidă - CSS/JS minificat
 
 

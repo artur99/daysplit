@@ -9,15 +9,52 @@
 </head>
 <body id="dash">
     <div class="colorbar"></div>
-    <div class="topmenu z-depth-1 red">
-        <div class="tmspl">
-            a
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red waves-effect waves-light" id="btn_add">
+        <i class="large material-icons">&#xE145;</i>
+        </a>
+    </div>
+    <div id="modal_add" class="modal">
+        <div class="modal-content white">
+        <div class="row">
+            <div class="col s12">
+            <ul class="tabs" id="tabs_addforms">
+                <li class="tab col s2"><a href="#tab_add_event" class="active">Eveniment</a></li>
+                <li class="tab col s2"><a href="#tab_add_project">Proiect</a></li>
+                <li class="tab col s2"><a href="#tab_add_deadline">Deadline</a></li>
+            </ul>
+            </div>
+            <div id="tab_add_event" class="col s12">{% include 'sub/dash_addevent.twig' %}</div>
+            <div id="tab_add_project" class="col s12">{% include 'sub/dash_addproj.twig' %}</div>
+            <div id="tab_add_deadline" class="col s12">{% include 'sub/dash_adddeadl.twig' %}</div>
         </div>
-        <div class="tmspl">
-            b
         </div>
-        <div class="tmspl">
-            c
+        <div class="modal-footer">
+            <a href="#" class="waves-effect waves-green btn-flat" id="btn_submit_addform">Adăugare</a>
+        </div>
+    </div>
+    <div class="row">
+    <div class="topmenu">
+        <div class="flex">
+            <div class="tmspl">
+                <div class="logo">DaySplit</div>
+            </div>
+            <div class="tmspl">
+                <a href="#" class="dropdown-button switchdd waves-effect" data-activates="switcher_drd"><i class="material-icons">&#xE8EE;</i></a>
+                <ul id="switcher_drd" class="dropdown-content">
+                    <li><a href="#!">Vizualizare pe săptămână</a></li>
+                    <li><a href="#!">Mode view 2</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!">three</a></li>
+                </ul>
+                <div id="toptime">
+                    <span class="time">13:44:44 <small>(GMT+3)</small></span><br>
+                    <span class="date">Marți, 17 Martie 2016</span>
+                </div>
+            </div>
+            <div class="tmspl">
+                c
+            </div>
         </div>
     </div>
     <div class="body z-depth-1">

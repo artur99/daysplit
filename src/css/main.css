@@ -25,3 +25,18 @@ html,body{
     top: 0;
     z-index: 0;
 }
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: rgba(0,0,0,.2);
+    -webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.5);
+    -webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
