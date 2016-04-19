@@ -119,6 +119,12 @@ class user{
         if(!sizeof($dt)) return false;
         return $dt;
     }
+    public function getc($data){
+        if(!$this->session->has('user')) return false;
+        $user = $this->session->get('user');
+        if(!isset($user[$data]))return false;
+        return $user[$data];
+    }
 }
 
 $user = new user($app);

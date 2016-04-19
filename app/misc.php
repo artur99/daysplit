@@ -11,6 +11,9 @@ class misc{
         if(isset($data['password'])){
             $data['password'] = substr($data['password'], 0, 100);
         }
+        if(isset($data['title'])){
+            $data['title'] = substr($data['title'], 0, 100);
+        }
         return $data;
     }
     public function validate($data, $type){
@@ -25,7 +28,7 @@ class misc{
     public function encode($data){
         return md5($data);
     }
-    public function renderdate($date, $lang='ro'){
+    public function render_date($date, $lang='ro'){
         if($lang=='ro'):
             $elems = preg_split( "/(\s+|\.|-|,|:|;|\|)/", $date);
             $elems = array_filter($elems, function($el){
@@ -49,19 +52,45 @@ class misc{
                 'noi'=>11,
                 'dec'=>12,
             ];
-            $elems[0] = (int) ($elems[0]);
+            if(isset($elems[0])) $elems[0] = (int) ($elems[0]);
             if(isset($elems[1])) $elems[1] = (int) ((ctype_alpha($elems[1]) && isset($mths[$elems[1]]))?$mths[$elems[1]]:$elems[1]);
             if(isset($elems[2])) $elems[2] = (int) ($elems[2]);
-            if(!$elems[0])$elems[0] = (int)date('d');
-            if(!isset($elems[1]) || !$elems[1])$elems[1] = (int)date('m');
-            if(!isset($elems[2]) || !$elems[2])$elems[2] = (int)date('Y');
+            if(!isset($elems[0]) || !$elems[0] || $elems[0]>31) $elems[0] = (int)date('d');
+            if(!isset($elems[1]) || !$elems[1] || $elems[1]>12) $elems[1] = (int)date('m');
+            if(!isset($elems[2]) || !$elems[2]) $elems[2] = (int)date('Y');
+            return $elems;
         endif;
+    }
+    public function render_time($time, $lang = 'ro'){
+        if($lang == 'ro'):
+            $elems = preg_split( "/(\s+|\.|-|,|:|;|\|)/", $time);
+            $elems = array_filter($elems, function($el){
+                return strlen(trim($el));
+            });
+            array_walk($elems, function(&$val){
+                $val = trim($val);
+            });
+            if(!isset($elems[0]))$elems[0] = 0;
+            else $elems[0] = (int)$elems[0];
+            if(!isset($elems[1]))$elems[1] = 0;
+            else $elems[1] = (int)$elems[1];
+            return $elems;
+        endif;
+    }
+    public function gentime($data, $type){
+        $str = 0;
+        if($type=='date'){
+            $str = str_pad($data[2],4,"0",STR_PAD_LEFT);
+            $str.= str_pad($data[1],2,"0",STR_PAD_LEFT);
+            $str.= str_pad($data[0],2,"0",STR_PAD_LEFT);
+        }elseif($type=='time'){
+            $str = str_pad($data[0],2,"0",STR_PAD_LEFT);
+            $str.= str_pad($data[1],2,"0",STR_PAD_LEFT);
+        }
+
+        return $str;
     }
 }
 
 
 $misc = new misc($app);
-
-
-// $misc->renderdate('8 martie');
-// die();

@@ -1,6 +1,6 @@
 {
   "name": "daysplit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "directory": "public_html/assets",
   "dependencies": {
     "Materialize": "materialize#^0.97.5",

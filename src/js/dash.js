@@ -29,16 +29,16 @@ $(document).on('click', '#btn_add', function(e){
     open_add_modal('modal_add');
 });
 $(document).on('input', '#form_add_event .gr1 input[name=start_date]', function(){
-    var $el = $('#form_add_event .gr2 input[name=start_date]');
+    var $el = $('#form_add_event .gr2 input[name=end_date]');
     if(!form_add_event_edit_handler.date){
         $el.val($(this).val());
     }
 });
 $(document).on('input', '#form_add_event .gr1 input[name=start_time]', function(){
-    var $el = $('#form_add_event .gr2 input[name=start_time]');
+    var $el = $('#form_add_event .gr2 input[name=end_time]');
     if(!form_add_event_edit_handler.time){
         $el.val($(this).val());
     }
 });
-$(document).on('input', '#form_add_event .gr2 input[name=start_date]', function(){form_add_event_edit_handler.date=1;});
-$(document).on('input', '#form_add_event .gr2 input[name=start_time]', function(){form_add_event_edit_handler.time=1;});
+$(document).on('input', '#form_add_event .gr2 input[name=end_date]', function(){form_add_event_edit_handler.date=1;});
+$(document).on('input', '#form_add_event .gr2 input[name=end_time]', function(){form_add_event_edit_handler.time=1;});
