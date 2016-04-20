@@ -26,10 +26,11 @@ class model{
         if($st == 0){
             $et = "0700";
         }
+        $color = 'purple';
         $uid = (int)$user->getc('id');
         $this->db->executeQuery("INSERT INTO events (user_id, title, description, edate, etime) VALUES (?, ?, ?, ?, ?)", [$uid, (string)$name, (string)$desc, $ed, $et]);
         $eid = (int)$this->db->lastInsertId();
-        $this->db->executeQuery("INSERT INTO periods (event_id, user_id, sdate, stime, edate, etime) VALUES (?, ?, ?, ?, ?, ?)", [$eid, $uid, $sd, $st, $ed, $et]);
+        $this->db->executeQuery("INSERT INTO periods (event_id, user_id, sdate, stime, edate, etime, color) VALUES (?, ?, ?, ?, ?, ?, ?)", [$eid, $uid, $sd, $st, $ed, $et, $color]);
         return true;
     }
     function add($d){
@@ -57,10 +58,10 @@ class model{
         }
 
     }
-    function get_3days(){
+    function get_3days($day){
         global $user;
-        $sdate = (string)$this->misc->unix2date(time());
-        $edate = (string)$this->misc->unix2date(time()+60*60*24*2);
+        $sdate = (string)$this->misc->unix2date(time()+60*60*24*$day);
+        $edate = (string)$this->misc->unix2date(time()+60*60*24*($day+2));
         $uid = (int)$user->getc('id');
         //edate - sdate
         $qr = $this->db->executeQuery("SELECT periods.*, events.title FROM periods INNER JOIN events ON periods.event_id=events.id WHERE periods.user_id = ? AND periods.sdate <= ? AND periods.edate >= ?", [$uid, $edate, $sdate])->fetchAll();

@@ -19,6 +19,6 @@ $router_ajax_add = function(Request $r)use($model){
 $router_ajax_get_3days = function(Request $r)use($model){
     $resp = new JsonResponse();
     $data = $r->request->all();
-    $resp->setData($model->get_3days());
+    $resp->setData($model->get_3days($data['day']));
     return $resp;
 };

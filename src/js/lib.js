@@ -29,7 +29,23 @@ function unmarkloading_btn(btn){
 function is_mobile(){
     return $( window ).width() < 600 ? true : false;
 }
-
+function pad(width, string, padding) {
+  return (width <= string.length) ? string : pad(width, padding + string, padding)
+}
+function dayofweek(i){
+    if(i==1)return 'Luni';
+    if(i==2)return 'Marți';
+    if(i==3)return 'Miercuri';
+    if(i==4)return 'Joi';
+    if(i==5)return 'Vineri';
+    if(i==6)return 'Sâmbătă';
+    if(i==7)return 'Duminică';
+}
+function monthofyear(i){
+    var months = 'Ianuarie,Februarie,Martie,Aprilie,Mai,Iunie,Iulie,August,Septembrie,Octombrie,Noiembrie,Decembrie';
+    var mth = months.split(',');
+    return mth[i-1];
+}
 
 
 $(document).on('click', '#btn-logout', function(){

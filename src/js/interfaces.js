@@ -8,3 +8,4 @@ function render_interface(interface_id){
 }
 
 interfaces = {};
+current_interface = '';

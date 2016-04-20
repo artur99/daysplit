@@ -96,3 +96,6 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 .hide{
     display: none;
 }
+.cfx.orange,.cfx.yellow{
+    color: #333!important;
+}

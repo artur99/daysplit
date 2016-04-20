@@ -29,6 +29,7 @@ function submit_form_add_event(){
             Materialize.toast(data.msg, 2000);
             close_add_modal('modal_add');
             clean_form('#form_add_event');
+            interfaces[current_interface].load();
         }
     });
 }

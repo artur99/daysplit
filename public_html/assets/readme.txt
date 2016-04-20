@@ -1,1 +1,1 @@
-﻿Fișierele vor fi generate de grunt
+﻿Restul componentelor vor fi generate de grunt
