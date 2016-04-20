@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 		concat: {
 		    dist: {
 		      files: [
-		        {src: ['public_html/assets/components/bowercomp.js', 'src/js/*.js', 'src/js/init.js'], dest: 'public_html/assets/components/data.js'},
+		        {src: ['public_html/assets/components/bowercomp.js', 'src/js/*.js', '!src/js/interface_*.js', '!src/js/interfaces.js', '!src/js/init.js', 'src/js/interfaces.js', 'src/js/interface_*.js', 'src/js/init.js'], dest: 'public_html/assets/components/data.js'},
 				{src: ['public_html/assets/components/bowercomp.css', 'src/css/*.css', 'src/css/main.css'], dest: 'public_html/assets/components/data.css'}
 		      ],
 		    },

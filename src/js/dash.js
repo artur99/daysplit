@@ -15,6 +15,11 @@ function open_add_modal(mid){
         $('#modal_add input[name=title]').focus();
     }
 }
+function close_add_modal(mid){
+    if(mid=='modal_add'){
+        $('#modal_add').closeModal();
+    }
+}
 $(document).ready(function(){
     $(".colors_selector_field").html(render_colors());
 });

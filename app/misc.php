@@ -90,6 +90,12 @@ class misc{
 
         return $str;
     }
+    public function unix2date($unix){
+        $y = date("Y", $unix);
+        $m = date("m", $unix);
+        $d = date("d", $unix);
+        return $this->gentime([$d, $m, $y], 'date');
+    }
 }
 
 

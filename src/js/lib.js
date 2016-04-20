@@ -26,7 +26,9 @@ function markloading_btn(btn){
 function unmarkloading_btn(btn){
     $(btn).removeClass('disabled');
 }
-
+function is_mobile(){
+    return $( window ).width() < 600 ? true : false;
+}
 
 
 

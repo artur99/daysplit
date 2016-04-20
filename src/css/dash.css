@@ -4,7 +4,7 @@
     width: 95%;
     max-width: 960px;
     background: #fff;
-    height: 300px;
+    min-height: 300px;
     position: relative;
 }
 .topmenu{
