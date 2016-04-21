@@ -99,3 +99,12 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 .cfx.orange,.cfx.yellow{
     color: #333!important;
 }
+.tabs .tab a{
+    color: #f44336;
+}
+.tabs .tab a:hover {
+    color: rgba(244,67,54,0.7);
+}
+.tabs .indicator{
+    background: rgba(244,67,54,0.4);
+}

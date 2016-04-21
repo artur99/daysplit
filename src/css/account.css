@@ -22,6 +22,9 @@
     background: #3084FF;
     color: #fff;
 }
+.loginbox.nr2 p{
+    font-size: 22px;
+}
 .loginbox .inpad{
     display: block;
     margin: auto;
@@ -38,5 +41,11 @@
     max-width: 185px;
     margin: auto;
     display: block;
+    margin-bottom: 10px;
+}
+.rellogo{
+    height: 250px;
+    display: block;
+    margin: 20px auto;
     margin-bottom: 10px;
 }

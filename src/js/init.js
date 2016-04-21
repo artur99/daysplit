@@ -12,7 +12,7 @@ $(document).ready(function(){
       constrain_width: false,
       hover: false,
       belowOrigin: true,
-      alignment: 'left'
+      alignment: 'right'
     });
     $('ul.tabs').tabs();
     picker = $('.datepicker').pickadate({

@@ -29,12 +29,17 @@
 }
 .tmspl .logo{
     font-size: 30px;
-    line-height: 45px;
-    padding-left: 20%;
+    line-height: 47px;
+}
+.tmspl .logo img{
+    margin: 5px 0;
+    height: 40px;
+    vertical-align: top;
+    margin-right: 5px;
 }
 .switchdd{
     width: 48px;
-    float: left;
+    float: right;
     height: 48px;
     text-align: center;
 }
@@ -45,13 +50,26 @@
 }
 #toptime{
     padding-right: 10px;
-    text-align: right;
-    float: right;
+    text-align: center;
     font-size: 16px;
-    line-height: 19px;
+    line-height: 20px;
     padding-top: 3px;
-    font-family: 'Open Sans', sans-serif;
 }
+#toptime .time{
+    font-size: 19px;
+    padding: 1px;
+    padding-bottom: 2px;
+    display: inline-block;
+}
+@media(max-width:500px){
+    .topmenu .tmspl.notmobile{
+        display: none;
+    }
+    .topmenu .tmspl:nth-child(1){
+        flex: 66%;
+    }
+}
+
 .modtabc{
     display: block;
     padding: 15px 0;

@@ -1,0 +1,38 @@
+.landing .header{
+    background: #3084FF;
+    min-height: 90vh;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+.landing .header .logo{
+    display: block;
+    margin: auto;
+    height: 30vh;
+    margin-top: 13vh;
+    margin-bottom: 4vh;
+}
+.landing .header .headerline{
+    display: block;
+    margin: auto;
+    width: 98%;
+    max-width: 60vw;
+    text-align: center;
+    font-size: 4.5vh;
+    color: #fff;
+    font-family: 'Open Sans', Roboto, sans-serif;
+    margin-bottom: 5vh;
+}
+.landing .header .btncont{
+    margin: auto;
+    width: 98%;
+    max-width: 70vw;
+    text-align: center;
+}
+.landing .header .btncont .btn{
+    margin: 1.5vh 1.5vw;
+    width: 98%;
+    max-width: 255px;
+}
+.landing .header .btncont .btn:nth-child(2){
+    /*float: right;*/
+}

@@ -55,6 +55,9 @@ $ grunt watch
 
 * Protecție împotriva SQL injection, Cross-site Scripting, Cross-site request forgery
 * Încărcare rapidă - CSS/JS minificat
+* Material Design
+* Responsive Layout
+* Foarte flexibil și ușor de utilizat
 
 
 ### Todos

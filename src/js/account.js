@@ -28,11 +28,29 @@ function form_switch(toshow){
 
 
 $(document).ready(function(){
-    form_active = "#form-login";
-    form_hide_initial("#form-signup");
-    form_hide_initial("#form-reset");
+    if(window.location.hash.length){
+        if(window.location.hash=='#signup'){
+            form_active = "#form-signup";
+            form_hide_initial("#form-login");
+            form_hide_initial("#form-reset");
+        }
+        else if(window.location.hash=='#reset'){
+            form_active = "#form-reset";
+            form_hide_initial("#form-login");
+            form_hide_initial("#form-signup");
+        }else{
+            form_active = "#form-login";
+            form_hide_initial("#form-signup");
+            form_hide_initial("#form-reset");
+        }
+    }else{
+        form_active = "#form-login";
+        form_hide_initial("#form-signup");
+        form_hide_initial("#form-reset");
+    }
     setTimeout(function(){
-        form_width = $("#form-login").css("width");
+        form_width = $(form_active).css("width");
+        $(form_active).find("input")[0].focus();
     }, 200);
 });
 $(document).on('click', '#btn-signup', function(){form_switch("#form-signup")});

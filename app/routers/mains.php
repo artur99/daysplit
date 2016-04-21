@@ -13,13 +13,13 @@ $app->error(function(\Exception $e, $code)use($app) {
 });
 
 $router = function()use($app,$user){
-    return $app['twig']->render('index.twig');
+    return $app['twig']->render('landing.twig');
 };
 
 $router_account = function()use($app,$user){
-    if($uid = $user->loggedin()) return $app['twig']->render('loggedin.twig', ['user'=>$user->get($uid, 'name,email')]);
-    if($uid = $user->loggedin_cookie()) return $app['twig']->render('relogin.twig', ['user'=>$user->get($uid, 'name,email')]);
-    return $app['twig']->render('login.twig');
+    if($uid = $user->loggedin()) return $app['twig']->render('account2.twig', ['user'=>$user->get($uid, 'name,email')]);
+    if($uid = $user->loggedin_cookie()) return $app['twig']->render('account2.twig', ['user'=>$user->get($uid, 'name,email'), 'relogin'=>1]);
+    return $app['twig']->render('account.twig');
 };
 
 $router_dash = function()use($app,$user,$model){

@@ -20,8 +20,17 @@ function close_add_modal(mid){
         $('#modal_add').closeModal();
     }
 }
+function updatetoptime(){
+    var cd = new Date();
+    $("#toptime .time").html(pad(2, cd.getHours().toString(), '0')+':'+pad(2, cd.getMinutes().toString(), '0')+':'+pad(2, cd.getSeconds().toString(), '0'));
+    if(cd.getMinutes() == 0)$("#toptime .date").html(jsday2fulldatestr(0));
+}
 $(document).ready(function(){
     $(".colors_selector_field").html(render_colors());
+
+    $("#toptime .date").html(jsday2fulldatestr(0, 1));
+    updatetoptime();
+    setInterval(updatetoptime, 1000);
 });
 $(document).on('click', '.simple_show_anddel', function(e){
     e.preventDefault();
@@ -31,6 +40,8 @@ $(document).on('click', '.simple_show_anddel', function(e){
 });
 $(document).on('click', '#btn_add', function(e){
     e.preventDefault();
+    $("#form_add_event [name=start_date]").val('');
+    $("#form_add_event [name=end_date]").val('');
     open_add_modal('modal_add');
 });
 $(document).on('input', '#form_add_event .gr1 input[name=start_date]', function(){
