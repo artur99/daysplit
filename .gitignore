@@ -48,7 +48,7 @@ phpvendor
 composer.lock
 
 ### Config files ###
-app/conf.yaml
+### app/conf.yaml -fixat altfel
 
 ### Generated data ###
 public_html/assets/*
