@@ -1,6 +1,5 @@
-
 # Created by https://www.gitignore.io/api/node,bower
-
+# Și modificat de mine :D
 ### Node ###
 # Logs
 logs
@@ -48,6 +47,8 @@ bower_components
 phpvendor
 composer.lock
 
+### Config files ###
+app/conf.yaml
 
 ### Generated data ###
 public_html/assets/*
