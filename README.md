@@ -28,9 +28,9 @@ Tehnologii utilizate
 * ApacheConf
 
 ### Instalare
-Cerințe: `git`, `composer`, `node.js`
+Cerințe: `git`, `composer`, `node.js`.
 
-Fișierul de configurații se află în `app/conf.yaml`
+Fișierul de configurații se află în `app/conf.yaml`.
 
 ```sh
 $ git init
