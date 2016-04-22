@@ -8,8 +8,7 @@ Demo: [daysplit.artur99.net]
 ### Versiune
 1.0.0
 
-### Tech
-Tehnologii utilizate
+### Tehnologii utilizate
 * [Composer]
 * [Node.js]
 * [Bower]
