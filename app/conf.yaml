@@ -4,7 +4,6 @@ conf.title: DaySplit
 
 conf.db.host: localhost
 conf.db.user: root
-
 conf.db.pass: password
 conf.db.name: daysplit
 
