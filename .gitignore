@@ -53,4 +53,4 @@ app/conf.yaml
 ### Generated data ###
 public_html/assets/*
 !public_html/assets/readme.txt
-!public_html/assets/img/*
+!public_html/assets/img*
