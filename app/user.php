@@ -1,6 +1,7 @@
 <?php
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class user{
     function __construct($app){
         $this->session = $app['session'];
@@ -67,6 +68,17 @@ class user{
         $mailcls->send_signup($data['email']);
         return 1;
     }
+    public function signup_mode2($data){
+        global $misc,$mailcls;
+        $data = $misc->filter($data);
+        $em = $data['email'];
+        $fbid = $data['id'];
+        $this->db->executeQuery("INSERT INTO users (id, type, email, fbid, name, sdate, ldate) VALUES (NULL, 1, ?, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $fbid, (string)$data['name']]);
+        $lid = $this->db->lastInsertId();
+        $this->login_mode1($lid, 0);
+        $mailcls->send_signup($data['email']);
+        return 1;
+    }
     public function signup_validate($data){
         global $misc;
         if(!$misc->validate($data,'email'))$err['email'] = 'Adresa de email este invalidă';
@@ -83,22 +95,36 @@ class user{
         $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
         return $q->fetch()['COUNT(1)'];
     }
-    public function fbauth(){
+    public function fb_realauth($tok, &$resp){
+        global $app;
+        $this->session->set('fb_access_token', $tok);
+        $data = $app['fb']->get("/me?fields=id,name,email", $tok)->getDecodedBody();
+        if(empty($data['email']))throw new AccessDeniedHttpException("Accesul la adresa de email nu a fost acceptat!");
+        if($this->mail_exists($data['email'])){
+            $uid = $this->db->executeQuery("SELECT id FROM users WHERE email = ?", [(string)$data['email']])->fetch()['id'];
+            $this->login_mode1($uid, 1, $resp);
+            return 1;
+        }else{
+            $this->signup_mode2($data);
+            return 1;
+        }
+    }
+    public function fbauth(&$resp){
         global $app;
         if($this->loggedin()){
-            $this->getuserdata();
+            // $this->getuserdata();
             return 1;
         }
         $app['fb'] = new Facebook\Facebook(array(
-          'appId'  => getenv('FACEBOOK_APP_ID'),
-          'secret' => getenv('FACEBOOK_APP_SECRET'),
+          'appId'  => $app['conf.facebook.app_id'],
+          'secret' => $app['conf.facebook.app_secret']
         ));
         $session = $this->session->has('fb_access_token')?$this->session->get('fb_access_token'):0;
         $helper = $app['fb']->getRedirectLoginHelper();
         $user=0;
         if($session){
             try{
-                if($app['fb']->get('/me',$session)) $user=1;
+                if($app['fb']->get('/me?fields=id,name,email',$session)) $user=1;
             }catch(FacebookApiException $e){}
         }if(!$user){
             $session = $helper->getAccessToken();
@@ -108,10 +134,10 @@ class user{
             }
         }
         if($user){
-            $this->realauth($session);
+            $this->fb_realauth($session, $resp);
             return 1;
         }
-        return $helper->getLoginUrl('http://thevoiceofyoungeurope.com/login');
+        return $helper->getLoginUrl('http://daysplit.com/fblogin').'&scope=email';
     }
     public function get($uid, $data){
         $q = $this->db->executeQuery("SELECT ".$data." FROM users WHERE id = ?", [(int)$uid]);

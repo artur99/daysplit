@@ -1,9 +1,11 @@
 debug: true
 
 conf.title: DaySplit
-conf.api.pass: asdf
 
 conf.db.host: localhost
 conf.db.user: root
-conf.db.pass:
+conf.db.pass: password
 conf.db.name: daysplit
+
+conf.facebook.app_id: 123456789012345
+conf.facebook.app_secret: 1234567890qwertyuiop1234567890qw

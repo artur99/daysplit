@@ -1,15 +1,16 @@
 .landing .header{
     background: #3084FF;
-    min-height: 90vh;
+    min-height: 100vh;
     overflow: hidden;
     padding-bottom: 50px;
+    text-align: center;
 }
 .landing .header .logo{
     display: block;
     margin: auto;
     height: 30vh;
     margin-top: 13vh;
-    margin-bottom: 4vh;
+    margin-bottom: 5vh;
 }
 .landing .header .headerline{
     display: block;
@@ -19,11 +20,13 @@
     text-align: center;
     font-size: 4.5vh;
     color: #fff;
-    font-family: 'Open Sans', Roboto, sans-serif;
-    margin-bottom: 5vh;
+    font-family: Raleway, 'Open Sans', Roboto, sans-serif;
+    margin-bottom: 7vh;
+    font-weight: 300;
 }
 .landing .header .btncont{
     margin: auto;
+    margin-bottom: 2.5vh;
     width: 98%;
     max-width: 70vw;
     text-align: center;
@@ -35,4 +38,12 @@
 }
 .landing .header .btncont .btn:nth-child(2){
     /*float: right;*/
+}
+.slimlink{
+    display: inline-block;
+    margin: auto;
+    color: rgba(0,0,0,.4);
+    text-align: center;
+    text-decoration: none;
+    font-family: Roboto, 'Open Sans', sans-serif;
 }

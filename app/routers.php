@@ -8,7 +8,7 @@ $app->get('/', $router);
 $app->match('/account', $router_account);
 $app->match('/dashboard', $router_dash);
 
-$app->match('/login/facebook', $router_login_fb);
+$app->match('/fblogin', $router_login_fb);
 $app->match('/ajax/account/login', $router_ajax_login);
 $app->match('/ajax/account/relogin', $router_ajax_relogin);
 $app->match('/ajax/account/signup', $router_ajax_signup);

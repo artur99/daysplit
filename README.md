@@ -58,6 +58,7 @@ $ grunt watch
 * Material Design
 * Responsive Layout
 * Foarte flexibil și ușor de utilizat
+* Pagini de eroare
 
 
 ### Todos

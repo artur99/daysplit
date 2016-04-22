@@ -1,9 +1,6 @@
 <?php
 date_default_timezone_set("Europe/Bucharest");
 
-putenv('FACEBOOK_APP_ID=257868991214937');
-putenv('FACEBOOK_APP_SECRET=8ee3cefff7168c8f2ef631b0d9828d7a');
-
 $app['conf.path'] = dirname(dirname($_SERVER['SCRIPT_FILENAME']));
 $app['twig.path'] = $app['conf.path'].'/app/templates';
 $app['twig.assets'] = '/assets/';
@@ -27,3 +24,6 @@ $app['db.options'] = array(
     'dbname' => $app['conf.db.name'],
     'charset'   => 'utf8'
 );
+
+putenv('FACEBOOK_APP_ID='.$app['conf.facebook.app_id']);
+putenv('FACEBOOK_APP_SECRET='.$app['conf.facebook.app_secret']);

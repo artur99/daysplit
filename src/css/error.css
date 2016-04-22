@@ -1,0 +1,11 @@
+.landing.error .header{
+    background: #e53935;
+}
+
+.landing.error .header .headerline{
+    font-size: 7vh;
+    margin-bottom: 4vh;
+}
+.landing.error .header .headerline small{
+    font-size: 4vh;
+}

@@ -1,1 +1,21 @@
-{{error_code}}: {{error_text}}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+<body class="landing error">
+    <div class="header">
+        <img src="{{asset('img/logo_3.png')}}" alt="" class="logo">
+        <h2 class="headerline">Eroare {{error_code}}<br><small>{{error_text}}</small></h2>
+        <div class="btncont">
+            <a href="{{l('/')}}" class="btn btn-large waves-effect white">Înapoi acasă</a>
+        </div>
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

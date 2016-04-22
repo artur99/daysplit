@@ -15,8 +15,8 @@ interfaces.interface_1 = {
 
         ajax('dash/get/3days', {day:current_day}, function(pers){
             pers.sort(function(e1,e2){
-                if(e1.sdate==e2.sdate)return e1.stime > e2.stime;
-                else return e1.sdate > e2.sdate;
+                if(e1.sdate==e2.sdate)return e1.stime > e2.stime ? 1 : e1.stime == e2.stime ? 0 : -1;
+                else return e1.sdate > e2.sdate ? 1 : e1.sdate == e2.sdate ? 0 : -1;
             });
             $(".col_innte_1").html('');
             $(".col_innte_2").html('');

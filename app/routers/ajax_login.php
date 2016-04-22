@@ -3,9 +3,16 @@ use Silex\Provider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 $router_login_fb = function()use($app,$user){
-    // return $app['twig']->render('login.twig');
+    $res0 = new JsonResponse();
+    $fbck = $user->fbauth($res0);
+
+    // if(!$user->cookie_login($resp)) $resp->setData(['type'=>'error']);
+    if($fbck == 1) $resp = new RedirectResponse(g_link("/dashboard"));
+    else $resp = new RedirectResponse($fbck);
+    return $resp;
 };
 $router_ajax_login = function(Request $r)use($app,$user){
     $resp = new JsonResponse();

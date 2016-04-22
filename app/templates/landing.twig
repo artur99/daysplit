@@ -6,16 +6,17 @@
     {% if meta is defined %}{% for key,itm in meta %}
     <meta name="{{key}}" content="{{itm}}">
     {% endfor %}{% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 </head>
 <body class="landing">
     <div class="header">
         <img src="{{asset('img/logo_3.png')}}" alt="" class="logo">
-        <h2 class="headerline">DaySplit - Organizează-ți activitățile, proiectele și evenimentele pentru a economisi timp.</h2>
+        <h2 class="headerline">Organizează-ți activitățile, proiectele și evenimentele cu DaySplit pentru a-ți economisi timpul</h2>
         <div class="btncont">
             <a href="{{l('/account#signup')}}" class="btn btn-large waves-effect white">Creare cont</a>
             <a href="{{l('/account')}}" class="btn btn-large waves-effect white">Accesare cont</a>
         </div>
-        <a href="{{l('/fblogin')}}"></a>
+        <a href="{{l('/fblogin')}}" class="slimlink">Logare cu facebook</a>
     </div>
 
 
