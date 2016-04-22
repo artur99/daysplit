@@ -4,8 +4,9 @@ conf.title: DaySplit
 
 conf.db.host: localhost
 conf.db.user: root
-conf.db.pass: pass
+
+conf.db.pass: password
 conf.db.name: daysplit
 
 conf.facebook.app_id: 1234567890123
-conf.facebook.app_secret: 1234567890qwertyuiopasdfghjkl123
+conf.facebook.app_secret: 1234567890qwertyuiop1234567890qw
