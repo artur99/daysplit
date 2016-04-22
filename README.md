@@ -29,6 +29,7 @@ Tehnologii utilizate
 
 ### Instalare
 Cerințe: `git`, `composer`, `node.js`
+Fișierul de configurații se află în `app/conf.yaml`
 
 ```sh
 $ git init
