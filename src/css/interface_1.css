@@ -100,11 +100,23 @@
     font-size: 17px;
     float: left;
     font-family: Roboto, sans-serif;
+    width: 67%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .interface_1 .period .evtime{
     float: right;
     font-size: 14px;
     font-style: italic;
+    width: 33%;
+    text-align: right;
+}
+.interface_1 .period.shorttime .evtitle{
+    width: 80%;
+}
+.interface_1 .period.shorttime .evtime{
+    width: 20%;
 }
 .interface_1 .period .evtime .material-icons{
     font-size: 11px;

@@ -15,5 +15,6 @@ $app->match('/ajax/account/signup', $router_ajax_signup);
 $app->match('/ajax/account/logout', $router_ajax_logout);
 
 $app->match('/ajax/dash/time', $router_ajax_time);
-$app->match('/ajax/dash/add', $router_ajax_add);
+$app->match('/ajax/dash/event', $router_ajax_event);
 $app->match('/ajax/dash/get/3days', $router_ajax_get_3days);
+$app->match('/ajax/dash/get/event', $router_ajax_get_event);

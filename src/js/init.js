@@ -26,4 +26,5 @@ $(document).ready(function(){
       formatSubmit: 'dd/mm/yyyy',
       container: 'body'
     });
+    $('select').material_select();
 });

@@ -28,6 +28,7 @@ function form_switch(toshow){
 
 
 $(document).ready(function(){
+    if($("#form-login").length==0)return 0;
     if(window.location.hash.length){
         if(window.location.hash=='#signup'){
             form_active = "#form-signup";

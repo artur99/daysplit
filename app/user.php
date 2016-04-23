@@ -137,7 +137,7 @@ class user{
             $this->fb_realauth($session, $resp);
             return 1;
         }
-        return $helper->getLoginUrl('http://daysplit.com/fblogin').'&scope=email';
+        return $helper->getLoginUrl(g_link('/fblogin')).'&scope=email';
     }
     public function get($uid, $data){
         $q = $this->db->executeQuery("SELECT ".$data." FROM users WHERE id = ?", [(int)$uid]);

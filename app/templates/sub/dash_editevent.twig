@@ -1,0 +1,55 @@
+<div id="modal_edit_event" class="modal">
+    <div class="modal-content white">
+    <div class="row">
+        <div class="col s12">
+        <h4>Eveniment</h4>
+        <form id="form_edit_event" class="modtabc" action="">
+            <input type="hidden" name="period_update_id" value="">
+            <div class="input-field col l6 m12 s12">
+                <input name="title" id="inp_edit_event_title" type="text" autocomplete="off">
+                <label for="inp_edit_event_title">Nume / Titlu</label>
+            </div>
+            <div class="input-field col l6 m12 s12 simpmgtop">
+                <div class="smimpmg doubledate">
+                    <div class="dategroup gr1">
+                        <input type="text" name="start_date" class="inpsmalldt inpsmalldt2" placeholder="zz ll [aaaa]" class="col m2" maxlength="20" autocomplete="off"> -
+                        <input type="text" name="start_time" class="inpsmalldt" placeholder="hh[:mm]" maxlength="7" autocomplete="off">
+                        <span class="btn-floating smallfbtn blue"><i class="material-icons">play_arrow</i></span>
+                    </div>
+                    <div class="dategroup gr2">
+                        <input type="text" name="end_date" class="inpsmalldt inpsmalldt2" placeholder="zz ll [aaaa]" class="col m2" maxlength="20" autocomplete="off"> -
+                        <input type="text" name="end_time" class="inpsmalldt" placeholder="hh[:mm]" maxlength="7" autocomplete="off">
+                        <span class="btn-floating smallfbtn red"><i class="material-icons">stop</i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="input-field col s12 m3">
+                <input type="hidden" name="color" value="red">
+                <div class="colorbox">
+                    <div class="blue"></div>
+                    <div class="red"></div>
+                    <div class="purple"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                    <div class="indigo"></div>
+                    <div class="orange"></div>
+                    <div class="pink"></div>
+                </div>
+            </div>
+            <div class="input-field col s12 m9">
+                <div class="desc_showup_add">
+                    <textarea class="materialize-textarea" name="description" id="inp_edit_event_desc"></textarea>
+                    <label for="inp_edit_event_desc">Descriere</label>
+                </div>
+            </div>
+            <input type="submit" class="hide">
+        </form>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-blue btn-flat" id="btn_submit_editform">Salvare</a>
+        <a href="#" class="waves-effect btn-flat waves-red" id="btn_submit_delform">Ștergere</a>
+    </div>
+</div>

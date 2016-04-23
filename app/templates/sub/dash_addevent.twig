@@ -1,7 +1,7 @@
 <form id="form_add_event" class="modtabc" action="">
     <div class="row">
         <div class="input-field col l6 m12 s12">
-            <input name="title" id="inp_add_event_title" type="text">
+            <input name="title" id="inp_add_event_title" type="text"  autocomplete="off">
             <label for="inp_add_event_title">Nume / Titlu</label>
         </div>
         <div class="input-field col l6 m12 s12 simpmgtop">
@@ -19,9 +19,21 @@
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="input-field col s12">
-            <a href="#" class="simple_show_anddel" data-target=".desc_showup_add">Adaugă descriere</a>
-            <div class="hide desc_showup_add">
+        <div class="input-field col s12 m3">
+            <input type="hidden" name="color" value="red" id="color_selector_field">
+            <div class="colorbox">
+                <div class="blue"></div>
+                <div class="red"></div>
+                <div class="purple"></div>
+                <div class="yellow"></div>
+                <div class="green"></div>
+                <div class="indigo"></div>
+                <div class="orange"></div>
+                <div class="pink"></div>
+            </div>
+        </div>
+        <div class="input-field col s12 m9">
+            <div class="desc_showup_add">
                 <textarea class="materialize-textarea" name="description" id="inp_add_event_desc"></textarea>
                 <label for="inp_add_event_desc">Descriere</label>
             </div>

@@ -96,7 +96,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 .hide{
     display: none;
 }
-.cfx.orange,.cfx.yellow{
+.cfx.yellow{
     color: #333!important;
 }
 .tabs .tab a{
@@ -107,4 +107,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 }
 .tabs .indicator{
     background: rgba(244,67,54,0.4);
+}
+#materialPreloader{
+    z-index: 22;
 }

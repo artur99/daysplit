@@ -62,8 +62,27 @@ function monthofyear(i){
     var mth = months.split(',');
     return mth[i-1];
 }
-
-
+function date2jsday(date){
+    var year = date.substr(0, 4);
+    var mon = date.substr(4, 2);
+    var day = date.substr(6, 2);
+    var jsdate = new Date(year, mon-1, day, 9);
+    var now = new Date();
+    now.setHours(9);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    var df = (jsdate.getTime() - now.getTime());
+    var days = Math.round(df / (1000 * 3600 * 24));
+    return days;
+}
+function time2timestr(time){
+    var hour = time.substr(0, 2);
+    var min = time.substr(2, 2);
+    return hour+':'+min;
+}
+function htmlentities(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 $(document).on('click', '#btn-logout', function(){
     markloading_btn('#btn-logout');
     preloader.on();

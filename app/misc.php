@@ -63,6 +63,11 @@ class misc{
     }
     public function render_time($time, $lang = 'ro'){
         if($lang == 'ro'):
+            if(strlen($time) == 4)
+                $time = substr($time, 0, 2).":".substr($time, 2, 2);
+            elseif(strlen($time) == 6)
+                $time = substr($time, 0, 2).":".substr($time, 2, 2).":".substr($time, 4, 2);
+            
             $elems = preg_split( "/(\s+|\.|-|,|:|;|\|)/", $time);
             $elems = array_filter($elems, function($el){
                 return strlen(trim($el));
