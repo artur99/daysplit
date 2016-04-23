@@ -9,10 +9,16 @@
 </head>
 <body id="dash">
     <div class="colorbar"></div>
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
         <a class="btn-floating btn-large red waves-effect waves-light" id="btn_add">
-        <i class="large material-icons">&#xE145;</i>
+            <i class="large material-icons">&#xE145;</i>
         </a>
+        <ul>
+            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        </ul>
     </div>
     {% include 'sub/dash_editevent.twig' %}
     <div id="modal_add" class="modal">
@@ -49,9 +55,9 @@
             <div class="tmspl">
                 <a href="#" class="dropdown-button switchdd waves-effect" data-activates="switcher_drd"><i class="material-icons">&#xE8EE;</i></a>
                 <ul id="switcher_drd" class="dropdown-content">
-                    <li><a href="#!">Vizualizare pe săptămână</a></li>
-                    <li><a href="#!">Mode view 2</a></li>
+                    <li><a href="#!"></a></li>
                     <li class="divider"></li>
+                    <li><a href="#!">Contul meu</a></li>
                     <li><a href="#" id="btn-logout">Delogare</a></li>
                 </ul>
             </div>

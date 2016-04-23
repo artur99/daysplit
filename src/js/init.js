@@ -27,4 +27,11 @@ $(document).ready(function(){
       container: 'body'
     });
     $('select').material_select();
+    $(".tooltiped").tooltip();
+    $(".fixed-action-btn").openFAB();
+    $(".fixed-action-btn").click(function(){
+        setTimeout(function(){
+            $(".fixed-action-btn").openFAB();
+        },1);
+    });
 });

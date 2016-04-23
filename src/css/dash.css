@@ -61,12 +61,15 @@
     padding-bottom: 2px;
     display: inline-block;
 }
-@media(max-width:500px){
+@media(max-width:580px){
     .topmenu .tmspl.notmobile{
         display: none;
     }
     .topmenu .tmspl:nth-child(1){
         flex: 66%;
+    }
+    #toptime{
+        display: none;
     }
 }
 
@@ -137,7 +140,7 @@ input.inpsmalldt2{
     transition: .25s all;
 }
 .doubledate{
-    padding-top: 0!important;
+    padding-top: 1px!important;
     padding-bottom: 0!important;
     margin-top: 0!important;
 }

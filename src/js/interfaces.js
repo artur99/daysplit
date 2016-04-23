@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if(is_mobile()) render_interface('interface_m1');
+    if(is_mobile()) render_interface('interface_1');
     else render_interface('interface_1');
 });
 

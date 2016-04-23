@@ -124,3 +124,25 @@
     display: inline-block;
     vertical-align: top;
 }
+@media(max-width:940px){
+    .interface_1 .col_main_3{
+        display: none;
+    }
+    .interface_1 .col_main_1, .interface_1 .col_main_2{
+        width: 40%;
+    }
+    .interface_1 .col_arrow{
+        width: 10%;
+    }
+}
+@media(max-width:580px){
+    .interface_1 .col_main_2,.interface_1 .col_main_3{
+        display: none;
+    }
+    .interface_1 .col_main_1{
+        width: 70%;
+    }
+    .interface_1 .col_arrow{
+        width: 15%;
+    }
+}

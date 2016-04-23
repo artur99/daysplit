@@ -61,7 +61,10 @@ function open_edit_event_modal(pid){
         $("#form_edit_event").find('.colorbox').find('.'+data.color).addClass('selected');
         $("#form_edit_event").find('.colorbox').parent().find('input[type=hidden][name=color]').val(data.color);
         $("#form_edit_event").find('#inp_edit_event_desc').val(data.description);
-        if(data.description.length) $("#form_edit_event").find('label[for=inp_edit_event_desc]').addClass('active');
+        $("#form_edit_event").find('#inp_edit_event_desc').trigger('autoresize');
+        if(data.description.length){
+            $("#form_edit_event").find('label[for=inp_edit_event_desc]').addClass('active');
+        }
         $("#form_edit_event").find('input[name=period_update_id]').val(data.id);
         $("#modal_edit_event").removeClass('loading');
         $("#form_edit_event").find('#inp_edit_event_title').focus();

@@ -15,8 +15,8 @@ interfaces.interface_1 = {
 
         ajax('dash/get/3days', {day:current_day}, function(pers){
             pers.sort(function(e1,e2){
-                if(e1.sdate==e2.sdate)return e1.stime > e2.stime ? 1 : e1.stime == e2.stime ? 0 : -1;
-                else return e1.sdate > e2.sdate ? 1 : e1.sdate == e2.sdate ? 0 : -1;
+                /*if(e1.sdate==e2.sdate)*/return e1.stime > e2.stime ? 1 : e1.stime == e2.stime ? 0 : -1;
+                /*else return e1.sdate > e2.sdate ? 1 : e1.sdate == e2.sdate ? 0 : -1;*/
             });
             $(".col_innte_1").html('');
             $(".col_innte_2").html('');
@@ -30,17 +30,17 @@ interfaces.interface_1 = {
                     tmp += '<div class="period cfx '+el.color+' waves-effect'+(el.edate == el.sdate && el.etime == el.stime?' shorttime':'')+'" data-pid="'+el.id+'">';
                     tmp += '<div class="evtime">';
                     tmp += el.stime.substr(0,2)+':'+el.stime.substr(2,2);
-                    if(el.edate == el.sdate && el.etime != el.stime){
+                    if(el.etime != el.stime){
                         tmp += ' <i class="material-icons">&#xE5C8;</i>'+el.etime.substr(0,2)+':'+el.etime.substr(2,2);
                     }
                     tmp += '</div>';
                     tmp += '<div class="evtitle">'+htmlentities(el.name.charAt(0).toUpperCase() + el.name.slice(1))+'</div>';
                     tmp += '</div>';
                 }
-                console.log(day);
-                if(el.sdate==day[1]) $(".col_innte_1").append(tmp);
-                else if(el.sdate==day[2]) $(".col_innte_2").append(tmp);
-                else if(el.sdate==day[3]) $(".col_innte_3").append(tmp);
+                console.log(el);
+                if(el.sdate==day[1] || el.sdate < day[1] && el.edate >= day[1]) $(".col_innte_1").append(tmp);
+                if(el.sdate==day[2] || el.sdate < day[2] && el.edate >= day[2]) $(".col_innte_2").append(tmp);
+                if(el.sdate==day[3] || el.sdate < day[3] && el.edate >= day[3]) $(".col_innte_3").append(tmp);
             });
             if($(".col_innte_1").html().length=="")$(".col_innte_1").append('<div class="shadowtext">Niciun eveniment în această zi...</div>');
             if($(".col_innte_2").html().length=="")$(".col_innte_2").append('<div class="shadowtext">Niciun eveniment în această zi...</div>');
