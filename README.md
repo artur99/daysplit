@@ -61,6 +61,7 @@ $ grunt watch
 * Responsive Layout
 * Foarte flexibil și ușor de utilizat
 * Pagini de eroare
+* Scurtături tastatură
 
 
 ### Todos

@@ -15,23 +15,19 @@ $(document).ready(function(){
       alignment: 'right'
     });
     $('ul.tabs').tabs();
-    picker = $('.datepicker').pickadate({
+    picker1 = $('#dateinput_mover').pickadate({
       monthsFull: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombeie', 'Noimebrie', 'Decembrie'],
       weekdaysShort: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
       weekdaysFull: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
       firstDay: 1,
       today: 'azi',
-      clear: 'șterge',
-      close: 'închide',
-      formatSubmit: 'dd/mm/yyyy',
-      container: 'body'
-    });
+      clear: '',
+      close: 'Alege zi',
+      formatSubmit: 'dd.mm.yyyy',
+      container: 'body',
+      onClose: movetodatefromin
+    }).pickadate('picker');
     $('select').material_select();
     $(".tooltiped").tooltip();
-    $(".fixed-action-btn").openFAB();
-    $(".fixed-action-btn").click(function(){
-        setTimeout(function(){
-            $(".fixed-action-btn").openFAB();
-        },1);
-    });
+    $('.modal-trigger').leanModal();
 });

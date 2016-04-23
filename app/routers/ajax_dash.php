@@ -28,3 +28,9 @@ $router_ajax_get_event = function(Request $r)use($model){
     $resp->setData($model->get_event($data['period_id']));
     return $resp;
 };
+$router_ajax_todo = function(Request $r)use($model){
+    $resp = new JsonResponse();
+    $data = $r->request->all();
+    $resp->setData($model->handle_todo($data));
+    return $resp;
+};

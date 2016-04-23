@@ -5,7 +5,7 @@ class model{
         $this->db = $app['db'];
         $this->misc = $misc;
     }
-    function time(){
+    public function time(){
         $data = [];
         $data['unix'] = time();
         $data['time'] = [
@@ -18,21 +18,21 @@ class model{
         ];
         return $data;
     }
-    function insert_event($name, $desc, $color, $ed, $et=0, $sd, $st=0){
+    public function insert_event($name, $location, $desc, $color, $ed, $et=0, $sd, $st=0){
         global $user;
         $uid = (int)$user->getc('id');
         $this->db->executeQuery("INSERT INTO events (user_id, title, description, edate, etime) VALUES (?, ?, ?, ?, ?)", [$uid, (string)$name, (string)$desc, $ed, $et]);
         $eid = (int)$this->db->lastInsertId();
-        $this->db->executeQuery("INSERT INTO periods (event_id, user_id, name, description, sdate, stime, edate, etime, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [$eid, $uid, (string)$name, (string)$desc, $sd, $st, $ed, $et, $color]);
+        $this->db->executeQuery("INSERT INTO periods (event_id, user_id, name, location, description, sdate, stime, edate, etime, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$eid, $uid, (string)$name, (string)$location, (string)$desc, $sd, $st, $ed, $et, $color]);
         return true;
     }
-    function update_period($pid, $name, $desc, $color, $ed, $et=0, $sd, $st=0){
+    public function update_period($pid, $name, $location, $desc, $color, $ed, $et=0, $sd, $st=0){
         global $user;
         $uid = (int)$user->getc('id');
-        $this->db->executeQuery("UPDATE periods SET name = ?, description = ?, sdate = ?, stime = ?, edate = ?, etime = ?, color = ? WHERE id = ? AND user_id = ? LIMIT 1", [(string)$name, (string)$desc, $sd, $st, $ed, $et, $color, $pid, $uid]);
+        $this->db->executeQuery("UPDATE periods SET name = ?, location = ?, description = ?, sdate = ?, stime = ?, edate = ?, etime = ?, color = ? WHERE id = ? AND user_id = ? LIMIT 1", [(string)$name, (string)$location, (string)$desc, $sd, $st, $ed, $et, $color, $pid, $uid]);
         return true;
     }
-    function delete_period($pid){
+    public function delete_period($pid){
         global $user;
         $uid = (int)$user->getc('id');
         $eid = (int)$this->db->executeQuery("SELECT event_id FROM periods WHERE id = ? AND user_id = ? LIMIT 1", [$pid, $uid])->fetch()['event_id'];
@@ -43,7 +43,7 @@ class model{
         return true;
 
     }
-    function handle_event($d){
+    public function handle_event($d){
         if(!isset($d['type'])) return ['type'=>'error', 'text'=>'Tip invalid de date'];
         if($d['type']=='event'){
             $name = (isset($d['title']) && !empty($d['title']))?trim($d['title']):'Fără titlu';
@@ -69,6 +69,7 @@ class model{
             $st = str_pad($st, 4, '0');
 
             $desc = isset($d['description'])&&!empty($d['description']) ? trim($d['description']) : '';
+            $location = trim($d['location']);
 
             if(isset($d['period_delete_id'])){
                 //update
@@ -79,19 +80,19 @@ class model{
             }elseif(isset($d['period_update_id'])){
                 //update
                 $pid = (int)$d['period_update_id'];
-                if($pid!=0 && $this->update_period($pid, $name, $desc, $color, $ed, $et, $sd, $st)){
+                if($pid!=0 && $this->update_period($pid, $name, $location, $desc, $color, $ed, $et, $sd, $st)){
                     return ['type'=>'success', 'msg'=>'Eveniment editat cu succes!'];
                 }
             }else{
                 //insert
-                if($this->insert_event($name, $desc, $color, $ed, $et, $sd, $st)){
+                if($this->insert_event($name, $location, $desc, $color, $ed, $et, $sd, $st)){
                     return ['type'=>'success', 'msg'=>'Eveniment adăugat cu succes!'];
                 }
             }
         }
 
     }
-    function get_3days($day){
+    public function get_3days($day){
         global $user;
         $sdate = (string)$this->misc->unix2date(time()+60*60*24*$day);
         $edate = (string)$this->misc->unix2date(time()+60*60*24*($day+2));
@@ -101,12 +102,30 @@ class model{
 
         return $qr;
     }
-    function get_event($pid){
+    public function get_event($pid){
         global $user;
         $uid = (int)$user->getc('id');
         $qr = $this->db->executeQuery("SELECT periods.*, events.title FROM periods INNER JOIN events ON periods.event_id=events.id WHERE periods.user_id = ? AND periods.id = ?", [$uid, (int)$pid])->fetch();
 
         return $qr;
+    }
+    public function todo_add($text){
+        global $user;
+        $uid = (int)$user->getc('id');
+        $this->db->executeQuery("INSERT INTO todo (user_id, text, status) VALUES (?, ?, 0)", [$uid, (string)$text]);
+        return ['tdid'=>(int)$this->db->lastInsertId()];
+    }
+    public function todo_turn($tdid, $to){
+        global $user;
+        $uid = (int)$user->getc('id');
+        $tdid = (int)$tdid;
+        $to = (int)($to == 'on'?1:0);
+        $this->db->executeQuery("UPDATE todo SET status = ? WHERE id = ? AND user_id = ?", [$to, $tdid, $uid]);
+        return 1;
+    }
+    public function handle_todo($data){
+        if($data['do'] == 'add') return $this->todo_add($data['elem']);
+        elseif($data['do'] == 'on' || $data['do'] == 'off') return $this->todo_turn($data['elem'], $data['do']);
     }
 
 }
