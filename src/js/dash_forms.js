@@ -21,7 +21,7 @@ $(document).on('click', '#btn_submit_addform', function(e){
 });
 var added_td = 0;
 $(document).on('click', "a[href='#modal_list']", function(){
-    $("#modal_list").addClass('loading');
+    $("#modal_list .modal-content").addClass('loading');
     ajax('dash/get/todo',{},function(data){
         $('.waited').html('');
         $('.doned').html('');
@@ -36,7 +36,20 @@ $(document).on('click', "a[href='#modal_list']", function(){
             }
             added_td++;
         });
-        $("#modal_list").removeClass('loading');
+        $("#modal_list .modal-content").removeClass('loading');
+    });
+    setTimeout(function(){
+        $("#todo_add_item").focus();
+    },20);
+});
+$(document).on('click', "a[href='#modal_settings']", function(){
+    $("#modal_settings .modal-content").addClass('loading');
+    ajax('dash/get/settings',{},function(data){
+        $("#form_settings #settings_name").val(data.name);
+        $("#form_settings #settings_email").val(data.email);
+        $("#form_settings label[for=settings_name]").addClass('active');
+        $("#form_settings label[for=settings_email]").addClass('active');
+        $("#modal_settings .modal-content").removeClass('loading');
     });
     setTimeout(function(){
         $("#todo_add_item").focus();

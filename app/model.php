@@ -133,7 +133,33 @@ class model{
         if($data['do'] == 'add') return $this->todo_add($data['elem']);
         elseif($data['do'] == 'on' || $data['do'] == 'off') return $this->todo_turn($data['elem'], $data['do']);
     }
-
+    public function get_settings(){
+        global $user;
+        $uid = (int)$user->getc('id');
+        $data = $this->db->executeQuery("SELECT name, email FROM users WHERE id = ? LIMIT 1",[$uid])->fetch();
+        return $data;
+    }
+    public function set_settings($data){
+        global $user;
+        $res = [];
+        if(!isset($data['email']) || !$this->misc->validate($data, 'email')) $res['err'] = ['email'=>'Adresă de email invalidă'];
+        else{
+            if(isset($data['opassword'],$data['password'],$data['cpassword']) && !empty($data['opassword']) || !empty($data['password']) || !empty($data['cpassword'])){
+                //wants to change the password
+                if(!$user->checkpassword($data['opassword'])) $res['err'] = ['opassword'=>'Vechea parolă este greșită'];
+                elseif(!$this->misc->validate($data, 'password')) $res['err'] = ['password'=>'Parola este prea scurtă'];
+                elseif($data['password']!=$data['cpassword']) $res['err'] = ['cpassword'=>'Parolele nu corespund'];
+                else{
+                    $data = $this->misc->filter($data);
+                    $user->direct_change('password', $data['password']);
+                    $data = $this->misc->filter($data);
+                }
+            }
+            $user->direct_change('emnm', $data);
+            if(!isset($res['err']))$res['success'] = ['text'=>'Setări schimbate cu succes'];
+        }
+        return $res;
+    }
 }
 
 $model = new model($app, $misc);

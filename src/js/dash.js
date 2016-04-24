@@ -79,6 +79,24 @@ function open_edit_event_modal(pid){
         $("#form_edit_event").find('#inp_edit_event_title').focus();
     });
 }
+function save_settings(){
+    var fid = '#form_settings';
+    var dt = getformdata(fid);
+    ajax('dash/settings', {data:dt}, function(res){
+        $(fid+" input").removeClass('invalid');
+        $(fid+" input+label").attr('data-error', '');
+        if(typeof res.err != 'undefined'){
+            $.each(res.err, function(i,el){
+                $(fid+" input[name="+i+"]").addClass('invalid');
+                $(fid+" input[name="+i+"]+label").attr('data-error', el);
+            });
+        }else{
+            $("#modal_settings").closeModal();
+            if(typeof res.success != 'undefined') Materialize.toast(res.success.text, 2000);
+        }
+        console.log(res);
+    });
+}
 $(document).ready(function(){
     init_colors();
 
@@ -139,3 +157,5 @@ $(document).on('click', '#btn_calendar', function(e){
     e.preventDefault();
     $("#dateinput_mover").click().click();
 });
+$(document).on('click', '#btn_submit_settingsform', function(e){e.preventDefault();save_settings();});
+$(document).on('submit', '#form_settings', function(e){e.preventDefault();save_settings();});

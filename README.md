@@ -51,6 +51,7 @@ $ grunt watch
 ### Pluginuri
 
 * Facebook API
+* Google Maps API
 
 ### Facilități
 
@@ -62,9 +63,6 @@ $ grunt watch
 * Foarte flexibil și ușor de utilizat
 * Pagini de eroare
 * Scurtături tastatură
-
-
-### Todos
 
 
 ### Linceță: MIT

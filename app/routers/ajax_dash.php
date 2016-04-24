@@ -34,8 +34,20 @@ $router_ajax_todo = function(Request $r)use($model){
     $resp->setData($model->handle_todo($data));
     return $resp;
 };
-$router_ajax_get_todo = function(Request $r)use($model){
+$router_ajax_get_todo = function()use($model){
     $resp = new JsonResponse();
     $resp->setData($model->get_todo());
+    return $resp;
+};
+$router_ajax_get_settings = function()use($model){
+    $resp = new JsonResponse();
+    $resp->setData($model->get_settings());
+    return $resp;
+
+};
+$router_ajax_settings = function(Request $r)use($model){
+    $resp = new JsonResponse();
+    $data = $r->request->all();
+    $resp->setData($model->set_settings($data['data']));
     return $resp;
 };

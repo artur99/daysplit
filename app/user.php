@@ -3,9 +3,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class user{
-    function __construct($app){
+    function __construct($app, $misc){
         $this->session = $app['session'];
         $this->db = $app['db'];
+        $this->misc = $misc;
     }
     public function loggedin(){
         return $this->session->has('user')?$this->session->get('user')['id']:false;
@@ -151,6 +152,22 @@ class user{
         if(!isset($user[$data]))return false;
         return $user[$data];
     }
+    public function checkpassword($psw){
+        $uid = (int)$this->getc('id');
+        $psw = (string)$this->misc->encode($psw);
+        return $this->db->executeQuery("SELECT COUNT(1) AS c FROM users WHERE id = ? AND password = ? LIMIT 1", [$uid, $psw])->fetch()['c'];
+    }
+    public function direct_change($type, $data){
+        $uid = (int)$this->getc('id');
+        if($type == 'emnm'){
+            $em = (string)$data['email'];
+            $nm = (string)$data['name'];
+            $this->db->executeQuery("UPDATE users SET email = ?, name = ? WHERE id = ? LIMIT 1", [$em, $nm, $uid]);
+        }elseif($type=='password'){
+            $psw = $this->misc->encode($data);
+            $this->db->executeQuery("UPDATE users SET password = ? WHERE id = ? LIMIT 1", [$psw, $uid]);
+        }
+    }
 }
 
-$user = new user($app);
+$user = new user($app, $misc);

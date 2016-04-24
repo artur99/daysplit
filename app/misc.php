@@ -67,10 +67,10 @@ class misc{
                 $time = substr($time, 0, 2).":".substr($time, 2, 2);
             elseif(strlen($time) == 6)
                 $time = substr($time, 0, 2).":".substr($time, 2, 2).":".substr($time, 4, 2);
-            
+
             $elems = preg_split( "/(\s+|\.|-|,|:|;|\|)/", $time);
             $elems = array_filter($elems, function($el){
-                return strlen(trim($el));
+                return abs(intval(strlen(trim($el))));
             });
             array_walk($elems, function(&$val){
                 $val = trim($val);
@@ -79,6 +79,10 @@ class misc{
             else $elems[0] = (int)$elems[0];
             if(!isset($elems[1]))$elems[1] = 0;
             else $elems[1] = (int)$elems[1];
+
+            if($elems[0]>=24)$elems[0]=23;
+            if($elems[1]>59)$elems[1]=59;
+
             return $elems;
         endif;
     }
