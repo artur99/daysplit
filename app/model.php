@@ -109,6 +109,12 @@ class model{
 
         return $qr;
     }
+    public function get_todo(){
+        global $user;
+        $uid = (int)$user->getc('id');
+        $qr = $this->db->executeQuery("SELECT * FROM todo WHERE user_id = ? ORDER BY id DESC LIMIT 30", [$uid])->fetchAll();
+        return $qr;
+    }
     public function todo_add($text){
         global $user;
         $uid = (int)$user->getc('id');

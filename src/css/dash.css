@@ -189,7 +189,7 @@ input.inpsmalldt2{
     outline: 1px solid #000000;
 }
 .modal.loading{
-    opacity: .6;
+    opacity: .6!important;
 }
 .modal h4{
     text-align: center;

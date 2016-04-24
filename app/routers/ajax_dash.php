@@ -34,3 +34,8 @@ $router_ajax_todo = function(Request $r)use($model){
     $resp->setData($model->handle_todo($data));
     return $resp;
 };
+$router_ajax_get_todo = function(Request $r)use($model){
+    $resp = new JsonResponse();
+    $resp->setData($model->get_todo());
+    return $resp;
+};

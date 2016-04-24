@@ -111,3 +111,25 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 #materialPreloader{
     z-index: 22;
 }
+.modal.open{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex!important;
+    overflow-y: hidden;
+}
+.modal.open .modal-content{
+    overflow-y: auto;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+    margin-bottom: 56px;
+}
+.modal.open .modal-footer{
+    position: fixed;
+    bottom:0;
+    left:0;
+}
