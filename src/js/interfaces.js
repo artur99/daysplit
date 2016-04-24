@@ -1,6 +1,8 @@
 $(document).ready(function(){
-    if(is_mobile()) render_interface('interface_1');
-    else render_interface('interface_1');
+    if(currenturl == 'dashboard'){
+        if(is_mobile()) render_interface('interface_1');
+        else render_interface('interface_1');
+    }
 });
 
 function render_interface(interface_id){
