@@ -49,3 +49,11 @@
     margin: 20px auto;
     margin-bottom: 10px;
 }
+@media(min-height: 800px){
+    .loginbox.nr1{
+        padding-top: 20vh;
+    }
+    .loginbox.nr2{
+        padding-top: 15vh;
+    }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+</head>
+<body id="dash">
+    <div class="colorbar"></div>
+    <input type="date" class="hide datepicker" id="dateinput_mover">
+    <div class="fixed-action-btn btnfl1">
+        <a class="btn-floating btn-large red waves-effect waves-light" id="btn_add">
+            <i class="large material-icons">&#xE145;</i>
+        </a>
+    </div>
+    <div class="fixed-action-btn btnfl2">
+        <a class="btn-floating blue waves-effect waves-light modal-trigger" href="#modal_list">
+            <i class="material-icons">&#xE896;</i>
+        </a>
+    </div>
+    <div class="fixed-action-btn btnfl3">
+        <a class="btn-floating purple waves-effect waves-light" id="btn_calendar">
+            <i class="material-icons">&#xE8DF;</i>
+        </a>
+    </div>
+    {% include 'sub/dash_help.twig' %}
+    {% include 'sub/dash_list.twig' %}
+    {% include 'sub/dash_archive.twig' %}
+    {% include 'sub/dash_settings.twig' %}
+    {% include 'sub/dash_editevent.twig' %}
+    <div id="modal_add" class="modal">
+        <div class="modal-content white">
+        <div class="row">
+            <div class="col s12">
+            <ul class="tabs" id="tabs_addforms">
+                <li class="tab col s2"><a href="#tab_add_event" class="active">Eveniment</a></li>
+                {#<li class="tab col s2"><a href="#tab_add_project">Proiect</a></li>
+                <li class="tab col s2"><a href="#tab_add_deadline">Deadline</a></li>#}
+            </ul>
+            </div>
+            <div id="tab_add_event" class="col s12">{% include 'sub/dash_addevent.twig' %}</div>
+            {#<div id="tab_add_project" class="col s12">{% include 'sub/dash_addproj.twig' %}</div>
+            <div id="tab_add_deadline" class="col s12">{% include 'sub/dash_adddeadl.twig' %}</div>#}
+        </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="waves-effect  btn-flat" id="btn_submit_addform">Adăugare</a>
+        </div>
+    </div>
+    <div class="row">
+    <div class="topmenu">
+        <div class="flex">
+            <div class="tmspl">
+                <div class="logo"><img src="{{asset('img/logo_small.png')}}" alt="">DaySplit</div>
+            </div>
+            <div class="tmspl notmobile">
+                <div id="toptime">
+                    <span class="time">--:--:--</span><br>
+                    <span class="date">.........</span>
+                </div>
+            </div>
+            <div class="tmspl">
+                <a href="#" class="dropdown-button switchdd waves-effect" data-activates="switcher_drd"><i class="material-icons">&#xE8EE;</i></a>
+                <ul id="switcher_drd" class="dropdown-content">
+                    <li><a href="#modal_help" class="modal-trigger">Ajutor</a></li>
+                    <li><a href="{{l('/dashboard/groups')}}" class="modal-trigger">Interfață Grupuri</a></li>
+                    <!-- <li><a href="#modal_archive" class="modal-trigger">Arhivă</a></li> -->
+                    <li class="divider"></li>
+                    <li><a href="#modal_settings" class="modal-trigger">Setări - Contul meu</a></li>
+                    <li><a href="#" id="btn-logout">Delogare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body z-depth-1" id="data">
+        <div class="maindsh interface_1">
+            <div class="col_arrow waves-effect navbtn" data-nav="left"><i class="material-icons">&#xE314;</i></div>
+            <div class="col_main col_main_1">
+                <div class="col_header"></div>
+                <div class="col_inner col_innte_1">
+
+                </div>
+            </div>
+            <div class="col_main col_main_2">
+                <div class="col_header"></div>
+                <div class="col_inner col_innte_2">
+                </div>
+            </div>
+            <div class="col_main col_main_3">
+                <div class="col_header"></div>
+                <div class="col_inner col_innte_3">
+
+                </div>
+            </div>
+            <div class="col_arrow waves-effect navbtn" data-nav="right"><i class="material-icons">&#xE315;</i></div>
+        </div>
+
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

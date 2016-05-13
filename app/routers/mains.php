@@ -12,17 +12,34 @@ $app->error(function(\Exception $e, $code)use($app) {
     );
 });
 
-$router = function()use($app,$user){
+$router = function()use($app){
     return $app['twig']->render('landing.twig');
 };
 
-$router_account = function()use($app,$user){
-    if($uid = $user->loggedin()) return $app['twig']->render('account2.twig', ['user'=>$user->get($uid, 'name,email')]);
-    if($uid = $user->loggedin_cookie()) return $app['twig']->render('account2.twig', ['user'=>$user->get($uid, 'name,email'), 'relogin'=>1]);
+$router_account = function(Request $request)use($app){
+    if($uid = $app['user']->loggedin()) return $app['twig']->render('account2.twig', ['user'=>$app['user']->get($uid, 'name,email')]);
+    if($uid = $app['user']->loggedin_cookie($request)) return $app['twig']->render('account2.twig', ['user'=>$app['user']->get($uid, 'name,email'), 'relogin'=>1]);
     return $app['twig']->render('account.twig');
 };
 
-$router_dash = function()use($app,$user,$model){
-    if(!($uid = $user->loggedin())) return $app->redirect('/account');
+$router_dash = function()use($app,$model){
+    if(!($uid = $app['user']->loggedin())) return $app->redirect('/account');
     return $app['twig']->render('dashboard.twig');
+};
+
+$router_dash_groups = function()use($app,$model){
+    if(!($uid = $app['user']->loggedin())) return $app->redirect('/account');
+    $tdata = [];
+    $tdata['groups'] = $model->get_grouplist();
+
+    return $app['twig']->render('dashboard_groups.twig', $tdata);
+};
+$router_dash_group_in = function($gid)use($app,$model){
+    if(!($uid = $app['user']->loggedin())) return $app->redirect('/account');
+    if(!$app['user']->in_group($gid)) throw new AccessDeniedHttpException("Nu aveți acces la acest grup!");
+    $tdata = [];
+    $tdata['gid'] = $gid;
+    $tdata['group'] = $model->get_groupdata($gid);
+    if(!$tdata['group']) throw new AccessDeniedHttpException("Nu aveți acces la acest grup!");
+    return $app['twig']->render('dashboard_group_in.twig', $tdata);
 };

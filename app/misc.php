@@ -1,7 +1,8 @@
 <?php
+use Silex\Application;
 
 class misc{
-    function __construct($app){
+    function __construct(Application $app){
         //nothing here :D
     }
     public function filter($data){
@@ -13,6 +14,10 @@ class misc{
         }
         if(isset($data['title'])){
             $data['title'] = substr($data['title'], 0, 100);
+        }
+        if(isset($data['color'])){
+            $colors = explode(',', 'blue,red,purple,yellow,green,indigo,orange,pink,teal,amber');
+            if(!in_array($data['color'], $colors))$data['color'] = 'blue';
         }
         return $data;
     }
@@ -103,9 +108,6 @@ class misc{
         $y = date("Y", $unix);
         $m = date("m", $unix);
         $d = date("d", $unix);
-        return $this->gentime([$d, $m, $y], 'date');
+        return misc::gentime([$d, $m, $y], 'date');
     }
 }
-
-
-$misc = new misc($app);

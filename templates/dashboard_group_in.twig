@@ -27,8 +27,9 @@
     </div>
     {% include 'sub/dash_help.twig' %}
     {% include 'sub/dash_list.twig' %}
-    {% include 'sub/dash_archive.twig' %}
     {% include 'sub/dash_settings.twig' %}
+    {% include 'sub/dash_gr_settings.twig' %}
+    {% include 'sub/dash_gr_members.twig' %}
     {% include 'sub/dash_editevent.twig' %}
     <div id="modal_add" class="modal">
         <div class="modal-content white">
@@ -36,13 +37,9 @@
             <div class="col s12">
             <ul class="tabs" id="tabs_addforms">
                 <li class="tab col s2"><a href="#tab_add_event" class="active">Eveniment</a></li>
-                {#<li class="tab col s2"><a href="#tab_add_project">Proiect</a></li>
-                <li class="tab col s2"><a href="#tab_add_deadline">Deadline</a></li>#}
             </ul>
             </div>
             <div id="tab_add_event" class="col s12">{% include 'sub/dash_addevent.twig' %}</div>
-            {#<div id="tab_add_project" class="col s12">{% include 'sub/dash_addproj.twig' %}</div>
-            <div id="tab_add_deadline" class="col s12">{% include 'sub/dash_adddeadl.twig' %}</div>#}
         </div>
         </div>
         <div class="modal-footer">
@@ -65,7 +62,9 @@
                 <a href="#" class="dropdown-button switchdd waves-effect" data-activates="switcher_drd"><i class="material-icons">&#xE8EE;</i></a>
                 <ul id="switcher_drd" class="dropdown-content">
                     <li><a href="#modal_help" class="modal-trigger">Ajutor</a></li>
-                    <!-- <li><a href="#modal_archive" class="modal-trigger">Arhivă</a></li> -->
+                    <li><a href="#modal_gr_settings" class="modal-trigger">Setări Grup</a></li>
+                    <li><a href="#modal_gr_members" class="modal-trigger">Membri Grup</a></li>
+                    <li><a href="{{l('/dashboard')}}">Interfața personală</a></li>
                     <li class="divider"></li>
                     <li><a href="#modal_settings" class="modal-trigger">Setări - Contul meu</a></li>
                     <li><a href="#" id="btn-logout">Delogare</a></li>
@@ -74,7 +73,11 @@
         </div>
     </div>
     <div class="body z-depth-1" id="data">
-        <div class="interface_1">
+        <h3 class="grs1_hd2 {{group.color}} cfx">
+            {{group.name}}
+        </h3>
+        <div class="bar {{group.color}} darken-2"></div>
+        <div class="maindsh interface_1">
             <div class="col_arrow waves-effect navbtn" data-nav="left"><i class="material-icons">&#xE314;</i></div>
             <div class="col_main col_main_1">
                 <div class="col_header"></div>

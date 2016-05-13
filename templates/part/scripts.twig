@@ -2,5 +2,8 @@
     var csrftoken = '{{csrftoken('main')}}';
     var currenturl = '{{app.request.attributes.get('_route')|trim('_')}}';
     var googleapikey = '{{app['conf.google.browser_key']}}';
+    {%if gid is defined%}
+    var groups_group_id = {{gid}};
+    {%endif%}
 </script>
 <script src="{{asset('components/data.js')}}"></script>

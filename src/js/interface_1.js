@@ -1,9 +1,9 @@
 interfaces.interface_1 = {
     current_day: 0,
-    load : function(){
+    load : function(silent){
         current_interface = 'interface_1';
         if(typeof day == 'undefined') day = [];
-        interfaces.interface_1.markload('on');
+        if(!silent)interfaces.interface_1.markload('on');
         var cdate = [];
         cdate[1] = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * (current_day));
         cdate[2] = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * (current_day+1));
@@ -12,8 +12,8 @@ interfaces.interface_1 = {
             day[i] = jsdate2date(cdate[i]);
             $(".col_main_"+i+" .col_header").html(jsday2fulldatestr(current_day+i-1));
         }
-
-        ajax('dash/get/3days', {day:current_day}, function(pers){
+        var reqdt = {day:current_day};
+        ajax('dash/get/3days', reqdt, function(pers){
             pers.sort(function(e1,e2){
                 /*if(e1.sdate==e2.sdate)*/return e1.stime > e2.stime ? 1 : e1.stime == e2.stime ? 0 : -1;
                 /*else return e1.sdate > e2.sdate ? 1 : e1.sdate == e2.sdate ? 0 : -1;*/
@@ -49,7 +49,7 @@ interfaces.interface_1 = {
             $(".col_innte_2").prepend('<div class="periodadd" data-addate="'+jsday2datestr(current_day+1)+'"><i class="material-icons">&#xE146;</i></div>');
             $(".col_innte_3").prepend('<div class="periodadd" data-addate="'+jsday2datestr(current_day+2)+'"><i class="material-icons">&#xE146;</i></div>');
             $(".periodadd").click(interfaces.interface_1.open_add_form);
-            interfaces.interface_1.markload('off');
+            if(!silent)interfaces.interface_1.markload('off');
         });
     },
     open_add_form : function(e){

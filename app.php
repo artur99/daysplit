@@ -16,10 +16,11 @@ $app->register(new Provider\SessionServiceProvider());
 $app->register(new Provider\TwigServiceProvider());
 include 'app/conf.php';
 include 'app/misc.php';
-include 'app/user.php';
-include 'app/langconf.php';
+include 'app/executers.php';
 include 'app/miscconf.php';
+include 'app/langconf.php';
 
+include 'app/user.php';
 
 include 'app/mail.php';
 include 'app/model.php';
@@ -38,6 +39,7 @@ $app->before(function ($request)use($app) {
             return new JsonResponse(['type'=>'error','text'=>'Token invalid']);
         }
     }
+    global_patches($app);
 });
 
 $app->run();

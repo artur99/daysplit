@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+</head>
+<body id="dash">
+    <div class="colorbar"></div>
+    {% include 'sub/dash_help.twig' %}
+    {% include 'sub/dash_list.twig' %}
+    {% include 'sub/dash_settings.twig' %}
+    {% include 'sub/dash_archive.twig' %}
+    {% include 'sub/dash_gr_addgroup.twig' %}
+    <div class="row">
+    <div class="topmenu">
+        <div class="flex">
+            <div class="tmspl">
+                <div class="logo"><img src="{{asset('img/logo_small.png')}}" alt="">DaySplit</div>
+            </div>
+            <div class="tmspl notmobile">
+                <div id="toptime">
+                    <span class="time">--:--:--</span><br>
+                    <span class="date">.........</span>
+                </div>
+            </div>
+            <div class="tmspl">
+                <a href="#" class="dropdown-button switchdd waves-effect" data-activates="switcher_drd"><i class="material-icons">&#xE8EE;</i></a>
+                <ul id="switcher_drd" class="dropdown-content">
+                    <li><a href="#modal_help" class="modal-trigger">Ajutor</a></li>
+                    <li><a href="{{l('/dashboard')}}">Interfața personală</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#modal_settings" class="modal-trigger">Setări - Contul meu</a></li>
+                    <li><a href="#" id="btn-logout">Delogare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body z-depth-1" id="data">
+        <div class="maindsh group_interface">
+            <div class="grs1_hd1">
+                <h2 class="left">Grupuri din care faci parte:</h2>
+                <a href="#modal_gr_add_group" class="btn btn-waves waves-light blue darken-1 right modal-trigger">Creare grup nou</a>
+            </div>
+            <div class="grs1_list row">
+                {%for itm in groups%}
+                <div class="col s12 m6 l3">
+                    <div class="card {{itm.color}} white-text cfx">
+                        <div class="card-content">
+                            <span class="card-title">{{itm.name}}</span>
+                            <p>
+                                [ {{itm.members}} Membri ]
+                                <br>
+                                {{itm.description}}
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{l('/dashboard/group/'~itm.id)}}" class="btn-flat right white">Accesare</a>
+                            <!-- <a href="#" class="btn">Setări</a> -->
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                {%if groups|length == 0%}
+                    <div class="shadowtext big">Nu faci parte din niciun grup...</div>
+                {%endif%}
+            </div>
+        </div>
+
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

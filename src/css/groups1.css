@@ -1,0 +1,39 @@
+.group_interface{
+    padding: 20px 30px;
+}
+.grs1_hd1{
+    text-align: center;
+    padding: 10px 0;
+    overflow: hidden;
+}
+.grs1_hd1 h2{
+    margin: 0;
+    font-size: 30px;
+}
+.grs1_list{
+    padding: 20px 0;
+}
+.grs1_list .card-action{
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+.grs1_list .card-action .btn-flat{
+    color: black!important;
+    margin-right: 0!important;
+}
+.grs1_list .shadowtext{
+    margin-top: 21px;
+    font-size: 30px;
+}
+.grs1_hd2{
+    font-size: 25px;
+    text-align: center;
+    padding: 12px 0;
+    display: block;
+    color: #fff;
+    margin: 0;
+}
+.group_interface .card-content{
+    height: 137px;
+    overflow: hidden;
+}

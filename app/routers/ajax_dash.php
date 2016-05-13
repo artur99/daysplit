@@ -13,19 +13,20 @@ $router_ajax_time = function()use($model){
 $router_ajax_event = function(Request $r)use($model){
     $resp = new JsonResponse();
     $data = $r->request->all();
-    $resp->setData($model->handle_event(isset($data['data'])?$data['data']:0));
+    $resp->setData($model->handle_event(isset($data)?$data:0));
     return $resp;
 };
 $router_ajax_get_3days = function(Request $r)use($model){
     $resp = new JsonResponse();
     $data = $r->request->all();
-    $resp->setData($model->get_3days($data['day']));
+    $data['gid'] = isset($data['gid'])?$data['gid']:0;
+    $resp->setData($model->get_3days($data['day'], $data['gid']));
     return $resp;
 };
 $router_ajax_get_event = function(Request $r)use($model){
     $resp = new JsonResponse();
     $data = $r->request->all();
-    $resp->setData($model->get_event($data['period_id']));
+    $resp->setData($model->get_event($data['period_id'], isset($data['gid'])?$data['gid']:0));
     return $resp;
 };
 $router_ajax_todo = function(Request $r)use($model){

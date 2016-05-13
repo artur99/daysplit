@@ -2,7 +2,7 @@
 date_default_timezone_set("Europe/Bucharest");
 
 $app['conf.path'] = dirname(dirname($_SERVER['SCRIPT_FILENAME']));
-$app['twig.path'] = $app['conf.path'].'/app/templates';
+$app['twig.path'] = $app['conf.path'].'/templates';
 $app['twig.assets'] = '/assets/';
 $app['conf.url'] = function($app){
     return $app['request']->getScheme() . '://' . $app['request']->getHttpHost() . $app['request']->getBasePath();

@@ -10,7 +10,6 @@
     -ms-flex-wrap: wrap;
     -o-flex-wrap: wrap;
     flex-wrap: wrap;
-    min-height: 430px;
 }
 .interface_1.loading{
     opacity: 0.5;

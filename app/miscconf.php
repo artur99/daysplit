@@ -10,18 +10,23 @@ function g_link($link){
     global $app;
     return $app['conf.url'].'/'.ltrim($link, '/');
 }
+function global_patches($app){
+    global $fb;
+    $fb = new Facebook\Facebook(array(
+      'appId'  => $app['conf.facebook.app_id'],
+      'secret' => $app['conf.facebook.app_secret']
+    ));
+}
 
 $app['csrf'] = $app->share(function () {
     return new CsrfTokenManager();
 });
-
 $app['twig'] = $app->share($app->extend('twig', function($twig,$app){
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset)use($app){
         return $app['conf.url'].$app['twig.assets'].ltrim($asset, '/');
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('user', function($what){
-        global $user;
-        return $user->data($what);
+    $twig->addFunction(new \Twig_SimpleFunction('user', function($what)use($app){
+        return $app['user']->data($what);
     }));
     $twig->addFunction(new \Twig_SimpleFunction('l', function($what)use($app){
         return $app['conf.url'].$what;
@@ -31,3 +36,15 @@ $app['twig'] = $app->share($app->extend('twig', function($twig,$app){
     }));
     return $twig;
 }));
+$app['misc'] = $app->share(function() use ($app) {
+    return new misc($app);
+});
+$app['user'] = $app->share(function() use ($app) {
+    return new user($app);
+});
+
+$app['executers'] = $app->share(function() use ($app) {
+    return [
+        'user' => new \DaySplit\Executers\UserExecuter($app['db']),
+    ];
+});

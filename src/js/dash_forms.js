@@ -21,7 +21,7 @@ $(document).on('click', '#btn_submit_addform', function(e){
 });
 var added_td = 0;
 $(document).on('click', "a[href='#modal_list']", function(){
-    $("#modal_list .modal-content").addClass('loading');
+    $("#modal_list").addClass('loading');
     ajax('dash/get/todo',{},function(data){
         $('.waited').html('');
         $('.doned').html('');
@@ -36,20 +36,20 @@ $(document).on('click', "a[href='#modal_list']", function(){
             }
             added_td++;
         });
-        $("#modal_list .modal-content").removeClass('loading');
+        $("#modal_list").removeClass('loading');
     });
     setTimeout(function(){
         $("#todo_add_item").focus();
     },20);
 });
 $(document).on('click', "a[href='#modal_settings']", function(){
-    $("#modal_settings .modal-content").addClass('loading');
+    $("#modal_settings").addClass('loading');
     ajax('dash/get/settings',{},function(data){
         $("#form_settings #settings_name").val(data.name);
         $("#form_settings #settings_email").val(data.email);
         $("#form_settings label[for=settings_name]").addClass('active');
         $("#form_settings label[for=settings_email]").addClass('active');
-        $("#modal_settings .modal-content").removeClass('loading');
+        $("#modal_settings").removeClass('loading');
     });
     setTimeout(function(){
         $("#todo_add_item").focus();
@@ -90,12 +90,12 @@ function submit_form_event(type){
     if(type=='edit') $f = $("#form_edit_event");
     else if(type=='add') $f = $("#form_add_event");
     else if(type=='del') $f = $("#form_edit_event");
-    data.data = getformdata($f);
-    data.data.type = 'event';
+    data = getformdata($f);
+    data.type = 'event';
 
     if(type=="del"){
-        data.data.period_delete_id = data.data.period_update_id;
-        data.data.period_update_id = undefined;
+        data.period_delete_id = data.period_update_id;
+        data.period_update_id = undefined;
     }
 
     ajax('dash/event', data, function(data){

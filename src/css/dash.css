@@ -2,7 +2,7 @@
     margin: auto;
     margin-top: 7vh;
     width: 95%;
-    max-width: 960px;
+    max-width: 80vw;
     background: #fff;
     min-height: 300px;
     position: relative;
@@ -17,7 +17,7 @@
 }
 .topmenu>.flex{
     width: 100%;
-    max-width: 960px;
+    max-width: 80vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -219,6 +219,9 @@ input.inpsmalldt2{
     color: #999;
     text-align: center;
 }
+.shadowtext.big{
+    font-size: 16px;
+}
 .fixed-action-btn .btn-floating:not(.btn-large){
     margin-right: 9.5px;
 }
@@ -318,4 +321,13 @@ input.inpsmalldt2{
     width: 110%;
     height: 2px;
     margin-top: 5px;
+}
+.maindsh{
+    min-height: 73vh;
+}
+.bar{
+    width: 100%;
+    height: 6px;
+    display: block;
+    background: black;
 }
