@@ -9,6 +9,7 @@ class user{
     function __construct(Application $app){
         $this->session = $app['session'];
         $this->db = $app['db'];
+        $this->misc = $app['misc'];
         // var_dump($app['request_stack']);
         $this->executer = $app['executers']['user'];
     }
@@ -32,14 +33,14 @@ class user{
         return $this->login_mode1($q['id'], 1, $resp);
     }
     public function check_auth($em, $pw){
-        if(!misc::validate(['email'=>$em],'email')) return 0;
-        $pw = misc::encode($pw);
+        if(!$this->misc->validate(['email'=>$em],'email')) return 0;
+        $pw = $this->misc->encode($pw);
         $q = $this->db->executeQuery("SELECT id FROM users WHERE type = 1 AND email = ? AND password = ? LIMIT 1", [$em, $pw]);
         return $q->fetchAll();
     }
     public function login_validate($data){
         if(!isset($data['email'], $data['password'])) return 0;
-        $data = misc::filter($data);
+        $data = $this->misc->filter($data);
         $kau = $this->check_auth($data['email'], $data['password']);
         if(isset($kau[0], $kau[0]['id'])) $res = ['id'=>$kau[0]['id']];
         else $res['err']=['password' => 'Date de logare invalide'];
@@ -59,9 +60,9 @@ class user{
         return 1;
     }
     public function signup_mode1($data){
-        $data = misc::filter($data);
+        $data = $this->misc->filter($data);
         $em = $data['email'];
-        $pw = misc::encode($data['password']);
+        $pw = $this->misc->encode($data['password']);
         $this->db->executeQuery("INSERT INTO users (id, type, email, password, sdate, ldate) VALUES (NULL, 1, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $pw]);
         $lid = $this->db->lastInsertId();
         $this->login_mode1($lid, 0);
@@ -69,7 +70,7 @@ class user{
         return 1;
     }
     public function signup_mode2($data){
-        $data = misc::filter($data);
+        $data = $this->misc->filter($data);
         $em = $data['email'];
         $fbid = $data['id'];
         $this->db->executeQuery("INSERT INTO users (id, type, email, fbid, name, sdate, ldate) VALUES (NULL, 1, ?, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $fbid, (string)$data['name']]);
@@ -79,14 +80,14 @@ class user{
         return 1;
     }
     public function signup_validate($data){
-        if(!misc::validate($data,'email'))$err['email'] = 'Adresa de email este invalidă';
+        if(!$this->misc->validate($data,'email'))$err['email'] = 'Adresa de email este invalidă';
         elseif($this->mail_exists($data['email'])) $err['email'] = 'Adresa de email este folosită';
-        if(!misc::validate($data,'password'))$err['password'] = 'Parola este prea scurtă';
+        if(!$this->misc->validate($data,'password'))$err['password'] = 'Parola este prea scurtă';
         elseif($data['password']!=$data['cpassword'])$err['cpassword'] = 'Parolele nu corespund';
         return isset($err)?$err:[];
     }
     public function mail_exists($em){
-        $em = misc::filter(['email'=>$em]);
+        $em = $this->misc->filter(['email'=>$em]);
         if(!$em)return 0;
         $em = $em['email'];
         $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
@@ -149,7 +150,7 @@ class user{
     }
     public function checkpassword($psw){
         $uid = (int)$this->getc('id');
-        $psw = (string)misc::encode($psw);
+        $psw = (string)$this->misc->encode($psw);
         return $this->db->executeQuery("SELECT COUNT(1) AS c FROM users WHERE id = ? AND password = ? LIMIT 1", [$uid, $psw])->fetch()['c'];
     }
     public function direct_change($type, $data){
@@ -159,7 +160,7 @@ class user{
             $nm = (string)$data['name'];
             $this->db->executeQuery("UPDATE users SET email = ?, name = ? WHERE id = ? LIMIT 1", [$em, $nm, $uid]);
         }elseif($type=='password'){
-            $psw = misc::encode($data);
+            $psw = $this->misc->encode($data);
             $this->db->executeQuery("UPDATE users SET password = ? WHERE id = ? LIMIT 1", [$psw, $uid]);
         }
     }

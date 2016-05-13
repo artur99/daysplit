@@ -108,6 +108,6 @@ class misc{
         $y = date("Y", $unix);
         $m = date("m", $unix);
         $d = date("d", $unix);
-        return misc::gentime([$d, $m, $y], 'date');
+        return $this->gentime([$d, $m, $y], 'date');
     }
 }
