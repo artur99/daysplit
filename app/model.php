@@ -51,18 +51,18 @@ class model{
         if(!isset($d['type'])) return ['type'=>'error', 'text'=>'Tip invalid de date'];
         if($d['type']=='event'){
             $name = (isset($d['title']) && !empty($d['title']))?trim($d['title']):'Fără titlu';
-            $sdate = misc::render_date(isset($d['start_date'])?$d['start_date']:'');
-            $edate = misc::render_date(isset($d['end_date'])?$d['end_date']:'');
-            $stime = misc::render_time(isset($d['start_time'])?$d['start_time']:'');
-            $etime = misc::render_time(isset($d['end_time'])?$d['end_time']:'');
+            $sdate = $this->misc->render_date(isset($d['start_date'])?$d['start_date']:'');
+            $edate = $this->misc->render_date(isset($d['end_date'])?$d['end_date']:'');
+            $stime = $this->misc->render_time(isset($d['start_time'])?$d['start_time']:'');
+            $etime = $this->misc->render_time(isset($d['end_time'])?$d['end_time']:'');
 
-            $sd = (string)misc::gentime($sdate, 'date');
-            $st = (string)misc::gentime($stime, 'time');
+            $sd = (string)$this->misc->gentime($sdate, 'date');
+            $st = (string)$this->misc->gentime($stime, 'time');
 
             $color = preg_replace("/[^a-zA-Z0-9#]+/", "", $d['color']);
 
-            $ed = (string)misc::gentime($edate, 'date');
-            $et = (string)misc::gentime($etime, 'time');
+            $ed = (string)$this->misc->gentime($edate, 'date');
+            $et = (string)$this->misc->gentime($etime, 'time');
 
             $gid = isset($d['gid'])?(int)($d['gid']):0;
 
@@ -98,8 +98,8 @@ class model{
 
     }
     public function get_3days($day, $gid){
-        $sdate = (string)misc::unix2date(time()+60*60*24*$day);
-        $edate = (string)misc::unix2date(time()+60*60*24*($day+2));
+        $sdate = (string)$this->misc->unix2date(time()+60*60*24*$day);
+        $edate = (string)$this->misc->unix2date(time()+60*60*24*($day+2));
         $uid = (int)$this->user->getc('id');
         if($gid) $uid = 0;
         else $gid = 0;
@@ -144,17 +144,17 @@ class model{
     }
     public function set_settings($data){
         $res = [];
-        if(!isset($data['email']) || !misc::validate($data, 'email')) $res['err'] = ['email'=>'Adresă de email invalidă'];
+        if(!isset($data['email']) || !$this->misc->validate($data, 'email')) $res['err'] = ['email'=>'Adresă de email invalidă'];
         else{
             if(isset($data['opassword'],$data['password'],$data['cpassword']) && !empty($data['opassword']) || !empty($data['password']) || !empty($data['cpassword'])){
                 //wants to change the password
                 if(!$this->user->checkpassword($data['opassword'])) $res['err'] = ['opassword'=>'Vechea parolă este greșită'];
-                elseif(!misc::validate($data, 'password')) $res['err'] = ['password'=>'Parola este prea scurtă'];
+                elseif(!$this->misc->validate($data, 'password')) $res['err'] = ['password'=>'Parola este prea scurtă'];
                 elseif($data['password']!=$data['cpassword']) $res['err'] = ['cpassword'=>'Parolele nu corespund'];
                 else{
-                    $data = misc::filter($data);
+                    $data = $this->misc->filter($data);
                     $this->user->direct_change('password', $data['password']);
-                    $data = misc::filter($data);
+                    $data = $this->misc->filter($data);
                 }
             }
             $this->user->direct_change('emnm', $data);
