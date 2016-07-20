@@ -2,7 +2,7 @@
 
 $lang = 'ro';
 
-include 'langs/'.$lang.'.php';
+include $lang.'.php';
 
 // TODO: integrare limbă
 // --ro/en/folder?/subdomeniu?

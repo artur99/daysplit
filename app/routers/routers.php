@@ -1,8 +1,8 @@
 <?php
-include 'routers/mains.php';
-include 'routers/ajax_login.php';
-include 'routers/ajax_dash.php';
-include 'routers/ajax_groups.php';
+include 'router_main.php';
+include 'ajax_login.php';
+include 'ajax_dash.php';
+include 'ajax_groups.php';
 
 
 $app->get('/', $router);

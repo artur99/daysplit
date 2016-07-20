@@ -27,7 +27,7 @@ $router_dash = function()use($app,$model){
     return $app['twig']->render('dashboard.twig');
 };
 
-$router_dash_groups = function()use($app,$model){
+ $router_dash_groups = function()use($app,$model){
     if(!($uid = $app['user']->loggedin())) return $app->redirect('/account');
     $tdata = [];
     $tdata['groups'] = $model->get_grouplist();
