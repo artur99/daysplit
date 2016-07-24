@@ -1,7 +1,7 @@
 {
   "name": "daysplit",
-  "version": "1.0.0",
-  "description": "Lorem ipsum...........",
+  "version": "1.0.2",
+  "description": "DaySplit este o platformă online care permite administrarea și organizarea activităților, proiectelor și evenimentelor într-un mod extrem de ușor de utilizat.",
   "main": "Gruntfile.js",
   "dependencies": {
     "grunt": "^0.4.5",
@@ -15,9 +15,7 @@
     "load-grunt-tasks": "^3.4.1"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artur99/daysplit.git"
