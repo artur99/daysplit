@@ -77,6 +77,7 @@ class misc{
             $elems = array_filter($elems, function($el){
                 return abs(intval(strlen(trim($el))));
             });
+            $elems = array_values($elems);
             array_walk($elems, function(&$val){
                 $val = trim($val);
             });
