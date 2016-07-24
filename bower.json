@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "directory": "public_html/assets",
   "dependencies": {
-    "Materialize": "materialize#^0.97.5",
+    "Materialize": "materialize#^0.97.6",
     "material-preloader": "artur99/material-preloader",
     "underscore": "^1.8.3"
   },

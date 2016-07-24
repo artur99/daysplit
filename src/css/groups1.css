@@ -4,7 +4,7 @@
 .grs1_hd1{
     text-align: center;
     padding: 10px 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .grs1_hd1 h2{
     margin: 0;

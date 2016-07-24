@@ -14,7 +14,7 @@ $(document).ready(function(){
       belowOrigin: true,
       alignment: 'right'
     });
-    $('ul.tabs').tabs();
+    // $('ul.tabs').tabs();
     picker1 = $('#dateinput_mover').pickadate({
       monthsFull: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombeie', 'Noimebrie', 'Decembrie'],
       weekdaysShort: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
