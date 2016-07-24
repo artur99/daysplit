@@ -56,6 +56,21 @@ class model{
             $stime = $this->misc->render_time(isset($d['start_time'])?$d['start_time']:'');
             $etime = $this->misc->render_time(isset($d['end_time'])?$d['end_time']:'');
 
+            if(join($sdate) > join($edate)){
+                $tmp = $sdate;
+                $sdate = $edate;
+                $edate = $tmp;
+                $tmp = $stime;
+                $stime = $etime;
+                $etime = $tmp;
+            }
+
+            if(join($sdate) == join($edate) && join($stime) > join($etime)){
+                $tmp = $stime;
+                $stime = $etime;
+                $etime = $tmp;
+            }
+
             $sd = (string)$this->misc->gentime($sdate, 'date');
             $st = (string)$this->misc->gentime($stime, 'time');
 
