@@ -6,7 +6,7 @@ DaySplit este o platformă online care permite administrarea și organizarea act
 Demo: [daysplit.artur99.net]
 
 ### Versiune
-1.0.0
+1.0.2
 
 ### Tehnologii utilizate
 * [Composer]
