@@ -8,7 +8,7 @@ function getformdata(form){
 function ajax(node, data, cb){
     data.csrftoken = csrftoken;
     if(typeof groups_group_id == 'number') data.gid = groups_group_id;
-    $.post('/ajax/'+node, data).done(cb).error(cb);
+    $.post('/ajax/'+node, data).done(cb).fail(cb);
 }
 
 //Others module
