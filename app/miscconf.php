@@ -42,6 +42,9 @@ $app['misc'] = $app->share(function() use ($app) {
 $app['user'] = $app->share(function() use ($app) {
     return new user($app);
 });
+$app['mailcls'] = $app->share(function() use ($app) {
+    return new mailcls();
+});
 
 $app['executers'] = $app->share(function() use ($app) {
     return [

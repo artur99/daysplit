@@ -19,6 +19,9 @@ class misc{
             $colors = explode(',', 'blue,red,purple,yellow,green,indigo,orange,pink,teal,amber');
             if(!in_array($data['color'], $colors))$data['color'] = 'blue';
         }
+        // if(isset($data['fbid'])){
+        //     $data['fbid'] = $data['fbid'];
+        // }
         return $data;
     }
     public function validate($data, $type){

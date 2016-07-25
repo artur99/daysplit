@@ -126,9 +126,9 @@ CREATE TABLE `users` (
   `name` text,
   `image` text,
   `description` text,
-  `sdate` int(11) NOT NULL,
-  `ldate` int(11) NOT NULL,
-  `token` text NOT NULL,
+  `sdate` int(11),
+  `ldate` int(11),
+  `token` text,
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `id` (`id`)

@@ -10,6 +10,7 @@ class user{
         $this->session = $app['session'];
         $this->db = $app['db'];
         $this->misc = $app['misc'];
+        $this->mailcls = $app['mailcls'];
         // var_dump($app['request_stack']);
         $this->executer = $app['executers']['user'];
     }
@@ -76,7 +77,7 @@ class user{
         $this->db->executeQuery("INSERT INTO users (id, type, email, fbid, name, sdate, ldate) VALUES (NULL, 1, ?, ?, ?, UNIX_TIMESTAMP(NOW()), UNIX_TIMESTAMP(NOW()))", [$em, $fbid, (string)$data['name']]);
         $lid = $this->db->lastInsertId();
         $this->login_mode1($lid, 0);
-        $this->mailcls->send_signup($data['email']);
+        if(!empty($data['email'])) $this->mailcls->send_signup($data['email']);
         return 1;
     }
     public function signup_validate($data){
@@ -93,16 +94,25 @@ class user{
         $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
         return $q->fetch()['COUNT(1)'];
     }
+    public function fbid_exists($fbid){
+        $fbid = $this->misc->filter(['fbid'=>$fbid]);
+        if(!$fbid)return 0;
+        $fbid = (string)$fbid['fbid'];
+        $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE fbid = ? LIMIT 1', [$fbid]);
+        return $q->fetch()['COUNT(1)'];
+    }
     public function fb_realauth($tok, &$resp){
         global $fb;
         $this->session->set('fb_access_token', $tok);
         $data = $fb->get("/me?fields=id,name,email", $tok)->getDecodedBody();
-        if(empty($data['email']))throw new AccessDeniedHttpException("Accesul la adresa de email nu a fost acceptat!");
-        if($this->mail_exists($data['email'])){
+        if(empty($data['id'])) throw new AccessDeniedHttpException("Accesul la ID-ul de facebook nu a fost acceptat!");
+
+        if($this->fbid_exists($data['id'])){
             $uid = $this->db->executeQuery("SELECT id FROM users WHERE email = ?", [(string)$data['email']])->fetch()['id'];
             $this->login_mode1($uid, 1, $resp);
             return 1;
         }else{
+            if(!isset($data['email'])) $data['email'] = '';
             $this->signup_mode2($data);
             return 1;
         }
