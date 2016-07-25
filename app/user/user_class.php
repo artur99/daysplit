@@ -54,7 +54,7 @@ class user{
         $udata['id'] = $uid;
         $this->session->set('user', $udata);
         if($keepin){
-            $token = str_shuffle(str_shuffle("artur99artur99artur99net").implode(range('f','y')).time().microtime(true)).time();
+            $token = $app['misc']->generate_token();
             $this->db->executeQuery("UPDATE users SET token = ? WHERE id = ? LIMIT 1", [$token, (int)$uid]);
             if($resp)$resp->headers->setCookie(new Cookie('token', $token, time()+604800));
         }
@@ -162,6 +162,27 @@ class user{
         $uid = (int)$this->getc('id');
         $psw = (string)$this->misc->encode($psw);
         return $this->db->executeQuery("SELECT COUNT(1) AS c FROM users WHERE id = ? AND password = ? LIMIT 1", [$uid, $psw])->fetch()['c'];
+    }
+    public function reset_password($data){
+        $em = $this->misc->filter(['email'=>isset($data['email'])?$data['email']:'']);
+        $txtarr = ['text'=>'Dacă adresa este înregistrată, veți primi un link de resetare'];
+        if(!$em)return $txtarr;
+        $em = $em['email'];
+        $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
+        if($q->fetch()['COUNT(1)']){
+            $resettok = 'reset_'.$this->misc->generate_token();
+            $this->db->executeQuery("UPDATE users SET TOKEN = '$resettok' WHERE email = ? LIMIT 1", [$em]);
+            $resetlink = g_link('/account/reset?key='.$resettok);
+            $this->mailcls->send_reset($em, ['reset_link'=>$resetlink]);
+        }
+        return $txtarr;
+    }
+    public function check_resetcode($key){
+        if(!$key) return false;
+        elseif(substr($key, 0, 6)!='reset_') return false;
+        $key = (string)$key;
+        $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE token = ? LIMIT 1', [$key]);
+        return $q->fetch()['COUNT(1)']?true:false;
     }
     public function direct_change($type, $data){
         $uid = (int)$this->getc('id');

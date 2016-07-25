@@ -136,3 +136,31 @@ $(document).on('submit', "#form-signup", function(e){
         }
     });
 });
+$(document).on('submit', "#form-reset", function(e){
+    e.preventDefault();
+    var fid = "#form-reset";
+
+    if(typeof(login_status) == "undefined") login_status = 1;
+    else if(login_status == 1) return;
+
+    markloading(fid);
+    ajax('account/reset', getformdata(fid), function(data){
+        $(fid+" input+label").attr('data-error', '');
+        if(data.type=='success'){
+            $(fid+" input").removeClass('invalid').addClass('valid');
+        }else{
+            data.type = 'error'
+            $(fid+" input").addClass('invalid');
+            setTimeout(function(data){
+                login_status = 0;
+                unmarkloading(fid);
+            },100);
+        }
+        if(typeof data.text == 'string') $(fid+" input[name=email]+label").attr('data-'+data.type, data.text);
+        else $.each(data.text, function(i,val){
+            if(val){
+                $(fid+" input[name="+i+"]+label").attr('data-error', val);
+            }
+        });
+    });
+});

@@ -53,3 +53,12 @@ $router_ajax_logout = function(Request $r)use($app){
     $resp->headers->clearCookie('token');
     return $resp;
 };
+$router_ajax_reset = function(Request $r)use($app){
+    $resp = new JsonResponse();
+    $pfdata = $r->request->all();
+    $data = $app['user']->reset_password($pfdata);
+    $res['type'] = 'success';
+    $res['text'] = $data['text'];
+    $resp->setData($res);
+    return $resp;
+};

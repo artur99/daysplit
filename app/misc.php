@@ -114,4 +114,7 @@ class misc{
         $d = date("d", $unix);
         return $this->gentime([$d, $m, $y], 'date');
     }
+    public function generate_token(){
+        return str_shuffle(str_shuffle("artur99artur99artur99net").implode(range('f','y')).time().microtime(true)).time();
+    }
 }

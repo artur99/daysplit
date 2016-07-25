@@ -25,6 +25,10 @@
 .loginbox.nr2 p{
     font-size: 22px;
 }
+.loginbox.nr3{
+    padding-top: 1vh;
+    background: #3084FF;
+}
 .loginbox .inpad{
     display: block;
     margin: auto;
@@ -43,11 +47,31 @@
     display: block;
     margin-bottom: 10px;
 }
+.loginbox.nr3 .logo2{
+    margin-bottom: 20px;
+}
 .rellogo{
     height: 250px;
     display: block;
     margin: 20px auto;
     margin-bottom: 10px;
+}
+.fullpageform{
+    background: white;
+    text-align: left;
+    padding-top: 20px!important;
+    padding-bottom: 20px!important;
+}
+.fullpageform .header{
+    text-align: center;
+}
+.fullpageform .header i.material-icons{
+    color: #2196F3;
+    font-size: 4rem;
+}
+.fullpageform .header h2{
+    margin: 0;
+    font-size: 20px;
 }
 @media(min-height: 800px){
     .loginbox.nr1{

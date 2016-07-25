@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    {% include 'part/head.twig' %}
+    <title>{{app['conf.title']}}{{title is defined?' | '~title:''}}</title>
+    {% if meta is defined %}{% for key,itm in meta %}
+    <meta name="{{key}}" content="{{itm}}">
+    {% endfor %}{% endif %}
+</head>
+<body id="login">
+    <div class="body row blue">
+        <div class="loginbox nr3 center-align">
+            <img src="{{asset('img/logo_3.png')}}" alt="" class="logo2">
+            <div class="clearfix"></div>
+            <form class="col s10 offset-s1 m4 offset-m4 fullpageform z-depth-1" id="form-reset-new" method="POST">
+                <div class="row rowblm">
+                <div class="col header s12">
+                    <i class="large material-icons">&#xE0DA;</i>
+                    <h2>Resetare parolă</h2>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="r_em" type="password" name="password" required tabindex="1" autofocus="true">
+                    <label for="r_em">Noua parolă</label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                    <input id="r_em" type="password" name="password" required tabindex="2">
+                    <label for="r_em">Confirmare parolă</label>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="input-field col s12 center-align">
+                    <button class="btn blue waves-effect waves-light btn-large" type="submit" name="action" tabindex="3">
+                      Resetare parolă
+                      <i class="material-icons left">&#xE163;</i>
+                    </button>
+                </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+            <!-- <a href="{{l('/dashboard')}}" class="btn waves-effect col l5 ma waves-dark btn-large white">Accesare cont</a> <br> -->
+        </div>
+    </div>
+    {% include 'part/scripts.twig' %}
+</body>
+</html>

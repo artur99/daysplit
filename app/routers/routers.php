@@ -7,6 +7,7 @@ include 'ajax_groups.php';
 
 $app->get('/', $router);
 $app->match('/account', $router_account);
+$app->match('/account/reset', $router_account_reset);
 $app->match('/dashboard', $router_dash);
 $app->match('/dashboard/groups', $router_dash_groups);
 $app->match('/dashboard/group/{gid}', $router_dash_group_in);
@@ -15,6 +16,7 @@ $app->match('/fblogin', $router_login_fb);
 $app->match('/ajax/account/login', $router_ajax_login);
 $app->match('/ajax/account/relogin', $router_ajax_relogin);
 $app->match('/ajax/account/signup', $router_ajax_signup);
+$app->match('/ajax/account/reset', $router_ajax_reset);
 $app->match('/ajax/account/logout', $router_ajax_logout);
 
 $app->match('/ajax/dash/time', $router_ajax_time);

@@ -22,6 +22,14 @@ $router_account = function(Request $request)use($app){
     return $app['twig']->render('account.twig');
 };
 
+$router_account_reset = function(Request $request)use($app){
+    $thekey = $request->query->get('key');
+    if(!$app['user']->check_resetcode($thekey)) throw new AccessDeniedHttpException("Cod de resetare invalid");
+    else{
+        return $app['twig']->render('account_reset.twig');
+    }
+};
+
 $router_dash = function()use($app,$model){
     if(!($uid = $app['user']->loggedin())) return $app->redirect('/account');
     return $app['twig']->render('dashboard.twig');
