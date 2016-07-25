@@ -16,8 +16,9 @@ $(document).on('click', '#btn_submit_editform', function(e){e.preventDefault();s
 $(document).on('submit', '#form_add_event', function(e){e.preventDefault();submit_form_event('add');});
 $(document).on('click', '#btn_submit_addform', function(e){
     e.preventDefault();
-    var hr = $("#tabs_addforms").find('a.active').attr('href');
-    if(hr=='#tab_add_event')submit_form_event('add');
+    /*var hr = $("#tabs_addforms").find('a.active').attr('href');
+    if(hr=='#tab_add_event')*/
+    submit_form_event('add');
 });
 var added_td = 0;
 $(document).on('click', "a[href='#modal_list']", function(){
