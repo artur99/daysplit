@@ -35,11 +35,16 @@
         <div class="modal-content white">
         <div class="row">
             <div class="col s12">
-            <ul class="tabs" id="tabs_addforms">
-                <li class="tab{# col s2#}"><a href="#tab_add_event" class="active">Eveniment</a></li>
-            </ul>
+                {#<ul class="tabs" id="tabs_addforms">
+                    <li class="tab col s2"><a href="#tab_add_event" class="active">Eveniment</a></li>
+                    <li class="tab col s2"><a href="#tab_add_project">Proiect</a></li>
+                    <li class="tab col s2"><a href="#tab_add_deadline">Deadline</a></li>
+                </ul>#}
+                <h4>Eveniment</h4>
             </div>
             <div id="tab_add_event" class="col s12">{% include 'sub/dash_addevent.twig' %}</div>
+            {#<div id="tab_add_project" class="col s12">{% include 'sub/dash_addproj.twig' %}</div>
+            <div id="tab_add_deadline" class="col s12">{% include 'sub/dash_adddeadl.twig' %}</div>#}
         </div>
         </div>
         <div class="modal-footer">
