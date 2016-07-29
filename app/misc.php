@@ -30,6 +30,8 @@ class misc{
             if(strlen($data[$type])<6 || !filter_var($data[$type], FILTER_VALIDATE_EMAIL)) return 0;
         }elseif($type=='password'){
             if(strlen($data['password'])<6) return 0;
+        }elseif($type=='cpassword'){
+            if($data['password']!=$data['cpassword']) return 0;
         }
         return 1;
     }

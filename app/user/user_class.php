@@ -68,7 +68,7 @@ class user{
         $lid = $this->db->lastInsertId();
         $this->login_mode1($lid, 0);
         $this->mailcls->send_signup($data['email']);
-        return 1;
+        return ['text'=>'Ați fost înregistrat cu succes.'];
     }
     public function signup_mode2($data){
         $data = $this->misc->filter($data);
@@ -170,17 +170,43 @@ class user{
         $em = $em['email'];
         $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE email = ? LIMIT 1', [$em]);
         if($q->fetch()['COUNT(1)']){
-            $resettok = 'reset_'.$this->misc->generate_token();
-            $this->db->executeQuery("UPDATE users SET TOKEN = '$resettok' WHERE email = ? LIMIT 1", [$em]);
+            $resettok = 'reset_'.time().'_'.$this->misc->generate_token();
+            $this->db->executeQuery("UPDATE users SET token = '$resettok' WHERE email = ? LIMIT 1", [$em]);
             $resetlink = g_link('/account/reset?key='.$resettok);
             $this->mailcls->send_reset($em, ['reset_link'=>$resetlink]);
         }
         return $txtarr;
     }
-    public function check_resetcode($key){
+    public function reset_password_change($data){
+        $err = 0;
+        if(!isset($data['password'], $data['cpassword'], $data['reset_token'])){
+            $err = 1;
+            $err_text = 'Ceva nu a funcționat, te rugăm să reîncarci pagina.';
+        }elseif(!$this->check_resetcode($data['reset_token'])){
+            $err = 1;
+            $err_text = 'Codul de resetare este invalid sau a expirat.';
+        }elseif(!$this->misc->validate($data, 'password')){
+            $err = 1;
+            $err_text = ['password'=>'Parola introdusă este prea scurtă sau invalidă.'];
+        }elseif(!$this->misc->validate($data, 'cpassword')){
+            $err = 1;
+            $err_text = ['cpassword'=>'Parolele nu corespund.'];
+        }
+        if($err) return ['type'=>'error', 'text'=>$err_text];
+
+        $pw = $this->misc->encode($data['password']);
+        $token = $data['reset_token'];
+
+        $this->db->executeQuery("UPDATE users SET token = '', password = ? WHERE token = ? LIMIT 1", [$pw,$token]);
+        return ['type'=>'success', 'text'=>'Parola a fost schimbată cu succes.'];
+
+    }
+    public function check_resetcode($keyc){
+        $key = explode('_', $keyc);
         if(!$key) return false;
-        elseif(substr($key, 0, 6)!='reset_') return false;
-        $key = (string)$key;
+        elseif(!isset($key[0]) || $key[0] != 'reset') return false;
+        elseif(!isset($key[1]) || (time() - (int)$key[1]) > 86400) return false;
+        $key = (string)$keyc;
         $q = $this->db->executeQuery('SELECT COUNT(1) FROM users WHERE token = ? LIMIT 1', [$key]);
         return $q->fetch()['COUNT(1)']?true:false;
     }

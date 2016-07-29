@@ -26,7 +26,7 @@ $router_account_reset = function(Request $request)use($app){
     $thekey = $request->query->get('key');
     if(!$app['user']->check_resetcode($thekey)) throw new AccessDeniedHttpException("Cod de resetare invalid");
     else{
-        return $app['twig']->render('account_reset.twig');
+        return $app['twig']->render('account_reset.twig', ['reset_token' => $thekey]);
     }
 };
 

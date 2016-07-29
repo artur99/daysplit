@@ -39,7 +39,7 @@ $router_ajax_signup = function(Request $r)use($app){
     $err = $app['user']->signup_validate($r->request->all());
     if(!sizeof($err)){
         $res['type'] = 'success';
-        $app['user']->signup_mode1($r->request->all());
+        $res['text'] = $app['user']->signup_mode1($r->request->all())['text'];
     }else{
         $res['type'] = 'error';
         $res['text'] = $err;
@@ -60,5 +60,11 @@ $router_ajax_reset = function(Request $r)use($app){
     $res['type'] = 'success';
     $res['text'] = $data['text'];
     $resp->setData($res);
+    return $resp;
+};
+$router_ajax_reset_new = function(Request $r)use($app){
+    $resp = new JsonResponse();
+    $pfdata = $r->request->all();
+    $resp->setData($app['user']->reset_password_change($pfdata));
     return $resp;
 };

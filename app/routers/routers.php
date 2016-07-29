@@ -17,6 +17,7 @@ $app->match('/ajax/account/login', $router_ajax_login);
 $app->match('/ajax/account/relogin', $router_ajax_relogin);
 $app->match('/ajax/account/signup', $router_ajax_signup);
 $app->match('/ajax/account/reset', $router_ajax_reset);
+$app->match('/ajax/account/reset-new', $router_ajax_reset_new);
 $app->match('/ajax/account/logout', $router_ajax_logout);
 
 $app->match('/ajax/dash/time', $router_ajax_time);

@@ -54,6 +54,12 @@ $(document).ready(function(){
         $(form_active).find("input")[0].focus();
     }, 200);
 });
+$( window ).resize(function() {
+    setTimeout(function(){
+        form_width = $(form_active).css("width");
+        $(form_active).find("input")[0].focus();
+    }, 200);
+});
 $(document).on('click', '#btn-signup', function(){form_switch("#form-signup")});
 $(document).on('click', '#btn-reset', function(){form_switch("#form-reset")});
 $(document).on('click', '.btn-login', function(){form_switch("#form-login")});
@@ -66,6 +72,15 @@ $(document).on('click', '#btn-relogin', function(){
         }, 400);
     })
 });
+$(document).on('click', '#btn-logout', function(){
+    markloading_btn('#btn-logout');
+    preloader.on();
+    ajax('account/logout', {}, function(){
+        setTimeout(function(){
+            window.location.href = '/account';
+        }, 400);
+    })
+});
 
 
 
@@ -74,93 +89,74 @@ $(document).on('submit', "#form-login", function(e){
     e.preventDefault();
     var fid = "#form-login";
 
-    if(typeof(login_status) == "undefined") login_status = 1;
-    else if(login_status == 1) return;
+    if(markerloading(fid)) return;
 
     markloading(fid);
     ajax('account/login', getformdata(fid), function(data){
-        $(fid+" input+label").attr('data-error', '');
-        if(data.type=='success'){
-            $(fid+" input").removeClass('invalid').addClass('valid');
-            preloader.on();
-            setTimeout(function(){
-                window.location.href = '/dashboard';
-            },500);
-        }else{
-            if(data.type=='error'){
-                $(fid+" input").addClass('invalid');
-                if(typeof data.text == 'string') $(fid+" input[name=password]+label").attr('data-error', data.text);
-                else $.each(data.text, function(i,val){
-                    if(val){
-                        $(fid+" input[name="+i+"]+label").attr('data-error', val);
-                    }
-                });
-            }
+        data = form_validate_response_data(data);
+        if(data.type == 'error'){
             setTimeout(function(data){
-                login_status = 0;
                 unmarkloading(fid);
             },100);
+        }else{
+            form_redirect('/dashboard', 500, true);
         }
+        form_response_fill(fid, data, 'password');
     });
 });
 $(document).on('submit', "#form-signup", function(e){
     e.preventDefault();
     var fid = "#form-signup";
 
-    if(typeof(login_status) == "undefined") login_status = 1;
-    else if(login_status == 1) return;
+    if(markerloading(fid)) return;
 
     markloading(fid);
     ajax('account/signup', getformdata(fid), function(data){
-        $(fid+" input+label").attr('data-error', '');
-        if(data.type=='success'){
-            $(fid+" input").removeClass('invalid').addClass('valid');
-            preloader.on();
-            setTimeout(function(){
-                window.location.href = '/dashboard';
-            },500);
-        }else{
-            if(data.type=='error'){
-                $(fid+" input").addClass('invalid');
-                if(typeof data.text == 'string') $(fid+" input[name=cpassword]+label").attr('data-error', data.text);
-                else $.each(data.text, function(i,val){
-                    if(val){
-                        $(fid+" input[name="+i+"]+label").attr('data-error', val);
-                    }
-                });
-            }
+        data = form_validate_response_data(data);
+        if(data.type == 'error'){
             setTimeout(function(data){
-                login_status = 0;
                 unmarkloading(fid);
             },100);
+        }else{
+            form_redirect('/dashboard', 500, true);
         }
+        form_response_fill(fid, data, 'cpassword');
     });
 });
 $(document).on('submit', "#form-reset", function(e){
     e.preventDefault();
     var fid = "#form-reset";
 
-    if(typeof(login_status) == "undefined") login_status = 1;
-    else if(login_status == 1) return;
+    if(markerloading(fid)) return;
 
     markloading(fid);
     ajax('account/reset', getformdata(fid), function(data){
-        $(fid+" input+label").attr('data-error', '');
-        if(data.type=='success'){
-            $(fid+" input").removeClass('invalid').addClass('valid');
-        }else{
-            data.type = 'error'
-            $(fid+" input").addClass('invalid');
+        data = form_validate_response_data(data);
+        form_response_fill(fid, data, 'email');
+        if(data.type == 'error'){
             setTimeout(function(data){
-                login_status = 0;
                 unmarkloading(fid);
             },100);
         }
-        if(typeof data.text == 'string') $(fid+" input[name=email]+label").attr('data-'+data.type, data.text);
-        else $.each(data.text, function(i,val){
-            if(val){
-                $(fid+" input[name="+i+"]+label").attr('data-error', val);
-            }
-        });
+    });
+});
+$(document).on('submit', "#form-reset-new", function(e){
+    e.preventDefault();
+    var fid = "#form-reset-new";
+
+    if(markerloading(fid)) return;
+
+    markloading(fid);
+    ajax('account/reset-new', getformdata(fid), function(data){
+        data = form_validate_response_data(data);
+        form_response_fill(fid, data, 'cpassword');
+
+        if(data.type == 'error'){
+            setTimeout(function(data){
+                unmarkloading(fid);
+            },100);
+        }else{
+            form_redirect('/dashboard', 500, true);
+        }
     });
 });
