@@ -6,9 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestMatcher;
-//$app->register(new Provider\SwiftmailerServiceProvider());
-// $app->register(new Provider\SecurityServiceProvider());
-// $app->register(new Provider\RememberMeServiceProvider());
+
 $app->register(new Provider\ServiceControllerServiceProvider());
 $app->register(new Provider\UrlGeneratorServiceProvider());
 $app->register(new Provider\DoctrineServiceProvider());
