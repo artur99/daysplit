@@ -6,10 +6,22 @@ function getformdata(form){
 }
 //Ajax module
 
-function ajax(node, data, cb){
+function ajax(node, data, cb, retry){
+    if(typeof retry == "number") retry = retry>0 ? retry-1 : 0;
+    else retry = 1;
+
     data.csrftoken = csrftoken;
     if(typeof groups_group_id == 'number') data.gid = groups_group_id;
-    $.post('/ajax/'+node, data).done(cb).fail(cb);
+    $.post('/ajax/'+node, data).done(function(scc_data){
+        cb(scc_data, 'success');
+    }).fail(function(err_data){
+
+        if(retry){
+            setTimeout(function(){
+                ajax(node, data, cb, retry);
+            }, 250);
+        } else cb(err_data, 'error');
+    });
 }
 
 //Others module
@@ -88,6 +100,7 @@ function time2timestr(time){
     return hour+':'+min;
 }
 function htmlentities(str) {
+    if(typeof str != 'string') return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 function form_response_fill(fid, data, lastel){

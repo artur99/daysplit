@@ -13,8 +13,8 @@ function g_link($link){
 function global_patches($app){
     global $fb;
     $fb = new Facebook\Facebook(array(
-      'appId'  => $app['conf.facebook.app_id'],
-      'secret' => $app['conf.facebook.app_secret']
+      'app_id'  => $app['conf.facebook.app_id'],
+      'app_secret' => $app['conf.facebook.app_secret']
     ));
 }
 

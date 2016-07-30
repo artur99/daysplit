@@ -1,15 +1,3 @@
-function clean_form(fid){
-    var $f = $(fid);
-    if(fid=='#form_add_event'){
-        $f.find('input[name=title]').val('');
-        $f.find('input[name=start_date]').val('');
-        $f.find('input[name=end_date]').val('');
-        $f.find('input[name=start_time]').val('');
-        $f.find('input[name=end_time]').val('');
-        $f.find('input[name=location]').val('');
-        $f.find('textarea[name=description]').val('');
-    }
-}
 $(document).ready(function(){
     rand_colors("#form_gr_add_group");
 })
@@ -47,13 +35,19 @@ function submit_form_group(type){
                     window.location.href = '/dashboard/group/'+data.inserted_id.toString();
                 }
             }
-            close_modal('modal_edit');
+            close_modal('modal_edit_event');
         }
     });
 }
 function fill_gr_settings(){
     $("#modal_gr_settings").addClass('loading');
-    ajax('dash/group/settings/'+groups_group_id, {}, function(data){
+    ajax('dash/group/settings/'+groups_group_id, {}, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_gr_settings").removeClass('loading');
+            close_modal('modal_gr_settings');
+            return;
+        }
         $("#form_gr_settings").find('input[name=color]').val(data.color);
         $("#form_gr_settings").find('.colorbox div').removeClass('selected');
         $("#form_gr_settings").find('.colorbox div[class='+data.color+']').addClass('selected');
@@ -66,19 +60,28 @@ function fill_gr_settings(){
 }
 function fill_gr_members(){
     $("#modal_gr_members").addClass('loading');
-    ajax('dash/group/members/'+groups_group_id, {}, function(data){
+    ajax('dash/group/members/'+groups_group_id, {}, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_gr_members").removeClass('loading');
+            close_modal('modal_gr_members');
+            return;
+        }
         $("#modal_gr_members .memberlist .collection").html('');
         $.each(data, function(i, el){
             $("#modal_gr_members .memberlist .collection").append('<li class="collection-item"><div>'+el.email+'<a href="#!" data-memberid="'+el.id+'" class="del_user secondary-content"><i class="material-icons">delete</i></a></div></li>');
-        })
-
+        });
         $("#modal_gr_members").removeClass('loading');
     });
 
 }
 function add_gr_member(){
     var email = $("#grmbr_add_item").val();
-    ajax('dash/group/addmember/'+groups_group_id,{email:email}, function(data){
+    ajax('dash/group/addmember/'+groups_group_id,{email:email}, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            return;
+        }
         Materialize.toast(data.text, 3000);
         if(data.type != 'error'){
             fill_gr_members();
@@ -90,7 +93,11 @@ function add_gr_member(){
 function del_gr_member(e){
     e.preventDefault();
     var uid = $(this).data('memberid');
-    ajax('dash/group/delmember/'+groups_group_id,{uid:uid}, function(data){
+    ajax('dash/group/delmember/'+groups_group_id,{uid:uid}, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            return;
+        }
         Materialize.toast(data.text, 3000);
         if(data.type != 'error') fill_gr_members();
 

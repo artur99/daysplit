@@ -1,31 +1,5 @@
 var form_add_event_edit_handler = {date:0,time:0};
-function render_colors(){
-    // var material_colors = "#F44336;#9C27B0;#673AB7;#3F51B5;#2196F3;#00BCD4;#009688;#4CAF50;#8BC34A;#FFEB3B;#FF9800;#FF5722;#795548;#9E9E9E".split(';');
-    // var colrs="";
-    // $(material_colors).each(function(i,col){
-    //     colrs+='<div class="color_selector" style="background:'+col+'"></div>';
-    // });
-    // return colrs;
 
-}
-function rand_colors(form){
-    var color_els = $(form+" .colorbox>div");
-    var sel = color_els[Math.floor(Math.random()*color_els.length)];
-    $(color_els).removeClass('selected');
-    $(form+" input[type=hidden][name=color]").val($(sel).attr('class'));
-    $(sel).addClass('selected');
-}
-function init_colors(){
-    $color_els = $(".colorbox>div");
-    if($color_els.length){
-        $color_els.click(function(e){
-            e.preventDefault();
-            $color_els.removeClass("selected");
-            $(this).parent().parent().find("input[type=hidden][name=color]").val($(this).attr('class'));
-            $(this).addClass("selected");
-        });
-    }
-}
 function open_add_modal(mid){
     if(mid=='modal_add'){
         $('#modal_add').openModal();
@@ -34,23 +8,24 @@ function open_add_modal(mid){
         $('#modal_add input[name=title]').focus();
     }
 }
-function close_modal(mid){
-    if(mid=='modal_add'){
-        $('#modal_add').closeModal();
-    }else if(mid=='modal_edit'){
-        $('#modal_edit_event').closeModal();
-    }
-}
+
 function updatetoptime(){
     var cd = new Date();
     $("#toptime .time").html(pad(2, cd.getHours().toString(), '0')+':'+pad(2, cd.getMinutes().toString(), '0')+':'+pad(2, cd.getSeconds().toString(), '0'));
     if(cd.getMinutes() == 0)$("#toptime .date").html(jsday2fulldatestr(0));
 }
 function open_edit_event_modal(pid){
+    clean_form('#form_edit_event');
     $("#form_edit_event").find('.editor_map').attr('src', 'about:blank');
     $("#modal_edit_event").openModal();
     $("#modal_edit_event").addClass('loading');
-    ajax('dash/get/event', {period_id: pid}, function(data){
+    ajax('dash/get/event', {period_id: pid}, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_edit_event").removeClass('loading');
+            close_modal("modal_edit_event");
+            return;
+        }
         if(data.name.length==0)data.name = data.title;
         $("#form_edit_event").find('#inp_edit_event_title').val(data.name);
         $("#form_edit_event").find('label[for=inp_edit_event_title]').addClass('active');
@@ -82,7 +57,13 @@ function open_edit_event_modal(pid){
 function save_settings(){
     var fid = '#form_settings';
     var dt = getformdata(fid);
-    ajax('dash/settings', {data:dt}, function(res){
+    $("#modal_settings").addClass('loading');
+    ajax('dash/settings', {data:dt}, function(res, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_settings").removeClass('loading');
+            return;
+        }
         $(fid+" input").removeClass('invalid');
         $(fid+" input+label").attr('data-error', '');
         if(typeof res.err != 'undefined'){
@@ -91,9 +72,10 @@ function save_settings(){
                 $(fid+" input[name="+i+"]+label").attr('data-error', el);
             });
         }else{
-            $("#modal_settings").closeModal();
+            close_modal("modal_settings");
             if(typeof res.success != 'undefined') Materialize.toast(res.success.text, 2000);
         }
+        $("#modal_settings").removeClass('loading');
         console.log(res);
     });
 }

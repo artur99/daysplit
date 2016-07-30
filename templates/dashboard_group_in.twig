@@ -55,7 +55,9 @@
     <div class="topmenu">
         <div class="flex">
             <div class="tmspl">
-                <div class="logo"><img src="{{asset('img/logo_small.png')}}" alt="">DaySplit</div>
+                <a href="{{l('/dashboard')}}">
+                    <div class="logo"><img src="{{asset('img/logo_small.png')}}" alt="">DaySplit</div>
+                </a>
             </div>
             <div class="tmspl notmobile">
                 <div id="toptime">
@@ -79,6 +81,7 @@
     </div>
     <div class="body z-depth-1" id="data">
         <h3 class="grs1_hd2 {{group.color}} cfx">
+            <a href="{{l('/dashboard/groups')}}" title="Lista de grupuri"><i class="grs1_hd2_icon material-icons">&#xE5C4;</i></a>
             {{group.name}}
         </h3>
         <div class="bar {{group.color}} darken-2"></div>

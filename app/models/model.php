@@ -234,12 +234,19 @@ class model{
     public function get_gr_members($gid){
         return $this->db->executeQuery("SELECT users.email, users.id, group_members.group_id FROM group_members JOIN users ON group_members.user_id = users.id WHERE group_members.group_id = ?", [(int)$gid])->fetchAll();
     }
+    public function in_group_email($gid, $email){
+        $membercounter = $this->db->executeQuery("SELECT COUNT(users.email) FROM group_members JOIN users ON group_members.user_id = users.id WHERE group_members.group_id = ? AND users.email = ?", [(int)$gid, (string)$email])->fetch();
+        return $membercounter['COUNT(users.email)'] ? true : false;
+    }
     public function get_gr_settings($gid){
         return $this->db->executeQuery("SELECT * FROM groups WHERE id = ?", [(int)$gid])->fetch();
     }
     public function add_gr_member($gid, $email){
         if(!$this->user->mail_exists($email)){
             return ['type'=>'error', 'text'=>'Nu există niciun cont cu această adresă'];
+        }
+        if($this->in_group_email($gid, $email)){
+            return ['type'=>'error', 'text'=>'Acest membru există deja în grup'];
         }
         $gid = (int)$gid;
         $email = (string)$email;
@@ -250,9 +257,9 @@ class model{
     }
     public function del_gr_member($gid, $uid){
         $params = [':user_id' => (int)$uid,':group_id' => (int)$gid];
-        $this->groups_handle('delete', $data);
+        // $this->groups_handle('delete', $data);
         $this->db->executeQuery("DELETE FROM group_members WHERE group_id = ? AND user_id = ? LIMIT 1", [$gid, $uid]);
-        $this->db->executeQuery("UPDATE groups SET members = members - 1 WHERE id = ?", [$num, $gid]);
+        $this->db->executeQuery("UPDATE groups SET members = members - 1 WHERE id = ?", [$gid]);
         return ['type'=>'success','text'=>'Eliminat cu succes'];
     }
     private function groups_handle($type, $data=[], $selector=[]){

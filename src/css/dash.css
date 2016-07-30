@@ -28,6 +28,7 @@
     border-left: none;
 }
 .tmspl .logo{
+    color: white;
     font-size: 30px;
     line-height: 47px;
 }
@@ -188,8 +189,8 @@ input.inpsmalldt2{
     border: 3px solid #FFF;
     outline: 1px solid #000000;
 }
-.modal.loading{
-    opacity: .6!important;
+.modal.loading > *{
+    opacity: 0.5;
 }
 .modal h4{
     text-align: center;

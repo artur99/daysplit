@@ -54,7 +54,7 @@ class user{
         $udata['id'] = $uid;
         $this->session->set('user', $udata);
         if($keepin){
-            $token = $app['misc']->generate_token();
+            $token = $this->misc->generate_token();
             $this->db->executeQuery("UPDATE users SET token = ? WHERE id = ? LIMIT 1", [$token, (int)$uid]);
             if($resp)$resp->headers->setCookie(new Cookie('token', $token, time()+604800));
         }

@@ -13,7 +13,11 @@ interfaces.interface_1 = {
             $(".col_main_"+i+" .col_header").html(jsday2fulldatestr(current_day+i-1));
         }
         var reqdt = {day:current_day};
-        ajax('dash/get/3days', reqdt, function(pers){
+        ajax('dash/get/3days', reqdt, function(pers, resptype){
+            if(resptype=='error'){
+                if(!silent)interfaces.interface_1.markload('off');
+                return;
+            }
             pers.sort(function(e1,e2){
                 /*if(e1.sdate==e2.sdate)*/return e1.stime > e2.stime ? 1 : e1.stime == e2.stime ? 0 : -1;
                 /*else return e1.sdate > e2.sdate ? 1 : e1.sdate == e2.sdate ? 0 : -1;*/

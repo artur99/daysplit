@@ -1,15 +1,3 @@
-function clean_form(fid){
-    var $f = $(fid);
-    if(fid=='#form_add_event'){
-        $f.find('input[name=title]').val('');
-        $f.find('input[name=start_date]').val('');
-        $f.find('input[name=end_date]').val('');
-        $f.find('input[name=start_time]').val('');
-        $f.find('input[name=end_time]').val('');
-        $f.find('input[name=location]').val('');
-        $f.find('textarea[name=description]').val('');
-    }
-}
 $(document).on('click', '#btn_submit_delform', function(e){e.preventDefault();if(window.confirm("Sigur ștergeți?")) submit_form_event('del');});
 $(document).on('submit', '#form_edit_event', function(e){e.preventDefault();submit_form_event('edit');});
 $(document).on('click', '#btn_submit_editform', function(e){e.preventDefault();submit_form_event('edit');});
@@ -23,7 +11,13 @@ $(document).on('click', '#btn_submit_addform', function(e){
 var added_td = 0;
 $(document).on('click', "a[href='#modal_list']", function(){
     $("#modal_list").addClass('loading');
-    ajax('dash/get/todo',{},function(data){
+    ajax('dash/get/todo',{},function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_list").removeClass('loading');
+            close_modal('modal_list');
+            return;
+        }
         $('.waited').html('');
         $('.doned').html('');
         $.each(data, function(i,el){
@@ -45,11 +39,17 @@ $(document).on('click', "a[href='#modal_list']", function(){
 });
 $(document).on('click', "a[href='#modal_settings']", function(){
     $("#modal_settings").addClass('loading');
-    ajax('dash/get/settings',{},function(data){
+    ajax('dash/get/settings',{},function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_settings").removeClass('loading');
+            close_modal('modal_settings');
+            return;
+        }
         $("#form_settings #settings_name").val(data.name);
         $("#form_settings #settings_email").val(data.email);
-        $("#form_settings label[for=settings_name]").addClass('active');
-        $("#form_settings label[for=settings_email]").addClass('active');
+        if(data.name.length) $("#form_settings label[for=settings_name]").addClass('active');
+        if(data.email.length) $("#form_settings label[for=settings_email]").addClass('active');
         $("#modal_settings").removeClass('loading');
     });
     setTimeout(function(){
@@ -58,6 +58,7 @@ $(document).on('click', "a[href='#modal_settings']", function(){
 });
 $(document).on('change', '.todolist input[type=checkbox]', function(){
     var tmp_this = this;
+    var elid = $(tmp_this).data('tdid');
     setTimeout(function(){
         var tmp_el;
         $(tmp_this).parent().slideUp(100);
@@ -72,17 +73,17 @@ $(document).on('change', '.todolist input[type=checkbox]', function(){
                 $('.waited').append(tmp_el);
                 form_todo('off', $(tmp_this).data('tdid'));
             }
-            $(tmp_el).slideDown();
+            $(tmp_el).slideDown(100);
         },100);
     }, 200);
 
 });
 $(document).on('submit', '#todo_add_form', function(e){
     e.preventDefault();
-    var itm = $("#todo_add_item").val();
-    $("#todo_add_item").val('');
-    $(".todolist .waited").prepend('<div class="item"><input type="checkbox" id="tdelement_'+(added_td).toString()+'" /><label for="tdelement_'+(added_td).toString()+'">'+htmlentities(itm)+'</label></div>');
-    form_todo('add', itm, '#tdelement_'+(added_td).toString());
+    var itm = $("#todo_add_item").val().trim();
+    if(itm.length==0) return;
+    form_todo('add', itm, 'tdelement_'+(added_td).toString());
+
     added_td++;
 })
 
@@ -98,26 +99,45 @@ function submit_form_event(type){
         data.period_delete_id = data.period_update_id;
         data.period_update_id = undefined;
     }
-
-    ajax('dash/event', data, function(data){
+    if(type=='add') $("#modal_add").addClass('loading');
+    else $("#modal_edit_event").addClass('loading');
+    ajax('dash/event', data, function(data, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            if(type=='add') $("#modal_add").removeClass('loading');
+            else $("#modal_edit_event").removeClass('loading');
+            return;
+        }
         if(data.type == 'success'){
             Materialize.toast(data.msg, 2000);
             if(type=='add'){
+                $("#modal_add").removeClass('loading');
                 close_modal('modal_add');
                 clean_form('#form_add_event');
-            } close_modal('modal_edit');
+            }else{
+                $("#modal_add").removeClass('loading');
+                close_modal('modal_edit_event');
+            }
             interfaces[current_interface].load();
         }
     });
 }
 function form_todo(dot, elem, domel){
+    //dot - action
+    //elem - id or Text to add
+    //domel - the id of the element on add
     var data = {};
     data.elem = elem;
     data.do = dot;
-    ajax('dash/todo', data, function(res){
+    ajax('dash/todo', data, function(res, resptype){
+        if(resptype=='error'){
+            Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            return;
+        }
         if(data.do == 'add'){
-            console.log(domel, res.tid);
-            $(domel).data('tdid', res.tdid);
+            $('#'+domel).data('tdid', res.tdid);
+            $("#todo_add_item").val('');
+            $(".todolist .waited").prepend('<div class="item"><input type="checkbox" id="'+domel+'" /><label for="'+domel+'">'+htmlentities(elem)+'</label></div>');
         }
     });
 }

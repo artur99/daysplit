@@ -26,12 +26,27 @@
     font-size: 30px;
 }
 .grs1_hd2{
+    position: relative;
+    display: block;
+    padding: 12px 0;
+    margin: 0;
     font-size: 25px;
     text-align: center;
-    padding: 12px 0;
-    display: block;
     color: #fff;
-    margin: 0;
+}
+.grs1_hd2_icon{
+    position: absolute;
+    float: left;
+    left: 0;
+    font-size: 27px;
+    line-height: 27px;
+    color: white;
+    text-decoration: none;
+    padding-left: 14px;
+    transition: .3s padding-left;
+}
+.grs1_hd2_icon:hover{
+    padding-left: 8px;
 }
 .group_interface .card-content{
     height: 137px;

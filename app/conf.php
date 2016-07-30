@@ -16,8 +16,6 @@ foreach($config as $k=>$v){
 }
 unset($config);
 
-putenv('FACEBOOK_APP_ID='.$app['conf.facebook.app_id']);
-putenv('FACEBOOK_APP_SECRET='.$app['conf.facebook.app_secret']);
 
 $app['db.options'] = array(
     'driver' => 'pdo_mysql',
