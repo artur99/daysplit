@@ -53,8 +53,8 @@ function fill_gr_settings(){
         $("#form_gr_settings").find('.colorbox div[class='+data.color+']').addClass('selected');
         $("#form_gr_settings").find('input[name=title]').val(data.name);
         $("#form_gr_settings").find('textarea[name=description]').val(data.description);
-        $("#form_gr_settings input[name=title]+label").addClass('active');
-        $("#form_gr_settings textarea[name=description]+label").addClass('active');
+        if(data.name.length) $("#form_gr_settings input[name=title]+label").addClass('active');
+        if(data.description.length) $("#form_gr_settings textarea[name=description]+label").addClass('active');
         $("#modal_gr_settings").removeClass('loading');
     });
 }

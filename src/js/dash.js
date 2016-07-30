@@ -39,10 +39,10 @@ function open_edit_event_modal(pid){
         $("#form_edit_event").find('.colorbox').parent().find('input[type=hidden][name=color]').val(data.color);
         $("#form_edit_event").find('#inp_edit_event_desc').val(data.description);
         $("#form_edit_event").find('#inp_edit_event_desc').trigger('autoresize');
-        if(data.description.length>0){
+        if(data.description.length){
             $("#form_edit_event").find('label[for=inp_edit_event_desc]').addClass('active');
         }
-        if(data.location.trim().length>0){
+        if(data.location.trim().length){
             $("#form_edit_event").find('label[for=inp_edit_event_location]').addClass('active');
             $("#form_edit_event").find('.editor_map').attr('src', 'https://www.google.com/maps/embed/v1/place?key='+googleapikey+'&q='+encodeURI(data.location));
             $("#form_edit_event").find('.editor_map').show();
