@@ -2,7 +2,6 @@
 ### Despre
 DaySplit este o platformă online care permite administrarea și organizarea activităților, proiectelor și evenimentelor într-un mod extrem de ușor de utilizat.
 
-### Despre
 Demo: [daysplit.artur99.net]
 
 ### Versiune
@@ -45,6 +44,7 @@ $ mysql -u root -p < db_structure.sql
 ### Dezvoltare
 
 ```sh
+$ grunt prep
 $ grunt watch
 ```
 

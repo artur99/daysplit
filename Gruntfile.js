@@ -99,5 +99,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.registerTask('default', ['bower_concat', 'concat', 'copy', 'uglify', 'cssmin', 'clean']);
-	grunt.registerTask('dev-watcher', ['bower_concat', 'concat']);
+	grunt.registerTask('prep', ['bower_concat', 'concat', 'copy']);
+	grunt.registerTask('dev-watcher', ['concat']);
 };
