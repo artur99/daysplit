@@ -24,16 +24,15 @@ class mailcls{
         return $this->sendmail($email, $subject, $maildata);
     }
     public function sendmail($to, $subject, $data){
-        $to = $this->conf->from;
         $subject = '['.$this->conf->sitetitle.'] '.$subject;
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers.= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers.= "From: webmaster@example.com" . "\r\n";
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers.= 'Content-type:text/html;charset=UTF-8' . "\r\n";
+        $headers.= 'From: <' . $this->conf->from . '>' . "\r\n";
         $twigdata = $data;
         $twigdata['subject'] = $subject;
         $html = $this->twig->render('mail_template.twig', $twigdata);
 
-        return mail($to,$subject,$data,$headers);
+        return mail($to,$subject,$html,$headers);
     }
 
 }

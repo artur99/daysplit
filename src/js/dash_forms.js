@@ -135,9 +135,9 @@ function form_todo(dot, elem, domel){
             return;
         }
         if(data.do == 'add'){
-            $('#'+domel).data('tdid', res.tdid);
             $("#todo_add_item").val('');
             $(".todolist .waited").prepend('<div class="item"><input type="checkbox" id="'+domel+'" /><label for="'+domel+'">'+htmlentities(elem)+'</label></div>');
+            $('#'+domel).data('tdid', res.tdid);
         }
     });
 }

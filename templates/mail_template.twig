@@ -3,11 +3,13 @@
     <title>{{subject}}</title>
 </head>
 <body>
-    <div style="width:95%;max-width:400px;font-size:20px;text-align:center;padding:15px 10px;color:white;background:#3084FF;font-family:sans-serif;">
-        <h2>{{title is defined ? title}}</h2>
-        <p> {{text1 is defined ? text1}} </p>
-        <p> {{link is defined ? '<a href="'~link|raw~'">'~link~'</a>'}} </p>
-        <p> {{text2 is defined ? text2}} </p>
+    <div style="display:block;width:95%;max-width:600px;margin:auto;text-align:left;font-size:18px;padding:10px 15px;border-radius:5px;color:white;background:#3084FF;font-family:sans-serif;">
+        <h2 style="text-align:center;">{{title is defined ? title}}</h2>
+        <p style="margin-bottom:10px;"> {{text1 is defined ? text1}} </p>
+        {% if link is defined %}
+            <p style="margin-bottom:10px;"><a style="color:white;font-size:15px;line-height:15p;x" href="{{link|raw}}">{{link}}</a></p>
+        {% endif %}
+        <p style="margin-bottom:10px;"> {{text2 is defined ? text2}} </p>
     </div>
 </body>
 </html>
