@@ -12,17 +12,30 @@
     margin-top: 13vh;
     margin-bottom: 5vh;
 }
+.landing .header .headertitle{
+	color: rgba(255, 255, 255, 0.8);
+    font-size: 55px;
+    font-family: Roboto;
+    margin-bottom: 4.5vh;
+    margin-top: 5vh;
+}
+@media(max-width: 500px){
+    .landing .header .headertitle{
+        font-size: 35px;
+    }
+}
 .landing .header .headerline{
     display: block;
     margin: auto;
+    margin-bottom: 10vh;
     width: 98%;
     max-width: 60vw;
     text-align: center;
-    font-size: 4.5vh;
-    color: #fff;
-    font-family: 'Open Sans', Roboto, sans-serif;
-    margin-bottom: 7vh;
-    font-weight: 300;
+    font-family: Roboto, sans-serif;
+	font-size: 19px;
+    max-width: 700px;
+    font-weight: 400;
+  	color: white;
 }
 .landing .header .btncont{
     margin: auto;
@@ -46,4 +59,45 @@
     text-align: center;
     text-decoration: none;
     font-family: Roboto, 'Open Sans', sans-serif;
+}
+
+
+.landing .headerinside{
+  overflow: hidden;
+  width: 95%;
+  max-width: 80vw;
+  margin: auto;
+  color: white;
+}
+.landing .header .topline{
+  overflow: hidden;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.landing .header .topline .logo{
+	float: left;
+    height: 80px;
+	margin: 0;
+}
+.landing .header .topline .logotext{
+	float: left;
+    line-height: 80px;
+    margin-left: 10px;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.95);
+}
+.landing .header .topline .right{
+	font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+  	line-height: 80px;
+}
+@media(max-width:500px){
+	.landing .header .topline .right{
+		display: none;
+	}
+}
+.landing .header .topline .right strong{
+    text-transform: uppercase;
+    font-weight: 500;
 }

@@ -14,6 +14,14 @@ class mailcls{
         $maildata['text2'] = 'Vă mulțumim pentru înregistrare!';
         return $this->sendmail($email, $subject, $maildata);
     }
+    public function send_addedgroup($email){
+        $subject = 'Grup Nou';
+        $maildata['title'] = 'Ați fost adăugat într-un nou grup pe Daysplit';
+        $maildata['text1'] = 'Contul dumneavoastră de pe siteul DaySplit a fost înregistrat într-un nou grup, vă invităm să verificați, iar dacă nu sunteți de acord să vă eliminați din lista membrilor grupului.';
+        $maildata['link'] = g_link("/dashboard/groups");
+        $maildata['text2'] = 'Vă mulțumim!';
+        return $this->sendmail($email, $subject, $maildata);
+    }
     public function send_reset($email, $data){
 
         $subject = 'Resetare parolă';
@@ -32,7 +40,7 @@ class mailcls{
         $twigdata['subject'] = $subject;
         $html = $this->twig->render('mail_template.twig', $twigdata);
 
-        return mail($to,$subject,$html,$headers);
+        return @mail($to,$subject,$html,$headers);
     }
 
 }

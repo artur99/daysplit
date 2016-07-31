@@ -5,6 +5,7 @@ class model{
         $this->db = $app['db'];
         $this->misc = $app['misc'];
         $this->user = $app['user'];
+        $this->mailcls = $app['mailcls'];
     }
     public function time(){
         $data = [];
@@ -253,6 +254,7 @@ class model{
         $id = (int)$this->db->executeQuery("SELECT id FROM users WHERE email = ?", [$email])->fetch()['id'];
         $this->db->executeQuery("INSERT INTO group_members (user_id, group_id) VALUES (?, ?)", [$id, $gid]);
         $this->db->executeQuery("UPDATE groups SET members = members+1 WHERE id = ?", [$gid]);
+        $this->mailcls->send_addedgroup($email);
         return ['type'=>'success','text'=>'Adăugat cu succes'];
     }
     public function del_gr_member($gid, $uid){
