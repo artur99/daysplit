@@ -311,7 +311,7 @@ input.inpsmalldt2{
     margin: 0;
     margin-top: 20px;
     color: #656565;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     display: block;
     float: left;
 }

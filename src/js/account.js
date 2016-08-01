@@ -8,7 +8,10 @@ function form_hide_initial(form){
     });
 }
 function form_switch(toshow){
-    if(toshow == form_active) return;
+    if(toshow == form_active){
+        $(toshow).removeClass('hide').find("input")[0].focus();
+        return;
+    }
     $(form_active).animate({
         "width": "200px",
         "opacity": 0
@@ -30,6 +33,7 @@ function form_switch(toshow){
 
 $(document).ready(function(){
     if($("#form-login").length==0)return 0;
+    $("form").removeClass("hide");
     if(window.location.hash.length){
         if(window.location.hash=='#signup'){
             form_active = "#form-signup";

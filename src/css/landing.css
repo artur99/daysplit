@@ -19,7 +19,7 @@
 .landing .header .headertitle{
 	color: rgba(255, 255, 255, 0.8);
     font-size: 55px;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     margin-bottom: 4.5vh;
     margin-top: 5vh;
 }
