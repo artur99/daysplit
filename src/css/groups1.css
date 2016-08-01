@@ -52,3 +52,6 @@
     height: 137px;
     overflow: hidden;
 }
+.group_interface .card-content p{
+    word-break: break-word;
+}

@@ -261,7 +261,11 @@ class model{
         // $this->groups_handle('delete', $data);
         $this->db->executeQuery("DELETE FROM group_members WHERE group_id = ? AND user_id = ? LIMIT 1", [$gid, $uid]);
         $this->db->executeQuery("UPDATE groups SET members = members - 1 WHERE id = ?", [$gid]);
-        return ['type'=>'success','text'=>'Eliminat cu succes'];
+        $resp = ['type'=>'success','text'=>'Eliminat cu succes'];
+        if($this->user->getc('id') == $uid){
+            $resp['backtolist'] = 1;
+        }
+        return $resp;
     }
     private function groups_handle($type, $data=[], $selector=[]){
         //add, edit, delete, get

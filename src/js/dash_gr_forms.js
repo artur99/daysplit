@@ -76,10 +76,12 @@ function fill_gr_members(){
 
 }
 function add_gr_member(){
+    $("#modal_gr_members").addClass('loading');
     var email = $("#grmbr_add_item").val();
     ajax('dash/group/addmember/'+groups_group_id,{email:email}, function(data, resptype){
         if(resptype=='error'){
             Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_gr_members").removeClass('loading');
             return;
         }
         Materialize.toast(data.text, 3000);
@@ -87,18 +89,25 @@ function add_gr_member(){
             fill_gr_members();
             $("#grmbr_add_item").val('');
         }
-
+        $("#modal_gr_members").removeClass('loading');
     })
 }
 function del_gr_member(e){
     e.preventDefault();
+    $("#modal_gr_members").addClass('loading');
     var uid = $(this).data('memberid');
     ajax('dash/group/delmember/'+groups_group_id,{uid:uid}, function(data, resptype){
         if(resptype=='error'){
             Materialize.toast("A apărut o eroare, te rugăm să încerci din nou", 3000);
+            $("#modal_gr_members").removeClass('loading');
             return;
         }
         Materialize.toast(data.text, 3000);
+        if(data.backtolist == 1){
+            window.location.href = '/dashboard/groups';
+            return;
+        }
+        $("#modal_gr_members").removeClass('loading');
         if(data.type != 'error') fill_gr_members();
 
     })
