@@ -199,7 +199,7 @@
 }
 .landing .lfooter{
     background: #3084FF;
-    height: 70px;
+    min-height: 70px;
     color: rgba(255, 255, 255, 0.9);
     font-size: 15px;
     line-height: 20px;
@@ -207,6 +207,19 @@
 }
 .landing .lfooter .left{
     float: left;
+}
+.landing .lfooter .right{
+    float: right;
+}
+@media(max-width: 400px){
+    .landing .lfooter .left{
+        margin-bottom: 10px;
+    }
+    .landing .lfooter .left, .landing .lfooter .right{
+        width: 100%;
+        float: none;
+        text-align: center;
+    }
 }
 .landing .lfooter a{
     color: white;
