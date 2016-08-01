@@ -8,6 +8,7 @@ function form_hide_initial(form){
     });
 }
 function form_switch(toshow){
+    if(toshow == form_active) return;
     $(form_active).animate({
         "width": "200px",
         "opacity": 0

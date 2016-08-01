@@ -9,18 +9,21 @@
 </head>
 <body id="login2">
     <div class="body row blue">
-        <div class="loginbox nr2 center-align">
-            <img src="{{asset('img/logo_3.png')}}" alt="" class="rellogo">
-            <p class="flow-text col s10 offset-s1">
-                Bun venit, {% if user.name %}{{user.name}}{% else %}{{user.email}}{% endif %}!
-            </p>
+        <div class="loginbox nr3 center-align">
+            <img src="{{asset('img/logo_3.png')}}" alt="" class="logo2">
             <div class="clearfix"></div>
-            {%if relogin is defined and relogin %}
-                <a href="#" id="btn-relogin" class="btn waves-effect col l5 ma waves-dark btn-large white">Accesare cont</a> <br>
-            {%else%}
-                <a href="{{l('/dashboard')}}" class="btn waves-effect col l5 ma waves-dark btn-large white">Accesare cont</a> <br>
-            {%endif%}
-            <a href="#" id="btn-logout" class="btn waves-effect col l5 ma waves-dark btn-large red lighten-1">Deconectare</a><br>
+            <div class="col s10 offset-s1 m4 offset-m4 fullpageform z-depth-1">
+                <p class="flow-text col s10 offset-s1"> Bun venit, {% if user.name %}{{user.name}}{% else %}{% if user.email %}{{user.email}}{% else %}utilizator{% endif %}{% endif %}! </p>
+                <div class="clearfix"></div>
+                {%if relogin is defined and relogin %}
+                    <a href="#" id="btn-relogin" class="btn waves-effect col l8 ma waves-dark btn-large blue">Accesare cont</a> <br>
+                {%else%}
+                    <a href="{{l('/dashboard')}}" class="btn waves-effect col l8 ma waves-dark btn-large blue">Accesare cont</a> <br>
+                {%endif%}
+                <a href="#" id="btn-logout" class="btn waves-effect col l8 ma waves-dark btn-large red lighten-1">Deconectare</a><br>
+            </div>
+            <div class="clearfix"></div>
+
         </div>
     </div>
     {% include 'part/scripts.twig' %}

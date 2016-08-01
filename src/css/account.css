@@ -73,6 +73,9 @@
     margin: 0;
     font-size: 20px;
 }
+.fullpageform p{
+    text-align: center;
+}
 @media(min-height: 800px){
     .loginbox.nr1{
         padding-top: 20vh;
