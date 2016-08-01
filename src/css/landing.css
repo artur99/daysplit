@@ -67,10 +67,14 @@
 
 
 .landing .inner{
-  overflow: hidden;
   width: 95%;
   max-width: 80vw;
   margin: auto;
+}
+.landing .inner:after{
+    content: '';
+    display: block;
+    clear: both;
 }
 .landing .header .topline{
   overflow: hidden;
@@ -168,4 +172,46 @@
 }
 .landing .subheader .sh-itm h3{
     font-size: 27px;
+}
+
+
+.landing .section2{
+    background: white;
+    padding: 60px 0;
+}
+.landing .section2 h2{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.landing .section2 .gallery img{
+    display: inline-block;
+
+}
+.landing .section2 p .material-icons{
+    vertical-align: bottom;
+    font-size: 30px;
+}
+.landing .section2 p{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.landing .lfooter{
+    background: #3084FF;
+    height: 70px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 20px;
+    padding: 25px 0;
+}
+.landing .lfooter .left{
+    float: left;
+}
+.landing .lfooter a{
+    color: white;
+    text-decoration: underline;
+}
+.landing .lfooter a:hover{
+    text-decoration: none;
 }

@@ -57,21 +57,6 @@ class model{
             $stime = $this->misc->render_time(isset($d['start_time'])?$d['start_time']:'');
             $etime = $this->misc->render_time(isset($d['end_time'])?$d['end_time']:'');
 
-            if(join($sdate) > join($edate)){
-                $tmp = $sdate;
-                $sdate = $edate;
-                $edate = $tmp;
-                $tmp = $stime;
-                $stime = $etime;
-                $etime = $tmp;
-            }
-
-            if(join($sdate) == join($edate) && join($stime) > join($etime)){
-                $tmp = $stime;
-                $stime = $etime;
-                $etime = $tmp;
-            }
-
             $sd = (string)$this->misc->gentime($sdate, 'date');
             $st = (string)$this->misc->gentime($stime, 'time');
 
@@ -89,6 +74,20 @@ class model{
             if($st == 0) $st = date("H").date("i");
             $et = str_pad($et, 4, '0');
             $st = str_pad($st, 4, '0');
+
+            if($sd > $ed){
+                $tmp = $sd;
+                $sd = $ed;
+                $ed = $tmp;
+                $tmp = $st;
+                $st = $et;
+                $et = $tmp;
+            }
+            if($sd == $ed && $st > $et){
+                $tmp = $st;
+                $st = $et;
+                $et = $tmp;
+            }
 
             $desc = isset($d['description'])&&!empty($d['description']) ? trim($d['description']) : '';
             $location = trim($d['location']);
