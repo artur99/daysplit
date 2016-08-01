@@ -4,6 +4,10 @@
     overflow: hidden;
     padding-bottom: 50px;
     text-align: center;
+    color: white;
+}
+.landing .header.lheadersm{
+    min-height: 93vh;
 }
 .landing .header .logo{
     display: block;
@@ -62,12 +66,11 @@
 }
 
 
-.landing .headerinside{
+.landing .inner{
   overflow: hidden;
   width: 95%;
   max-width: 80vw;
   margin: auto;
-  color: white;
 }
 .landing .header .topline{
   overflow: hidden;
@@ -100,4 +103,69 @@
 .landing .header .topline .right strong{
     text-transform: uppercase;
     font-weight: 500;
+}
+.landing .headercolorbar{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.landing .headercolorbar>div{
+    width: 11.11%;
+    height: 4vw;
+    background: #f54632;
+    float: left;
+}
+@media(max-width: 500px){
+    .landing .headercolorbar>div{
+        width: 16.66%;
+        height: 6vw;
+    }
+    .landing .headercolorbar .color4, .landing .headercolorbar .color6, .landing .headercolorbar .color8{
+        display: none;
+    }
+}
+.landing .headercolorbar .color1{
+    background: #f54632;
+}
+.landing .headercolorbar .color1{
+    background: #f54632;
+}
+.landing .headercolorbar .color2{
+    background: #673ab7;
+}
+.landing .headercolorbar .color3{
+    background: #2196f3;
+}
+.landing .headercolorbar .color4{
+    background: #00bcd4;
+}
+.landing .headercolorbar .color5{
+    background: #4caf50;
+}
+.landing .headercolorbar .color6{
+    background: #cddc39;
+}
+.landing .headercolorbar .color7{
+    background: #ffc107;
+}
+.landing .headercolorbar .color8{
+    background: #ff5722;
+}
+.landing .headercolorbar .color9{
+    background: #795548;
+}
+.landing .subheader{
+    background: #fafafa;
+    padding: 40px 0;
+}
+.landing .subheader .sh-itm{
+    text-align: center;
+    padding: 30px 10px;
+    color: #555;
+}
+.landing .subheader .sh-itm .material-icons{
+    font-size: 60px;
+}
+.landing .subheader .sh-itm h3{
+    font-size: 27px;
 }
