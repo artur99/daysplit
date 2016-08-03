@@ -62,7 +62,6 @@ $(document).ready(function(){
 $( window ).resize(function() {
     setTimeout(function(){
         form_width = $(form_active).css("width");
-        $(form_active).find("input")[0].focus();
     }, 200);
 });
 $(document).on('click', '#btn-signup', function(){form_switch("#form-signup")});
