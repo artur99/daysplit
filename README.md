@@ -41,6 +41,13 @@ $ composer install
 $ mysql -u root -p < db_structure.sql
 ```
 
+### Screenshots
+<a href="http://i.imgur.com/rJWaUht.gif"><img src="http://i.imgur.com/rJWaUht.gif" width="600"></a><br>
+<a href="http://i.imgur.com/VR8HmGt.png"><img src="http://i.imgur.com/VR8HmGt.png" width="400"></a>
+<a href="http://i.imgur.com/se4TGPd.png"><img src="http://i.imgur.com/se4TGPd.png" width="400"></a>
+
+
+
 ### Dezvoltare
 
 ```sh
